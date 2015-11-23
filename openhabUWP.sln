@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openUWP", "App3\openUWP.csproj", "{CB6FBFDF-8EFD-4020-9997-C9112627C036}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openhabUWP.UI.App", "openhabUWP.UI\openhabUWP.UI.App.csproj", "{CB6FBFDF-8EFD-4020-9997-C9112627C036}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openhabUWP", "openhabUWP\openhabUWP.csproj", "{D3EFA406-DEE1-4261-9F7C-00E5B4138E9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openhabUWP.PCL", "openhabUWP.PCL\openhabUWP.PCL.csproj", "{D3EFA406-DEE1-4261-9F7C-00E5B4138E9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
