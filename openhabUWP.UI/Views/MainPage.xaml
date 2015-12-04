@@ -5,19 +5,33 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
     xmlns:converters="using:openhabUWP.Converters"
+    xmlns:design="using:openhabUWP.ViewModels.Design"
+    xmlns:widgets="using:openhabUWP.UI.Widgets"
+    xmlns:helper="using:openhabUWP.Helper"
     x:Class="openhabUWP.Views.MainPage"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance design:MainPageViewModel, IsDesignTimeCreatable=True}">
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
-
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Height="48" VerticalAlignment="Top">
             <Rectangle x:Name="Spacer" Width="48"
                        Visibility="{Binding IsSpacerVisible, Mode=TwoWay, Converter={StaticResource VisibilityConverter}}"/>
             <TextBlock Text="MainPage" Margin="5"/>
         </StackPanel>
+
+        <ListView 
+            Grid.Row="1"
+            ItemsSource="{Binding Widgets}"
+            Style="{StaticResource ListViewStyle}"
+            ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
+        </ListView>
     </Grid>
 </Page>

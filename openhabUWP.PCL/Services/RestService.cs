@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.ServiceModel.Channels;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Networking.Sockets;
@@ -161,7 +162,7 @@ namespace openhabUWP.Services
             catch { }
             return string.Empty;
         }
-        
+
         public async Task<MessageWebSocket> RegisterWebSocketAsync(string url, Action<MessageWebSocketMessageReceivedEventArgs> callbackAction)
         {
             url = string.Concat(url, "?Accept=application/json");
@@ -186,8 +187,14 @@ namespace openhabUWP.Services
             return RegisterWebSocketAsync(openhab.Links.First(l => l.Type == "items").Value, callbackAction);
         }
 
-
-
-
+        public async Task PostCommand(string url, string command)
+        {
+            try
+            {
+                var client = GetClient();
+                await client.PostAsync(new Uri(url), new StringContent(command, Encoding.UTF8, "text/plain"));
+            }
+            catch { /*something was wrong, ignore (todo)*/ }
+        }
     }
 }

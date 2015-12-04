@@ -1,0 +1,28 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:widgets="using:openhabUWP.UI.Widgets"
+    xmlns:helper="using:openhabUWP.Helper">
+
+    <!-- templates -->
+    <DataTemplate x:Key="FrameWidgetTemplate">
+        <widgets:FrameWidget/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SwitchWidgetTemplate">
+        <widgets:SwitchWidget/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TextWidgetTemplate">
+        <widgets:TextWidget/>
+    </DataTemplate>
+
+    
+    <!-- selector -->
+    <helper:WidgetTemplateSelector
+        x:Key="WidgetTemplateSelector"
+        FrameWidgeTemplate="{StaticResource FrameWidgetTemplate}"
+        SwitchWidgeTemplate="{StaticResource SwitchWidgetTemplate}"
+        TextWidgeTemplate="{StaticResource TextWidgetTemplate}"/>
+    
+</ResourceDictionary>

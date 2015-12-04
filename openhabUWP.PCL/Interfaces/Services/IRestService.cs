@@ -66,5 +66,7 @@ namespace openhabUWP.Interfaces.Services
         /// <param name="callbackAction">The callback action.</param>
         /// <returns></returns>
         Task<MessageWebSocket> RegisterWebSocketAsync(Openhab openhab, Action<MessageWebSocketMessageReceivedEventArgs> callbackAction);
+
+        Task PostCommand(string url, string command);
     }
 }

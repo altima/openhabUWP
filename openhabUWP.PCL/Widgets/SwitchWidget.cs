@@ -1,4 +1,5 @@
-﻿using openhabUWP.Interfaces;
+﻿using Windows.ApplicationModel;
+using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Widgets;
 
@@ -6,7 +7,15 @@ namespace openhabUWP.Widgets
 {
     public class SwitchWidget : ISwitchWidget
     {
-        public SwitchWidget() { }
+        public SwitchWidget()
+        {
+            if (DesignMode.DesignModeEnabled)
+            {
+                Id = "ID10000";
+                Label = "My Switch";
+                Icon = "";
+            }
+        }
 
         public SwitchWidget(string widgetId, string label, string icon)
         {

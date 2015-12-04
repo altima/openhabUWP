@@ -1,11 +1,20 @@
-﻿using openhabUWP.Interfaces.Common;
+﻿using Windows.ApplicationModel;
+using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Widgets;
 
 namespace openhabUWP.Widgets
 {
     public class TextWidget : ITextWidget
     {
-        public TextWidget() { }
+        public TextWidget()
+        {
+            if (DesignMode.DesignModeEnabled)
+            {
+                Id = "ID2000";
+                Label = "TextWidget";
+                Icon = "";
+            }
+        }
 
         public TextWidget(string widgetId, string label, string icon) : this()
         {

@@ -4,14 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="using:Prism.Unity.Windows"
     RequestedTheme="Light">
-    
+
     <prism:PrismUnityApplication.Resources>
         <ResourceDictionary>
             <!--General styles-->
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Common.xaml" />
                 <ResourceDictionary Source="Styles/Styles.xaml" />
+                <ResourceDictionary Source="Styles/DataTemplates.xaml" />
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prism:PrismUnityApplication.Resources>
-    
+
 </prism:PrismUnityApplication>

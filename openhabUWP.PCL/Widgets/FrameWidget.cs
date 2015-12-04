@@ -1,4 +1,5 @@
-﻿using openhabUWP.Interfaces;
+﻿using Windows.ApplicationModel;
+using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Widgets;
 
@@ -6,7 +7,25 @@ namespace openhabUWP.Widgets
 {
     public class FrameWidget : IFrameWidget
     {
-        public FrameWidget() { }
+        public FrameWidget()
+        {
+            if (DesignMode.DesignModeEnabled)
+            {
+                Id = "ID10";
+                Label = "FrameWidget";
+                Widgets = new IWidget[]
+                {
+                    new SwitchWidget(), 
+                    new SwitchWidget(), 
+                    new SwitchWidget(), 
+                    new TextWidget(), 
+                    new TextWidget(),
+                    new SwitchWidget(),
+                    new SwitchWidget(),
+                };
+            }
+
+        }
 
         public FrameWidget(string widgetId, string label, string icon) : this()
         {
