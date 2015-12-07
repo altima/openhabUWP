@@ -3,4 +3,4 @@
 **/*.suo
 **/*.user
 /.vs/
-**/*.DotSettings
+*.DotSettings
