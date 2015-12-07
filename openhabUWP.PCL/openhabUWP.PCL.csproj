@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\LogType.cs" />
+    <Compile Include="Helper\openhabFluent.cs" />
     <Compile Include="Helper\StringFluent.cs" />
     <Compile Include="Interfaces\Common\IIconItem.cs" />
     <Compile Include="Interfaces\Common\IIdItem.cs" />
@@ -156,7 +157,9 @@
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\ParserService.cs" />
     <Compile Include="Services\RestService.cs" />
+    <Compile Include="Services\RestService20.cs" />
     <Compile Include="Widgets\FrameWidget.cs" />
+    <Compile Include="Widgets\GroupWidget.cs" />
     <Compile Include="Widgets\SwitchWidget.cs" />
     <Compile Include="Widgets\TextWidget.cs" />
     <Content Include="Properties\openhabUWP.rd.xml" />

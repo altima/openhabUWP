@@ -201,6 +201,37 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "Rx-Core/2.2.5": {
+        "dependencies": {
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        }
+      },
+      "Rx-Interfaces/2.2.5": {
+        "compile": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        }
+      },
+      "Rx-Linq/2.2.5": {
+        "dependencies": {
+          "Rx-Core": "[2.2.5, )",
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        }
+      },
       "System.AppContext/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.0, )",
@@ -1535,6 +1566,17 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Zeroconf/2.5.0": {
+        "dependencies": {
+          "Rx-Linq": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        },
+        "runtime": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -1777,6 +1819,37 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Rx-Core/2.2.5": {
+        "dependencies": {
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        }
+      },
+      "Rx-Interfaces/2.2.5": {
+        "compile": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        }
+      },
+      "Rx-Linq/2.2.5": {
+        "dependencies": {
+          "Rx-Core": "[2.2.5, )",
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -3160,6 +3233,17 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Zeroconf/2.5.0": {
+        "dependencies": {
+          "Rx-Linq": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        },
+        "runtime": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
@@ -3388,6 +3472,37 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Rx-Core/2.2.5": {
+        "dependencies": {
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        }
+      },
+      "Rx-Interfaces/2.2.5": {
+        "compile": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        }
+      },
+      "Rx-Linq/2.2.5": {
+        "dependencies": {
+          "Rx-Core": "[2.2.5, )",
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -4756,6 +4871,17 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "Zeroconf/2.5.0": {
+        "dependencies": {
+          "Rx-Linq": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        },
+        "runtime": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
         }
       }
     },
@@ -5006,6 +5132,37 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "Rx-Core/2.2.5": {
+        "dependencies": {
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        }
+      },
+      "Rx-Interfaces/2.2.5": {
+        "compile": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        }
+      },
+      "Rx-Linq/2.2.5": {
+        "dependencies": {
+          "Rx-Core": "[2.2.5, )",
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        }
+      },
       "System.AppContext/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.0, )",
@@ -6387,6 +6544,17 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Zeroconf/2.5.0": {
+        "dependencies": {
+          "Rx-Linq": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        },
+        "runtime": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
@@ -6615,6 +6783,37 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Rx-Core/2.2.5": {
+        "dependencies": {
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        }
+      },
+      "Rx-Interfaces/2.2.5": {
+        "compile": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        }
+      },
+      "Rx-Linq/2.2.5": {
+        "dependencies": {
+          "Rx-Core": "[2.2.5, )",
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -7983,6 +8182,17 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "Zeroconf/2.5.0": {
+        "dependencies": {
+          "Rx-Linq": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        },
+        "runtime": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
         }
       }
     },
@@ -8233,6 +8443,37 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "Rx-Core/2.2.5": {
+        "dependencies": {
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        }
+      },
+      "Rx-Interfaces/2.2.5": {
+        "compile": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        }
+      },
+      "Rx-Linq/2.2.5": {
+        "dependencies": {
+          "Rx-Core": "[2.2.5, )",
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        }
+      },
       "System.AppContext/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.0, )",
@@ -9614,6 +9855,17 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Zeroconf/2.5.0": {
+        "dependencies": {
+          "Rx-Linq": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        },
+        "runtime": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
@@ -9842,6 +10094,37 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Rx-Core/2.2.5": {
+        "dependencies": {
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Core.dll": {}
+        }
+      },
+      "Rx-Interfaces/2.2.5": {
+        "compile": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Interfaces.dll": {}
+        }
+      },
+      "Rx-Linq/2.2.5": {
+        "dependencies": {
+          "Rx-Core": "[2.2.5, )",
+          "Rx-Interfaces": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/windows8/System.Reactive.Linq.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -11210,6 +11493,17 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "Zeroconf/2.5.0": {
+        "dependencies": {
+          "Rx-Linq": "[2.2.5, )"
+        },
+        "compile": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
+        },
+        "runtime": {
+          "lib/portable-win81+wpa81/Zeroconf.dll": {}
         }
       }
     }
@@ -11866,6 +12160,96 @@
         "ref/net46/Microsoft.Win32.Primitives.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
+      ]
+    },
+    "Rx-Core/2.2.5": {
+      "sha512": "DfWVTfW6tvRkkqpnRHKxPIvaRZyDJGADuqrE6J2nwejOQbLRWi0rNUwXkViDWz++25BGDy3iRE5OE6Dv8mJxYQ==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/net40/System.Reactive.Core.dll",
+        "lib/net40/System.Reactive.Core.XML",
+        "lib/net45/System.Reactive.Core.dll",
+        "lib/net45/System.Reactive.Core.XML",
+        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Core.dll",
+        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Core.XML",
+        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Core.dll",
+        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Core.XML",
+        "lib/portable-win81+wpa81/System.Reactive.Core.dll",
+        "lib/portable-win81+wpa81/System.Reactive.Core.XML",
+        "lib/portable-windows8+net45+wp8/System.Reactive.Core.dll",
+        "lib/portable-windows8+net45+wp8/System.Reactive.Core.XML",
+        "lib/sl5/System.Reactive.Core.dll",
+        "lib/sl5/System.Reactive.Core.XML",
+        "lib/windows8/System.Reactive.Core.dll",
+        "lib/windows8/System.Reactive.Core.XML",
+        "lib/windowsphone71/System.Reactive.Core.dll",
+        "lib/windowsphone71/System.Reactive.Core.XML",
+        "lib/windowsphone8/System.Reactive.Core.dll",
+        "lib/windowsphone8/System.Reactive.Core.XML",
+        "package/services/metadata/core-properties/acd70acf6eca4cb38c21c68005176d93.psmdcp",
+        "Rx-Core.nuspec"
+      ]
+    },
+    "Rx-Interfaces/2.2.5": {
+      "sha512": "FKtG2QfMIeUcfB7r3a89VoAiszX3DTvYETkpC6U0FzWpxRK/mcHyzYOsniDfag+NsDG0P1k1c8yNSefXKp3t2A==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/net40/System.Reactive.Interfaces.dll",
+        "lib/net40/System.Reactive.Interfaces.XML",
+        "lib/net45/System.Reactive.Interfaces.dll",
+        "lib/net45/System.Reactive.Interfaces.XML",
+        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Interfaces.dll",
+        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Interfaces.XML",
+        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Interfaces.dll",
+        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Interfaces.XML",
+        "lib/portable-win81+wpa81/System.Reactive.Interfaces.dll",
+        "lib/portable-win81+wpa81/System.Reactive.Interfaces.XML",
+        "lib/portable-windows8+net45+wp8/System.Reactive.Interfaces.dll",
+        "lib/portable-windows8+net45+wp8/System.Reactive.Interfaces.XML",
+        "lib/sl5/System.Reactive.Interfaces.dll",
+        "lib/sl5/System.Reactive.Interfaces.XML",
+        "lib/windows8/System.Reactive.Interfaces.dll",
+        "lib/windows8/System.Reactive.Interfaces.XML",
+        "lib/windowsphone71/System.Reactive.Interfaces.dll",
+        "lib/windowsphone71/System.Reactive.Interfaces.XML",
+        "lib/windowsphone8/System.Reactive.Interfaces.dll",
+        "lib/windowsphone8/System.Reactive.Interfaces.XML",
+        "package/services/metadata/core-properties/c34c0935638f4b7ea6c51ca968fd1a88.psmdcp",
+        "Rx-Interfaces.nuspec"
+      ]
+    },
+    "Rx-Linq/2.2.5": {
+      "sha512": "UTeCIu3cWPExxmTzdiVq7SalqTBhUaomBTaAC9LpYPoAopjlFwA3hjVWXoLkGlDc/44wqJemJuEwFP00KphiFg==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/net40/System.Reactive.Linq.dll",
+        "lib/net40/System.Reactive.Linq.XML",
+        "lib/net45/System.Reactive.Linq.dll",
+        "lib/net45/System.Reactive.Linq.XML",
+        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Linq.dll",
+        "lib/portable-net40+sl5+win8+wp8/System.Reactive.Linq.XML",
+        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Linq.dll",
+        "lib/portable-net45+winrt45+wp8+wpa81/System.Reactive.Linq.XML",
+        "lib/portable-win81+wpa81/System.Reactive.Linq.dll",
+        "lib/portable-win81+wpa81/System.Reactive.Linq.XML",
+        "lib/portable-windows8+net45+wp8/System.Reactive.Linq.dll",
+        "lib/portable-windows8+net45+wp8/System.Reactive.Linq.XML",
+        "lib/sl5/System.Reactive.Linq.dll",
+        "lib/sl5/System.Reactive.Linq.XML",
+        "lib/windows8/System.Reactive.Linq.dll",
+        "lib/windows8/System.Reactive.Linq.XML",
+        "lib/windowsphone71/System.Reactive.Linq.dll",
+        "lib/windowsphone71/System.Reactive.Linq.XML",
+        "lib/windowsphone8/System.Reactive.Linq.dll",
+        "lib/windowsphone8/System.Reactive.Linq.XML",
+        "package/services/metadata/core-properties/0b05bef9a8e34a3da5e4d5d41f320ee4.psmdcp",
+        "Rx-Linq.nuspec"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -14562,11 +14946,44 @@
         "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll",
         "System.Xml.XmlSerializer.nuspec"
       ]
+    },
+    "Zeroconf/2.5.0": {
+      "sha512": "s91c9dbUmbJjJ16lcc3OGBm76PJ+Mp8hFv3zb49uLC3UsP7v/LJPpYirTYe90yBKqzGyuQQd6OcaY3Mdt2U5xw==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/monoandroid/Zeroconf.dll",
+        "lib/monoandroid/Zeroconf.pdb",
+        "lib/monoandroid/Zeroconf.xml",
+        "lib/monotouch/Zeroconf.dll",
+        "lib/monotouch/Zeroconf.pdb",
+        "lib/monotouch/Zeroconf.xml",
+        "lib/net45/Zeroconf.dll",
+        "lib/net45/Zeroconf.pdb",
+        "lib/net45/Zeroconf.xml",
+        "lib/portable-net45+wp8+win8+wpa81+monoandroid+monotouch+xamarin.ios/Zeroconf.dll",
+        "lib/portable-net45+wp8+win8+wpa81+monoandroid+monotouch+xamarin.ios/Zeroconf.pdb",
+        "lib/portable-net45+wp8+win8+wpa81+monoandroid+monotouch+xamarin.ios/Zeroconf.xml",
+        "lib/portable-win81+wpa81/Zeroconf.dll",
+        "lib/portable-win81+wpa81/Zeroconf.pdb",
+        "lib/portable-win81+wpa81/Zeroconf.pri",
+        "lib/portable-win81+wpa81/Zeroconf.xml",
+        "lib/wp8/Zeroconf.dll",
+        "lib/wp8/Zeroconf.pdb",
+        "lib/wp8/Zeroconf.xml",
+        "lib/xamarin.ios/Zeroconf.dll",
+        "lib/xamarin.ios/Zeroconf.pdb",
+        "lib/xamarin.ios/Zeroconf.xml",
+        "package/services/metadata/core-properties/0e6e761b3eff4bcea768d69aae96024a.psmdcp",
+        "Zeroconf.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0"
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
+      "Zeroconf >= 2.5.0"
     ],
     "UAP,Version=v10.0": []
   }

@@ -12,6 +12,7 @@ using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Services;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Items;
+using openhabUWP.Services;
 using openhabUWP.Widgets;
 using Prism.Events;
 using Prism.Windows.Mvvm;
@@ -27,7 +28,7 @@ namespace openhabUWP.ViewModels
     public class MainPageViewModel : ViewModelBase, IMainPageViewModel
     {
         private MessageWebSocket _socket;
-        private readonly IRestService _restService;
+        private readonly IRestService20 _restService;
         private readonly IEventAggregator _eventAggregator;
 
         private bool _isSpacerVisible;
@@ -45,7 +46,7 @@ namespace openhabUWP.ViewModels
             set { SetProperty(ref _widgets, value); }
         }
 
-        public MainPageViewModel(IRestService restService, IEventAggregator eventAggregator)
+        public MainPageViewModel(IRestService20 restService, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _restService = restService;
@@ -79,13 +80,17 @@ namespace openhabUWP.ViewModels
                 var server = await _restService.FindLocalServersAsync();
                 if (server.Length > 0)
                 {
-                    var openhabLinks = await _restService.LoadOpenhabLinksAsync(server.First());
-                    var sitemaps = await _restService.LoadSitemapsAsync(openhabLinks);
-                    if (sitemaps != null && sitemaps.Maps != null && sitemaps.Maps.Length > 0)
+                    var sitemaps = await _restService.LoadSitemapsAsync(server.First());
+                    if (sitemaps.Any())
                     {
-                        var sitemap = await _restService.LoadSitemapDetailsAsync(sitemaps.Maps.First());
+                        var sitemap = await _restService.LoadSitemapDetailsAsync(sitemaps.First());
                         CreatePage(sitemap.Homepage);
                     }
+                    //if (sitemaps != null && sitemaps.Maps != null && sitemaps.Maps.Length > 0)
+                    //{
+                    //    var sitemap = await _restService.LoadSitemapDetailsAsync(sitemaps.Maps.First());
+                    //    CreatePage(sitemap.Homepage);
+                    //}
                 }
             }
             base.OnNavigatedTo(e, viewModelState);
@@ -94,7 +99,7 @@ namespace openhabUWP.ViewModels
         private async void CreatePage(IPage page)
         {
             Widgets = new ObservableCollection<IWidget>(page.Widgets);
-            _socket = await _restService.RegisterWebSocketAsync(page, CallbackAction);
+            //_socket = await _restService.RegisterWebSocketAsync(page, CallbackAction);
         }
 
         private void CallbackAction(MessageWebSocketMessageReceivedEventArgs args)

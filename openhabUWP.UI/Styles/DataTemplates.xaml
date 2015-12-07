@@ -17,12 +17,17 @@
         <widgets:TextWidget/>
     </DataTemplate>
 
+    <DataTemplate x:Key="GroupWidgetTemplate">
+        <widgets:GroupWidget/>
+    </DataTemplate>
+
     
     <!-- selector -->
     <helper:WidgetTemplateSelector
         x:Key="WidgetTemplateSelector"
         FrameWidgeTemplate="{StaticResource FrameWidgetTemplate}"
         SwitchWidgeTemplate="{StaticResource SwitchWidgetTemplate}"
-        TextWidgeTemplate="{StaticResource TextWidgetTemplate}"/>
+        TextWidgeTemplate="{StaticResource TextWidgetTemplate}"
+        GroupWidgeTemplate="{StaticResource GroupWidgetTemplate}"/>
     
 </ResourceDictionary>

@@ -107,6 +107,9 @@
     <Compile Include="UI\Widgets\FrameWidget.xaml.cs">
       <DependentUpon>FrameWidget.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Widgets\GroupWidget.xaml.cs">
+      <DependentUpon>GroupWidget.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Widgets\IWidget.cs" />
     <Compile Include="UI\Widgets\TextWidget.xaml.cs">
       <DependentUpon>TextWidget.xaml</DependentUpon>
@@ -165,6 +168,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Widgets\GroupWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Widgets\TextWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,15 +190,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\openhabUWP.PCL\openhabUWP.PCL.csproj">
-      <Project>{d3efa406-dee1-4261-9f7c-00e5b4138e9e}</Project>
-      <Name>openhabUWP</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
       <Name>BehaviorsXamlSDKManaged</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\openhabUWP.PCL\openhabUWP.PCL.csproj">
+      <Project>{d3efa406-dee1-4261-9f7c-00e5b4138e9e}</Project>
+      <Name>openhabUWP.PCL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

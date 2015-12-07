@@ -14,4 +14,10 @@ namespace openhabUWP.Interfaces.Widgets
     }
 
     public interface ISwitchWidget : IWidget { }
+
+    public interface IGroupWidget : IWidget
+    {
+        IWidget[] Widgets { get; set; }
+        ILinkedPage LinkedPage { get; set; }
+    }
 }
