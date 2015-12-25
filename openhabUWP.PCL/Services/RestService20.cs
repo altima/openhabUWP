@@ -19,7 +19,7 @@ namespace openhabUWP.Services
         Task<Sitemap[]> LoadSitemapsAsync(Server server);
         Task<Sitemap> LoadSitemapDetailsAsync(Sitemap sitemap);
 
-        Task AttachToEvents(string baseUrl, Action<string> onDataReceived = null, Action<string> onEventReceived = null);
+        Task AttachToEvents(string baseUrl, string[] topyics = null, Action<string> onDataReceived = null, Action<string> onEventReceived = null);
     }
 
     public class RestService20 : IRestService20
@@ -117,7 +117,7 @@ namespace openhabUWP.Services
             if (onDataReceived == null) onDataReceived = (input) => { };
             if (onEventReceived == null) onEventReceived = (input) => { };
             if (topcis == null) topcis = new string[] { "smarthome", "items", "*", "state" };
-            
+
             //build uri
             string url = string.Concat(baseUrl, "/events?topics=", string.Join("/", topcis));
             using (var client = new HttpClient())

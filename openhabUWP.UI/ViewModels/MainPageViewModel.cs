@@ -111,7 +111,7 @@ namespace openhabUWP.ViewModels
         {
             try
             {
-                await _restService.AttachToEvents(server.Link, OnDataReceived);
+                await _restService.AttachToEvents(server.Link, onDataReceived: OnDataReceived);
             }
             catch (WebException ex)
             {
