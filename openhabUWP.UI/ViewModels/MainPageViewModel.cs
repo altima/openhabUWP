@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using Windows.Data.Json;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
-using Newtonsoft.Json;
 using openhabUWP.Events;
 using openhabUWP.Interfaces.Common;
-using openhabUWP.Interfaces.Services;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Items;
+using openhabUWP.Models;
 using openhabUWP.Services;
 using openhabUWP.Widgets;
 using Prism.Events;
@@ -77,10 +78,15 @@ namespace openhabUWP.ViewModels
             _eventAggregator.GetEvent<PubSubNames.NavigatedToPageEvent>().Publish(e);
             if (_restService != null)
             {
-                var server = await _restService.FindLocalServersAsync();
-                if (server.Length > 0)
+                var servers = await _restService.FindLocalServersAsync();
+                if (servers.Length > 0)
                 {
-                    var sitemaps = await _restService.LoadSitemapsAsync(server.First());
+                    var server = servers.First();
+                    RegisterSSE(server);
+
+                    return;
+                    var sitemaps = await _restService.LoadSitemapsAsync(server);
+
                     if (sitemaps.Any())
                     {
                         var sitemap = await _restService.LoadSitemapDetailsAsync(sitemaps.First());
@@ -96,10 +102,27 @@ namespace openhabUWP.ViewModels
             base.OnNavigatedTo(e, viewModelState);
         }
 
-        private async void CreatePage(IPage page)
+        private void CreatePage(IPage page)
         {
             Widgets = new ObservableCollection<IWidget>(page.Widgets);
-            //_socket = await _restService.RegisterWebSocketAsync(page, CallbackAction);
+        }
+
+        private async void RegisterSSE(Server server)
+        {
+            try
+            {
+                await _restService.AttachToEvents(server.Link, OnDataReceived);
+            }
+            catch (WebException ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            catch { }
+        }
+
+        private void OnDataReceived(string s)
+        {
+            Debug.WriteLine(s);
         }
 
         private void CallbackAction(MessageWebSocketMessageReceivedEventArgs args)

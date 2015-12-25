@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
-using Windows.Data.Json;
-using Windows.Networking.Sockets;
 using openhabUWP.Enums;
 using openhabUWP.Helper;
-using openhabUWP.Interfaces.Common;
-using openhabUWP.Interfaces.Services;
-using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Models;
 using Zeroconf;
 
@@ -22,6 +18,8 @@ namespace openhabUWP.Services
         Task<Server[]> FindLocalServersAsync();
         Task<Sitemap[]> LoadSitemapsAsync(Server server);
         Task<Sitemap> LoadSitemapDetailsAsync(Sitemap sitemap);
+
+        Task AttachToEvents(string baseUrl, Action<string> onDataReceived = null, Action<string> onEventReceived = null);
     }
 
     public class RestService20 : IRestService20
@@ -41,7 +39,7 @@ namespace openhabUWP.Services
                 var clientHandler = new HttpClientHandler();
                 if (clientHandler.SupportsAutomaticDecompression)
                 {
-                    clientHandler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+                    //clientHandler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
                 }
                 _client = new HttpClient(clientHandler);
             }
@@ -95,6 +93,61 @@ namespace openhabUWP.Services
         public async Task<Sitemap> LoadSitemapDetailsAsync(Sitemap sitemap)
         {
             return (await Get(sitemap.Link)).ToSitemap(sitemap);
+        }
+
+
+
+        private const string DataPrefix = "data: ";
+        private const string EventPrefix = "event: ";
+        private bool _dataWillFollow = false;
+
+
+        /// <summary>
+        /// Attaches to events (by http long pooling, simple SSE :) )
+        /// by http://danielwertheim.se/2013/09/15/using-c-and-httpclient-to-consume-continuously-streamed-results/
+        /// </summary>
+        /// <param name="baseUrl">The base URL.</param>
+        /// <param name="onDataReceived">The on data received.</param>
+        /// <param name="onEventReceived">The on event received.</param>
+        /// <returns></returns>
+        public async Task AttachToEvents(string baseUrl, Action<string> onDataReceived = null, Action<string> onEventReceived = null)
+        {
+            //defaults
+            if (onDataReceived == null) onDataReceived = (input) => { };
+            if (onEventReceived == null) onEventReceived = (input) => { };
+
+            //build uri
+            string url = baseUrl + "/events";
+            using (var client = new HttpClient())
+            {
+                client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                using (var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
+                {
+                    using (var body = await response.Content.ReadAsStreamAsync())
+                    using (var reader = new StreamReader(body))
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            var line = reader.ReadLine();
+
+                            if (line.StartsWith(EventPrefix) && !_dataWillFollow)
+                            {
+                                _dataWillFollow = true;
+                                var @event = line.Substring(EventPrefix.Length);
+                                onEventReceived.Invoke(@event);
+                            }
+
+                            if (line.StartsWith(DataPrefix) && _dataWillFollow)
+                            {
+                                var data = line.Substring(DataPrefix.Length);
+                                onDataReceived.Invoke(data);
+                                _dataWillFollow = false;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public Task PostCommand(string url, string command)
