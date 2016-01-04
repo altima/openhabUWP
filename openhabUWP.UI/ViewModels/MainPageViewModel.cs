@@ -8,7 +8,10 @@ using Windows.Data.Json;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+using Microsoft.Practices.ObjectBuilder2;
 using openhabUWP.Events;
+using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Items;
@@ -23,16 +26,17 @@ namespace openhabUWP.ViewModels
 {
     public interface IMainPageViewModel : IViewModel
     {
+        string PageTitle { get; set; }
         ObservableCollection<IWidget> Widgets { get; set; }
     }
 
     public class MainPageViewModel : ViewModelBase, IMainPageViewModel
     {
-        private MessageWebSocket _socket;
         private readonly IRestService20 _restService;
         private readonly IEventAggregator _eventAggregator;
 
         private bool _isSpacerVisible;
+        private string _pageTitle;
         private ObservableCollection<IWidget> _widgets;
 
         public bool IsSpacerVisible
@@ -47,7 +51,12 @@ namespace openhabUWP.ViewModels
             set { SetProperty(ref _widgets, value); }
         }
 
-        public MainPageViewModel(IRestService20 restService, IEventAggregator eventAggregator)
+        public string PageTitle
+        {
+            get { return _pageTitle; }
+            set { SetProperty(ref _pageTitle, value); }
+        }
+        public MainPageViewModel(IEventAggregator eventAggregator, IRestService20 restService)
         {
             _eventAggregator = eventAggregator;
             _restService = restService;
@@ -76,27 +85,35 @@ namespace openhabUWP.ViewModels
         public override async void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
         {
             _eventAggregator.GetEvent<PubSubNames.NavigatedToPageEvent>().Publish(e);
+
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                // load
+            }
+            else
+            {
+                // refresh
+            }
+
             if (_restService != null)
             {
                 var servers = await _restService.FindLocalServersAsync();
                 if (servers.Length > 0)
                 {
                     var server = servers.First();
-                    RegisterSSE(server);
-
-                    return;
-                    var sitemaps = await _restService.LoadSitemapsAsync(server);
-
-                    if (sitemaps.Any())
+                    if (await _restService.IsOpenhab2(server))
                     {
-                        var sitemap = await _restService.LoadSitemapDetailsAsync(sitemaps.First());
-                        CreatePage(sitemap.Homepage);
+                        var sitemaps = await _restService.LoadSitemapsAsync(server);
+                        if (sitemaps.Any())
+                        {
+                            var sitemap = await _restService.LoadSitemapDetailAsync(sitemaps.First());
+                            CreatePage(sitemap.Homepage);
+                        }
                     }
-                    //if (sitemaps != null && sitemaps.Maps != null && sitemaps.Maps.Length > 0)
-                    //{
-                    //    var sitemap = await _restService.LoadSitemapDetailsAsync(sitemaps.Maps.First());
-                    //    CreatePage(sitemap.Homepage);
-                    //}
+                    else
+                    {
+
+                    }
                 }
             }
             base.OnNavigatedTo(e, viewModelState);
@@ -104,20 +121,8 @@ namespace openhabUWP.ViewModels
 
         private void CreatePage(IPage page)
         {
+            PageTitle = page.Title;
             Widgets = new ObservableCollection<IWidget>(page.Widgets);
-        }
-
-        private async void RegisterSSE(Server server)
-        {
-            try
-            {
-                await _restService.AttachToEvents(server.Link, onDataReceived: OnDataReceived);
-            }
-            catch (WebException ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            catch { }
         }
 
         private void OnDataReceived(string s)
@@ -189,12 +194,9 @@ namespace openhabUWP.ViewModels
             }
         }
 
-        public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState,
-            bool suspending)
+        public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
-            _eventAggregator.GetEvent<PubSubNames.NavigationDisplayModeChangedEvent>()
-                .Unsubscribe(OnNavigationDisplayModeChangedEvent);
-            _socket?.Close(1000, "navigation from page");
+            _eventAggregator.GetEvent<PubSubNames.NavigationDisplayModeChangedEvent>().Unsubscribe(OnNavigationDisplayModeChangedEvent);
             base.OnNavigatingFrom(e, viewModelState, suspending);
         }
 
@@ -205,10 +207,13 @@ namespace openhabUWP.ViewModels
     {
         public class MainPageViewModel : ViewModelBase, IMainPageViewModel
         {
+            public string PageTitle { get; set; }
             public ObservableCollection<IWidget> Widgets { get; set; }
 
             public MainPageViewModel()
             {
+                PageTitle = "UI Page 1";
+
                 Widgets = new ObservableCollection<IWidget>()
                 {
                     new FrameWidget("1", "Frame 1",""),

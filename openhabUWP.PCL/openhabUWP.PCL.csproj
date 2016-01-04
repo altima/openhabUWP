@@ -156,7 +156,7 @@
     <Compile Include="Interfaces\Services\ILogService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\ParserService.cs" />
-    <Compile Include="Services\RestService.cs" />
+    <Compile Include="Services\PushClientService.cs" />
     <Compile Include="Services\RestService20.cs" />
     <Compile Include="Widgets\FrameWidget.cs" />
     <Compile Include="Widgets\GroupWidget.cs" />

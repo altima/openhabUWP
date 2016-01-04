@@ -12,9 +12,6 @@
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance design:MainPageViewModel, IsDesignTimeCreatable=True}">
-    <Page.Resources>
-        <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
-    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -24,14 +21,14 @@
         <StackPanel Orientation="Horizontal" Height="48" VerticalAlignment="Top">
             <Rectangle x:Name="Spacer" Width="48"
                        Visibility="{Binding IsSpacerVisible, Mode=TwoWay, Converter={StaticResource VisibilityConverter}}"/>
-            <TextBlock Text="MainPage" Margin="5"/>
+            <TextBlock Text="{Binding PageTitle}" Margin="5"/>
         </StackPanel>
 
-        <ListView 
-            Grid.Row="1"
-            ItemsSource="{Binding Widgets}"
-            Style="{StaticResource ListViewStyle}"
-            ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
-        </ListView>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl
+                ItemsSource="{Binding Widgets}"
+                ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Page>

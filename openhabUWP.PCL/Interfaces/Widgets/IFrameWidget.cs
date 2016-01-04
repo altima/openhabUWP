@@ -1,23 +1,22 @@
-﻿using openhabUWP.Interfaces.Common;
+﻿using openhabUWP.Models;
 
 namespace openhabUWP.Interfaces.Widgets
 {
-    public interface IFrameWidget : IWidget
+    public interface IContainerWidget : IWidget
     {
         IWidget[] Widgets { get; set; }
-        ILinkedPage LinkedPage { get; set; }
     }
 
-    public interface ITextWidget : IWidget
+    public interface ILinkedPageWidget : IWidget
     {
-        ILinkedPage LinkedPage { get; set; }
+        Page LinkedPage { get; set; }
     }
+
+    public interface IFrameWidget : ILinkedPageWidget, IContainerWidget { }
+
+    public interface ITextWidget : ILinkedPageWidget { }
 
     public interface ISwitchWidget : IWidget { }
 
-    public interface IGroupWidget : IWidget
-    {
-        IWidget[] Widgets { get; set; }
-        ILinkedPage LinkedPage { get; set; }
-    }
+    public interface IGroupWidget : ILinkedPageWidget, IContainerWidget { }
 }

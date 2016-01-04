@@ -96,6 +96,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Database\OpenhabDatabase.cs" />
+    <Compile Include="Database\Tables.cs" />
     <Compile Include="Events\WidgetUpdateEvent.cs" />
     <Compile Include="Helper\WidgetTemplateSelector.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -190,15 +192,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
-      <Name>BehaviorsXamlSDKManaged</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\openhabUWP.PCL\openhabUWP.PCL.csproj">
       <Project>{d3efa406-dee1-4261-9f7c-00e5b4138e9e}</Project>
       <Name>openhabUWP.PCL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
+      <Name>Behaviors SDK %28XAML%29</Name>
+    </SDKReference>
+    <SDKReference Include="SQLite.UAP.2015, Version=3.9.2">
+      <Name>SQLite for Universal App Platform</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -62,6 +62,12 @@ namespace openhabUWP.Helper
             return page;
         }
 
+        public static Page ToPage(this string jsonString, Page page)
+        {
+            if (string.IsNullOrEmpty(jsonString)) return page;
+            return JsonObject.Parse(jsonString).ToPage();
+        }
+
         public static IWidget[] ToWidgets(this JsonArray ja)
         {
             return ja.Select(j => j.GetObject().ToWidget()).ToArray();
@@ -70,7 +76,7 @@ namespace openhabUWP.Helper
         public static IWidget ToWidget(this JsonObject jo)
         {
             IItem item = null;
-            ILinkedPage linkedPage = null;
+            Page linkedPage = null;
             IWidget widget = null;
             IWidget[] widgets = null;
 
@@ -148,9 +154,11 @@ namespace openhabUWP.Helper
                     item = new GroupItem(name, link);
                     break;
                 case "NumberItem":
+                    if (state == "NULL") state = "0";
                     item = new NumberItem(name, link, decimal.Parse(state));
                     break;
                 case "DateTimeItem":
+                    if (state == "NULL") state = DateTime.Parse("1970-01-01 01:00").ToString("s");
                     item = new DateTimeItem(name, link, DateTime.Parse(state));
                     break;
                 case "SwitchItem":

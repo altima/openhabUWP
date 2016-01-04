@@ -64,6 +64,17 @@
         </Setter>
     </Style>
 
+    <Style TargetType="ListView" x:Name="ListViewStyle">
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ListViewItemNavigationStyle" TargetType="ListViewItem">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Height" Value="48"/>

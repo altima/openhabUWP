@@ -1,6 +1,7 @@
 ﻿using Windows.ApplicationModel;
 using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Widgets;
+using openhabUWP.Models;
 
 namespace openhabUWP.Widgets
 {
@@ -28,6 +29,6 @@ namespace openhabUWP.Widgets
         public string Icon { get; set; }
         public IItem Item { get; set; }
         public IWidget[] Widgets { get; set; }
-        public ILinkedPage LinkedPage { get; set; }
+        public Page LinkedPage { get; set; }
     }
 }

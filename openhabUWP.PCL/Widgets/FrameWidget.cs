@@ -2,6 +2,7 @@
 using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Widgets;
+using openhabUWP.Models;
 
 namespace openhabUWP.Widgets
 {
@@ -15,13 +16,13 @@ namespace openhabUWP.Widgets
                 Label = "FrameWidget";
                 Widgets = new IWidget[]
                 {
-                    new SwitchWidget(), 
-                    new SwitchWidget(), 
-                    new SwitchWidget(), 
-                    new TextWidget(), 
-                    new TextWidget(),
-                    new SwitchWidget(),
-                    new SwitchWidget(),
+                    new SwitchWidget("1","Switch 1",""),
+                    new SwitchWidget("2","Switch 2",""),
+                    new SwitchWidget("3","Switch 3",""),
+                    new TextWidget("4","Text 1",""),
+                    new TextWidget("5","Text 2 [31.2 Grad]",""),
+                    new SwitchWidget("6","Switch 4",""),
+                    new SwitchWidget("7","Switch 5",""),
                 };
             }
 
@@ -39,6 +40,6 @@ namespace openhabUWP.Widgets
         public string Icon { get; set; }
         public IWidget[] Widgets { get; set; }
         public IItem Item { get; set; }
-        public ILinkedPage LinkedPage { get; set; }
+        public Page LinkedPage { get; set; }
     }
 }

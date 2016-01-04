@@ -5,6 +5,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Microsoft.Practices.Unity;
+using openhabUWP.Database;
 using openhabUWP.Interfaces.Services;
 using openhabUWP.Services;
 using openhabUWP.ViewModels;
@@ -42,6 +43,10 @@ namespace openhabUWP
             this.RegisterTypeIfMissing(typeof(ILogService), typeof(LogService), true);
             this.RegisterTypeIfMissing(typeof(IParserService), typeof(ParserService), true);
             this.RegisterTypeIfMissing(typeof(IRestService20), typeof(RestService20), true);
+            this.RegisterTypeIfMissing(typeof(IPushClientService), typeof(PushClientService), true);
+            this.RegisterTypeIfMissing(typeof(IOpenhabDatabase), typeof(OpenhabDatabase), true);
+
+            this.RegisterTypeIfMissing(typeof(IMainPageViewModel), typeof(MainPageViewModel), false);
         }
     }
 }
