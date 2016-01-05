@@ -11,6 +11,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Lex.Db/1.2.6": {
+        "compile": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -300,25 +308,6 @@
         },
         "runtime": {
           "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.1": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "[3.1.1, )"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.1": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -1690,6 +1679,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Lex.Db/1.2.6": {
+        "compile": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -2022,25 +2019,6 @@
         },
         "runtime": {
           "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.1": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "[3.1.1, )"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.1": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -3459,6 +3437,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Lex.Db/1.2.6": {
+        "compile": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -3777,25 +3763,6 @@
         },
         "runtime": {
           "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.1": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "[3.1.1, )"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.1": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -5200,6 +5167,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Lex.Db/1.2.6": {
+        "compile": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -5537,25 +5512,6 @@
         },
         "runtime": {
           "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.1": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "[3.1.1, )"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.1": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -6974,6 +6930,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Lex.Db/1.2.6": {
+        "compile": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -7292,25 +7256,6 @@
         },
         "runtime": {
           "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.1": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "[3.1.1, )"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.1": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -8715,6 +8660,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Lex.Db/1.2.6": {
+        "compile": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -9052,25 +9005,6 @@
         },
         "runtime": {
           "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.1": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "[3.1.1, )"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.1": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -10489,6 +10423,14 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "Lex.Db/1.2.6": {
+        "compile": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Lex.Db.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -10807,25 +10749,6 @@
         },
         "runtime": {
           "lib/windows8/System.Reactive.Linq.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.1": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "[3.1.1, )"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.1": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -12238,6 +12161,53 @@
         "package/services/metadata/core-properties/99be0c88b2fd41c8b07c42071005ee47.psmdcp"
       ]
     },
+    "Lex.Db/1.2.6": {
+      "sha512": "jqfO/EbLRmp3st9inBhwqlzpXPDrQDZvHMA2BafXruNi9Z7GywKXaPk1fWQ+q2g0L4ZzlYLN759jaAPSMJKjGA==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "Lex.Db.nuspec",
+        "lib/MonoAndroid/Lex.Db.dll",
+        "lib/MonoAndroid/Lex.Db.pdb",
+        "lib/MonoAndroid/Lex.Db.xml",
+        "lib/MonoTouch/Lex.Db.dll",
+        "lib/MonoTouch/Lex.Db.pdb",
+        "lib/MonoTouch/Lex.Db.xml",
+        "lib/net40/DbTableAsync.cs",
+        "lib/net40/Lex.Db.dll",
+        "lib/net40/Lex.Db.pdb",
+        "lib/net40/Lex.Db.xml",
+        "lib/net45/Lex.Db.dll",
+        "lib/net45/Lex.Db.pdb",
+        "lib/net45/Lex.Db.xml",
+        "lib/net46/Lex.Db.dll",
+        "lib/net46/Lex.Db.pdb",
+        "lib/net46/Lex.Db.xml",
+        "lib/portable-net4+sl5+wp8+win8+MonoAndroid+MonoTouch/Lex.Db.dll",
+        "lib/portable-net4+sl5+wp8+win8+MonoAndroid+MonoTouch/Lex.Db.pdb",
+        "lib/portable-net4+sl5+wp8+win8+MonoAndroid+MonoTouch/Lex.Db.xml",
+        "lib/portable-win81+wpa81/Lex.Db.dll",
+        "lib/portable-win81+wpa81/Lex.Db.pdb",
+        "lib/portable-win81+wpa81/Lex.Db.pri",
+        "lib/portable-win81+wpa81/Lex.Db.xml",
+        "lib/sl50/DbTableAsync.cs",
+        "lib/sl50/Lex.Db.dll",
+        "lib/sl50/Lex.Db.pdb",
+        "lib/sl50/Lex.Db.xml",
+        "lib/uap10.0/Lex.Db.dll",
+        "lib/uap10.0/Lex.Db.pdb",
+        "lib/uap10.0/Lex.Db.pri",
+        "lib/uap10.0/Lex.Db.xml",
+        "lib/wp8/Lex.Db.dll",
+        "lib/wp8/Lex.Db.pdb",
+        "lib/wp8/Lex.Db.xml",
+        "lib/wp81/Lex.Db.dll",
+        "lib/wp81/Lex.Db.pdb",
+        "lib/wp81/Lex.Db.xml",
+        "package/services/metadata/core-properties/3d6ddc04bdf6452ca9af519d013bab3d.psmdcp"
+      ]
+    },
     "Microsoft.CSharp/4.0.0": {
       "sha512": "oWqeKUxHXdK6dL2CFjgMcaBISbkk+AqEg+yvJHE4DElNzS4QaTsCflgkkqZwVlWby1Dg9zo9n+iCAMFefFdJ/A==",
       "type": "Package",
@@ -13059,37 +13029,6 @@
         "lib/windowsphone8/System.Reactive.Linq.XML",
         "package/services/metadata/core-properties/0b05bef9a8e34a3da5e4d5d41f320ee4.psmdcp",
         "Rx-Linq.nuspec"
-      ]
-    },
-    "SQLite.Net-PCL/3.1.1": {
-      "sha512": "eIaIk+k4MwvBeKyzj1kgIegWXYZlaDAHNzsaYP7wNDgSqAdaza8FgCRun7mIZScJD/RIuKxN/b1V+bkC+/WIeA==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "lib/MonoAndroid/SQLite.Net.Platform.XamarinAndroid.dll",
-        "lib/monotouch/SQLite.Net.Platform.XamarinIOS.dll",
-        "lib/net4/SQLite.Net.Platform.Win32.dll",
-        "lib/net40/SQLite.Net.Platform.Generic.dll",
-        "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll",
-        "lib/portable-win81+wpa81/SQLite.Net.Platform.WinRT.dll",
-        "lib/Windows8/SQLite.Net.Platform.WinRT.dll",
-        "lib/windowsphone8/ARM/SQLite.Net.Platform.WindowsPhone8.dll",
-        "lib/windowsphone8/x86/SQLite.Net.Platform.WindowsPhone8.dll",
-        "lib/Xamarin.iOS10/SQLite.Net.Platform.XamarinIOS.Unified.dll",
-        "package/services/metadata/core-properties/42617fe08935462ea38a3073a9954c4b.psmdcp",
-        "SQLite.Net-PCL.nuspec"
-      ]
-    },
-    "SQLite.Net.Core-PCL/3.1.1": {
-      "sha512": "/0VdXnyj2srEh5rM1RW/snXJrVGRsxGB3xjW4EkhZIig9N/8EocZZrEr0vwRJU8a9Lz4BrweoLyKwp2evmSIzg==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll",
-        "package/services/metadata/core-properties/23cc4adcea6c40a7a0e82fb6b4a09ba7.psmdcp",
-        "SQLite.Net.Core-PCL.nuspec"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -15850,10 +15789,10 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "Lex.Db >= 1.2.6",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "Newtonsoft.Json >= 8.0.1",
-      "Prism.Unity >= 6.1.1",
-      "SQLite.Net-PCL >= 3.1.1"
+      "Prism.Unity >= 6.1.1"
     ],
     "UAP,Version=v10.0": []
   }

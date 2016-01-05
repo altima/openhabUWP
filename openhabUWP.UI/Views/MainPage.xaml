@@ -21,12 +21,12 @@
         <StackPanel Orientation="Horizontal" Height="48" VerticalAlignment="Top">
             <Rectangle x:Name="Spacer" Width="48"
                        Visibility="{Binding IsSpacerVisible, Mode=TwoWay, Converter={StaticResource VisibilityConverter}}"/>
-            <TextBlock Text="{Binding PageTitle}" Margin="5"/>
+            <TextBlock Text="{Binding OpenhabPage.Title}" Margin="5"/>
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
             <ItemsControl
-                ItemsSource="{Binding Widgets}"
+                ItemsSource="{Binding OpenhabPage.Widgets}"
                 ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
             </ItemsControl>
         </ScrollViewer>

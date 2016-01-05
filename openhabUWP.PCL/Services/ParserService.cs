@@ -22,24 +22,9 @@ namespace openhabUWP.Services
             _logService = logService;
         }
 
-        public Openhab ParseOpenhab(XElement openhabNode)
+        public Sitemap[] ParseSitemaps(XElement sitemapsNode)
         {
-            var hab = new Openhab();
-            hab.Links = openhabNode.Descendants("link")
-                    .AsParallel()
-                    .Select(n => new Link(GetAttribute(n, "type"), n.Value))
-                    .ToArray();
-            return hab;
-        }
-
-        public Sitemaps ParseSitempas(XElement sitemapsNode)
-        {
-            var maps = new Sitemaps();
-            maps.Maps = sitemapsNode.Descendants("sitemap")
-                .AsParallel()
-                .Select(ParseSitemap)
-                .ToArray();
-            return maps;
+            throw new NotImplementedException();
         }
 
         public Sitemap ParseSitemap(XElement sitemapNode)
@@ -66,17 +51,6 @@ namespace openhabUWP.Services
             page.Widgets = ParseWidgets(homepageNode.Elements("widget")).ToArray();
 
             return page;
-        }
-
-        public Models.Items ParseItems(XElement itemsNode)
-        {
-            var items = new Models.Items();
-            items.items = itemsNode.Descendants("item")
-                .AsParallel()
-                .Select(ParseItem)
-                .Where(i => i != null)
-                .ToArray();
-            return items;
         }
 
         public IItem ParseItem(XElement itemNode)
@@ -127,13 +101,13 @@ namespace openhabUWP.Services
                     break;
                 case "Text":
                     widget = new TextWidget(widgetId, label, icon);
-                    widget.Item = item;
+                    ((TextWidget)widget).Item = item;
                     ((TextWidget) widget).LinkedPage = linkedPage;
 
                     break;
                 case "Switch":
                     widget = new SwitchWidget(widgetId, label, icon);
-                    widget.Item = item;
+                    ((SwitchWidget)widget).Item = item;
                     break;
             }
 

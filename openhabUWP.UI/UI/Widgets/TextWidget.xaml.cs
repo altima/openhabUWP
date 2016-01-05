@@ -63,10 +63,10 @@ namespace openhabUWP.UI.Widgets
 
         public void WidgetUpdateReceived(Interfaces.Widgets.IWidget widget)
         {
-            if (Equals(_widget.Id, widget.Id))
+            if (Equals(_widget.WidgetId, widget.WidgetId))
             {
                 this.DataContext = widget;
-                Debug.WriteLine("TextWidget Udpate {0}", widget.Id);
+                Debug.WriteLine("TextWidget Udpate {0}", widget.WidgetId);
             }
         }
     }

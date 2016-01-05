@@ -1,8 +1,8 @@
-﻿using openhabUWP.Interfaces.Common;
+﻿using openhabUWP.Models;
 
-namespace openhabUWP.Interfaces
+namespace openhabUWP.Interfaces.Common
 {
-    public interface ISitemap : ILinkItem, ILabelItem, INameItem
+    public interface ISitemap
     {
         /// <summary>
         /// Gets or sets the homepage.
@@ -10,6 +10,30 @@ namespace openhabUWP.Interfaces
         /// <value>
         /// The homepage.
         /// </value>
-        IPage Homepage { get; set; }
+        Page Homepage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the label.
+        /// </summary>
+        /// <value>
+        /// The label.
+        /// </value>
+        string Label { get; set; }
+
+        /// <summary>
+        /// Gets or sets the link.
+        /// </summary>
+        /// <value>
+        /// The link.
+        /// </value>
+        string Link { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        string Name { get; set; }
     }
 }

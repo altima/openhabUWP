@@ -4,15 +4,19 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Practices.ObjectBuilder2;
+using openhabUWP.Enums;
 using openhabUWP.Events;
+using openhabUWP.Helper;
 using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
+using openhabUWP.Interfaces.Services;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Items;
 using openhabUWP.Models;
@@ -21,23 +25,26 @@ using openhabUWP.Widgets;
 using Prism.Events;
 using Prism.Windows.Mvvm;
 using Prism.Windows.Navigation;
+using Page = openhabUWP.Models.Page;
 
 namespace openhabUWP.ViewModels
 {
     public interface IMainPageViewModel : IViewModel
     {
-        string PageTitle { get; set; }
-        ObservableCollection<IWidget> Widgets { get; set; }
+        Page OpenhabPage { get; set; }
+
+        Task LoadPage(Page page);
+        void GoBack();
+        bool CanGoBack();
     }
 
     public class MainPageViewModel : ViewModelBase, IMainPageViewModel
     {
-        private readonly IRestService20 _restService;
+        private readonly IRestService _restService;
         private readonly IEventAggregator _eventAggregator;
 
         private bool _isSpacerVisible;
-        private string _pageTitle;
-        private ObservableCollection<IWidget> _widgets;
+        private Page _openhabPage;
 
         public bool IsSpacerVisible
         {
@@ -45,18 +52,13 @@ namespace openhabUWP.ViewModels
             set { SetProperty(ref _isSpacerVisible, value); }
         }
 
-        public ObservableCollection<IWidget> Widgets
+        public Page OpenhabPage
         {
-            get { return _widgets; }
-            set { SetProperty(ref _widgets, value); }
+            get { return _openhabPage; }
+            set { SetProperty(ref _openhabPage, value); }
         }
 
-        public string PageTitle
-        {
-            get { return _pageTitle; }
-            set { SetProperty(ref _pageTitle, value); }
-        }
-        public MainPageViewModel(IEventAggregator eventAggregator, IRestService20 restService)
+        public MainPageViewModel(IEventAggregator eventAggregator, IRestService restService)
         {
             _eventAggregator = eventAggregator;
             _restService = restService;
@@ -69,10 +71,6 @@ namespace openhabUWP.ViewModels
                 .Subscribe(OnNavigationDisplayModeChangedEvent, true);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="displayMode"></param>
         private void OnNavigationDisplayModeChangedEvent(SplitViewDisplayMode displayMode)
         {
             Debug.WriteLine(string.Format("MainPageViewModel.OnNavigationDisplayModeChangedEvent() - DisplayMode: {0}",
@@ -81,48 +79,10 @@ namespace openhabUWP.ViewModels
             IsSpacerVisible = displayMode == SplitViewDisplayMode.Overlay;
         }
 
-
         public override async void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
         {
             _eventAggregator.GetEvent<PubSubNames.NavigatedToPageEvent>().Publish(e);
-
-            if (e.NavigationMode == NavigationMode.New)
-            {
-                // load
-            }
-            else
-            {
-                // refresh
-            }
-
-            if (_restService != null)
-            {
-                var servers = await _restService.FindLocalServersAsync();
-                if (servers.Length > 0)
-                {
-                    var server = servers.First();
-                    if (await _restService.IsOpenhab2(server))
-                    {
-                        var sitemaps = await _restService.LoadSitemapsAsync(server);
-                        if (sitemaps.Any())
-                        {
-                            var sitemap = await _restService.LoadSitemapDetailAsync(sitemaps.First());
-                            CreatePage(sitemap.Homepage);
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                }
-            }
-            base.OnNavigatedTo(e, viewModelState);
-        }
-
-        private void CreatePage(IPage page)
-        {
-            PageTitle = page.Title;
-            Widgets = new ObservableCollection<IWidget>(page.Widgets);
+            CheckServer();
         }
 
         private void OnDataReceived(string s)
@@ -174,32 +134,71 @@ namespace openhabUWP.ViewModels
                 {
                     case "Switch":
                         widget = new SwitchWidget(widgetId, label, icon);
+                        _eventAggregator.GetEvent<WidgetUpdateEvent>().Publish(widget);
                         break;
                     case "Text":
                         widget = new TextWidget(widgetId, label, icon);
+                        _eventAggregator.GetEvent<WidgetUpdateEvent>().Publish(widget);
                         break;
                     case "Frame":
                         widget = new FrameWidget(widgetId, label, icon);
+                        _eventAggregator.GetEvent<WidgetUpdateEvent>().Publish(widget);
                         break;
                 }
-
-
-                if (widget != null)
-                {
-                    if (item != null)
-                        widget.Item = item;
-                    _eventAggregator.GetEvent<WidgetUpdateEvent>().Publish(widget);
-                }
-
             }
         }
 
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
-            _eventAggregator.GetEvent<PubSubNames.NavigationDisplayModeChangedEvent>().Unsubscribe(OnNavigationDisplayModeChangedEvent);
-            base.OnNavigatingFrom(e, viewModelState, suspending);
+            if (e.NavigationMode == NavigationMode.Back && CanGoBack())
+            {
+                e.Cancel = true;
+                GoBack();
+            }
+            else
+            {
+                _eventAggregator.GetEvent<PubSubNames.NavigationDisplayModeChangedEvent>().Unsubscribe(OnNavigationDisplayModeChangedEvent);
+            }
         }
 
+        private async void CheckServer()
+        {
+            var server = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
+            var sitemaps = await _restService.LoadSitemapsAsync(server);
+            if (sitemaps.Any())
+            {
+                var firstSitemap = sitemaps.FirstOrDefault();
+                if (firstSitemap != null)
+                {
+                    firstSitemap = await _restService.LoadSitemapAsync(firstSitemap);
+                    await LoadPage(firstSitemap.Homepage);
+                }
+            }
+        }
+
+        public async Task LoadPage(Page page)
+        {
+            OpenhabPage = await _restService.LoadPageAsync(page);
+        }
+        public async void GoBack()
+        {
+            if (CanGoBack())
+            {
+                await LoadPage(OpenhabPage.Parent);
+            }
+        }
+        public bool CanGoBack()
+        {
+            if (OpenhabPage != null &&
+                OpenhabPage.Parent != null &&
+                !OpenhabPage.Parent.Link.IsNullOrEmpty())
+            {
+                return true;
+            }
+
+
+            return false;
+        }
 
     }
 
@@ -207,27 +206,37 @@ namespace openhabUWP.ViewModels
     {
         public class MainPageViewModel : ViewModelBase, IMainPageViewModel
         {
-            public string PageTitle { get; set; }
-            public ObservableCollection<IWidget> Widgets { get; set; }
-
             public MainPageViewModel()
             {
-                PageTitle = "UI Page 1";
-
-                Widgets = new ObservableCollection<IWidget>()
+                OpenhabPage = new Page("", "Default", "http://link.to", false, "firstfloor")
                 {
-                    new FrameWidget("1", "Frame 1",""),
-                    new FrameWidget("2", "Frame 2",""),
-
-                    new SwitchWidget("3","Switch 1",""),
-                    new SwitchWidget("4","Switch 2",""),
-
-                    new TextWidget("5", "Text 1", ""),
-                    new TextWidget("6", "Text 2", ""),
+                    Widgets = new IWidget[]
+                    {
+                        new FrameWidget("","Frame 1", ""),
+                        new FrameWidget("","Frame 2", ""),
+                        new FrameWidget("","Frame 3", ""),
+                    }
                 };
             }
 
             public bool IsSpacerVisible { get; set; }
+
+            public Task LoadPage(Page page)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void GoBack()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool CanGoBack()
+            {
+                throw new NotImplementedException();
+            }
+
+            public Page OpenhabPage { get; set; }
         }
     }
 }

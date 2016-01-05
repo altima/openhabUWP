@@ -31,9 +31,9 @@ namespace openhabUWP.UI.Widgets
 
         public void WidgetUpdateReceived(Interfaces.Widgets.IWidget widget)
         {
-            if (Equals(widget.Id, _widget.Id))
+            if (Equals(widget.WidgetId, _widget.WidgetId))
             {
-                Debug.WriteLine("FrameWidget Udpate {0}", widget.Id);
+                Debug.WriteLine("FrameWidget Udpate {0}", widget.WidgetId);
             }
         }
     }

@@ -6,16 +6,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using openhabUWP.Interfaces.Services;
 
 namespace openhabUWP.Services
 {
-    public interface IPushClientService
-    {
-        bool PushChannelAttached { get; }
-
-        void AttachToEvents(string baseUrl, string[] topyics = null, Action<string> onDataReceived = null, Action<string> onEventReceived = null);
-    }
-
     public class PushClientService : IPushClientService
     {
         private const string DataPrefix = "data: ";

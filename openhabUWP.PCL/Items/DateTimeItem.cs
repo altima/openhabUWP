@@ -1,10 +1,12 @@
 ﻿using System;
-using openhabUWP.Enums;
-using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Items;
 
 namespace openhabUWP.Items
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="openhabUWP.Interfaces.Items.IDateTimeItem" />
     public class DateTimeItem : IDateTimeItem
     {
         /// <summary>
@@ -43,6 +45,14 @@ namespace openhabUWP.Items
         /// The name.
         /// </value>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        public string Type { get; set; }
 
         /// <summary>
         /// Gets or sets the link.

@@ -6,7 +6,7 @@ namespace openhabUWP.Models
     /// <summary>
     /// 
     /// </summary>
-    public class Server : ILinkItem
+    public class Server
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Server"/> class.
@@ -33,7 +33,7 @@ namespace openhabUWP.Models
         /// <param name="protocol">The protocol.</param>
         /// <param name="host">The host.</param>
         /// <param name="port">The port.</param>
-        public Server(ProtocolType protocol, string host, int port = 8080, string path = "/rest") : this()
+        public Server(ProtocolType protocol = ProtocolType.Http, string host = "localhost", int port = 8080, string path = "/rest") : this()
         {
             if (host.Contains("://")) host = host.Substring(host.IndexOf("://") + 2);
             this.Link = string.Concat(protocol, "://", host, ":", port, path);

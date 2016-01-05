@@ -42,7 +42,7 @@ namespace openhabUWP
 
             this.RegisterTypeIfMissing(typeof(ILogService), typeof(LogService), true);
             this.RegisterTypeIfMissing(typeof(IParserService), typeof(ParserService), true);
-            this.RegisterTypeIfMissing(typeof(IRestService20), typeof(RestService20), true);
+            this.RegisterTypeIfMissing(typeof(IRestService), typeof(RestService), true);
             this.RegisterTypeIfMissing(typeof(IPushClientService), typeof(PushClientService), true);
             this.RegisterTypeIfMissing(typeof(IOpenhabDatabase), typeof(OpenhabDatabase), true);
 

@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Linq;
 using Windows.Data.Json;
+using Newtonsoft.Json;
+using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Items;
@@ -14,11 +16,28 @@ namespace openhabUWP.Helper
     {
         public static Sitemap[] ToSitemaps(this string jsonString)
         {
-            if (jsonString.IsNullOrEmpty()) return new Sitemap[0];
-            return JsonArray.Parse(jsonString)
-                .Where(a => a != null)
-                .Select(a => a.GetObject().ToSitemap())
-                .ToArray();
+            if (!jsonString.IsNullOrEmpty())
+            {
+                JsonArray array = null;
+                if (!JsonArray.TryParse(jsonString, out array))
+                {
+                    //maybe openhab1?
+                    JsonObject sitemap = null;
+                    if (JsonObject.TryParse(jsonString, out sitemap))
+                    {
+                        array = sitemap.GetNamedArray("sitemap");
+                    }
+                }
+
+                if (array != null)
+                {
+                    return array
+                        .Where(a => a != null)
+                        .Select(a => a.GetObject().ToSitemap())
+                        .ToArray();
+                }
+            }
+            return new Sitemap[0];
         }
 
         public static Sitemap ToSitemap(this string jsonString, Sitemap sitemap)
@@ -43,6 +62,47 @@ namespace openhabUWP.Helper
             return sitemap;
         }
 
+        private static JsonArray ToWidgetsSafe(this JsonObject jo)
+        {
+            JsonArray jWidgets = null;
+            if (jo.ContainsKey("widgets"))
+            {
+                jWidgets = jo.GetNamedArray("widgets", null);
+            }
+
+            if (jo.ContainsKey("widget"))
+            {
+                switch (jo["widget"].ValueType)
+                {
+                    case JsonValueType.Object:
+                        jWidgets = new JsonArray()
+                        {
+                            jo["widget"].GetObject()
+                        };
+                        break;
+                    case JsonValueType.Array:
+                        jWidgets = jo.GetNamedArray("widget", null);
+                        break;
+                }
+            }
+            return jWidgets;
+        }
+        private static bool ToBooleanSafe(this JsonObject jo, string key)
+        {
+            IJsonValue leafValue = null;
+            if (jo.TryGetValue(key, out leafValue))
+            {
+                switch (leafValue.ValueType)
+                {
+                    case JsonValueType.String:
+                        return leafValue.GetString().ToBoolean();
+                    case JsonValueType.Boolean:
+                        return leafValue.GetBoolean();
+                }
+            }
+            return false;
+        }
+
         public static Page ToPage(this JsonObject jo)
         {
             Page page = null;
@@ -50,15 +110,14 @@ namespace openhabUWP.Helper
             var pLink = jo.GetNamedString("link", "");
             var pTitle = jo.GetNamedString("title", "");
             var pIcon = jo.GetNamedString("icon", "");
-            var pLeaf = jo.GetNamedBoolean("leaf", false);
+            var pLeaf = jo.ToBooleanSafe("key");
+
             page = new Page(pId, pTitle, pLink, pLeaf, pIcon);
 
-            // widgets
-            var jWidgets = jo.GetNamedArray("widgets", null);
+            var jWidgets = jo.ToWidgetsSafe();
             if (jWidgets != null)
-            {
                 page.Widgets = jWidgets.ToWidgets();
-            }
+
             return page;
         }
 
@@ -87,14 +146,10 @@ namespace openhabUWP.Helper
                 var label = jo.GetNamedString("label", "");
                 var type = jo.GetNamedString("type", "");
 
-                if (jo.ContainsKey("widgets"))
-                {
-                    var jWidgets = jo.GetNamedArray("widgets").Select(w => w.GetObject()).ToArray();
-                    widgets = jWidgets
-                        .Select(j => j.ToWidget())
-                        .Where(w => w != null)
-                        .ToArray();
-                }
+                var jWidgets = jo.ToWidgetsSafe();
+
+                if (jWidgets != null)
+                    widgets = jWidgets.ToWidgets();
 
                 if (jo.ContainsKey("item"))
                     item = jo.GetNamedObject("item").ToItem();
@@ -105,14 +160,14 @@ namespace openhabUWP.Helper
                 {
                     case "Frame":
                         widget = new FrameWidget(widgetId, label, icon);
-                        ((FrameWidget)widget).Widgets = widgets;
                         ((FrameWidget)widget).Item = item;
-                        ((FrameWidget)widget).LinkedPage = linkedPage;
+                        widget.Widgets = widgets;
+                        widget.LinkedPage = linkedPage;
                         break;
                     case "Text":
                         widget = new TextWidget(widgetId, label, icon);
                         ((TextWidget)widget).Item = item;
-                        ((TextWidget)widget).LinkedPage = linkedPage;
+                        widget.LinkedPage = linkedPage;
                         break;
                     case "Switch":
                         widget = new SwitchWidget(widgetId, label, icon);
@@ -120,9 +175,9 @@ namespace openhabUWP.Helper
                         break;
                     case "Group":
                         widget = new GroupWidget(widgetId, label, icon);
-                        ((GroupWidget)widget).Widgets = widgets;
                         ((GroupWidget)widget).Item = item;
-                        ((GroupWidget)widget).LinkedPage = linkedPage;
+                        widget.Widgets = widgets;
+                        widget.LinkedPage = linkedPage;
                         break;
                 }
             }
@@ -145,28 +200,28 @@ namespace openhabUWP.Helper
             var link = jo.GetNamedString("link", "");
             var state = jo.GetNamedString("state", "");
 
-            Debug.WriteLine(name);
-
-            IItem item = null;
             switch (type)
             {
                 case "GroupItem":
-                    item = new GroupItem(name, link);
-                    break;
+                    return new GroupItem(name, link);
                 case "NumberItem":
                     if (state == "NULL") state = "0";
-                    item = new NumberItem(name, link, decimal.Parse(state));
-                    break;
+                    return new NumberItem(name, link, decimal.Parse(state));
                 case "DateTimeItem":
                     if (state == "NULL") state = DateTime.Parse("1970-01-01 01:00").ToString("s");
-                    item = new DateTimeItem(name, link, DateTime.Parse(state));
-                    break;
+                    return new DateTimeItem(name, link, DateTime.Parse(state));
                 case "SwitchItem":
-                    item = new SwitchItem(name, link, state);
-                    break;
+                    return new SwitchItem(name, link, state);
             }
-            return item;
+            return null;
         }
 
+
+        public static bool ToBoolean(this string input)
+        {
+            var b = false;
+            bool.TryParse(input, out b);
+            return b;
+        }
     }
 }

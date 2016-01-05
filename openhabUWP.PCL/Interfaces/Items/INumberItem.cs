@@ -1,7 +1,9 @@
+using openhabUWP.Interfaces.Common;
+
 namespace openhabUWP.Interfaces.Items
 {
-    public interface INumberItem : IStateItem<decimal>
+    public interface INumberItem : IItem<decimal>
     {
-        
+
     }
 }

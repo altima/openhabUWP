@@ -11,7 +11,7 @@
     <AssemblyName>openhabUWP.PCL</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -110,28 +110,13 @@
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Helper\openhabFluent.cs" />
     <Compile Include="Helper\StringFluent.cs" />
-    <Compile Include="Interfaces\Common\IIconItem.cs" />
-    <Compile Include="Interfaces\Common\IIdItem.cs" />
-    <Compile Include="Interfaces\Common\ILeafItem.cs" />
-    <Compile Include="Interfaces\Common\ILinkedPage.cs" />
-    <Compile Include="Interfaces\Common\IParent.cs" />
-    <Compile Include="Interfaces\Common\ITitleItem.cs" />
-    <Compile Include="Interfaces\Widgets\IFrameWidget.cs" />
-    <Compile Include="Interfaces\Widgets\IItemWidget.cs" />
+    <Compile Include="Interfaces\Common\IItem.cs" />
     <Compile Include="LabelConstants.cs" />
     <Compile Include="Enums\ItemType.cs" />
     <Compile Include="Enums\ProtocolType.cs" />
-    <Compile Include="Interfaces\Common\IItem.cs" />
-    <Compile Include="Interfaces\Common\IItems.cs" />
     <Compile Include="Interfaces\Items\IDateTimeItem.cs" />
     <Compile Include="Interfaces\Items\IGroupItem.cs" />
-    <Compile Include="Interfaces\Common\IHomepage.cs" />
     <Compile Include="Interfaces\Items\INumberItem.cs" />
-    <Compile Include="Interfaces\Common\ISitemaps.cs" />
-    <Compile Include="Interfaces\Items\IStateItem.cs" />
-    <Compile Include="Interfaces\Common\ILabelItem.cs" />
-    <Compile Include="Interfaces\Common\ILinkItem.cs" />
-    <Compile Include="Interfaces\Common\INameItem.cs" />
     <Compile Include="Interfaces\Common\ISitemap.cs" />
     <Compile Include="Interfaces\Items\ISwitchItem.cs" />
     <Compile Include="Interfaces\Widgets\IWidget.cs" />
@@ -140,30 +125,25 @@
     <Compile Include="Items\NumberItem.cs" />
     <Compile Include="Items\SwitchItem.cs" />
     <Compile Include="Interfaces\Common\IPage.cs" />
-    <Compile Include="Interfaces\ILink.cs" />
-    <Compile Include="Interfaces\IOpenhab.cs" />
-    <Compile Include="Models\Items.cs" />
-    <Compile Include="Models\Link.cs" />
-    <Compile Include="Models\Openhab.cs" />
     <Compile Include="Models\Page.cs" />
-    <Compile Include="Models\Parent.cs" />
     <Compile Include="Models\Server.cs" />
     <Compile Include="Models\Sitemap.cs" />
-    <Compile Include="Models\Sitemaps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Services\IRestService.cs" />
     <Compile Include="Interfaces\Services\IParserService.cs" />
     <Compile Include="Interfaces\Services\ILogService.cs" />
+    <Compile Include="Interfaces\Services\IPushClientService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\ParserService.cs" />
     <Compile Include="Services\PushClientService.cs" />
-    <Compile Include="Services\RestService20.cs" />
+    <Compile Include="Services\RestService.cs" />
     <Compile Include="Widgets\FrameWidget.cs" />
     <Compile Include="Widgets\GroupWidget.cs" />
     <Compile Include="Widgets\SwitchWidget.cs" />
     <Compile Include="Widgets\TextWidget.cs" />
     <Content Include="Properties\openhabUWP.rd.xml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

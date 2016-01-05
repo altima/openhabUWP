@@ -6,19 +6,19 @@
 
     <!-- templates -->
     <DataTemplate x:Key="FrameWidgetTemplate">
-        <widgets:FrameWidget/>
+        <widgets:FrameWidget IsHitTestVisible="{Binding Converter={StaticResource WidgetClickableConverter}}"/>
     </DataTemplate>
 
     <DataTemplate x:Key="SwitchWidgetTemplate">
-        <widgets:SwitchWidget/>
+        <widgets:SwitchWidget IsHitTestVisible="{Binding Converter={StaticResource WidgetClickableConverter}}"/>
     </DataTemplate>
 
     <DataTemplate x:Key="TextWidgetTemplate">
-        <widgets:TextWidget/>
+        <widgets:TextWidget IsHitTestVisible="{Binding Converter={StaticResource WidgetClickableConverter}}"/>
     </DataTemplate>
 
     <DataTemplate x:Key="GroupWidgetTemplate">
-        <widgets:GroupWidget/>
+        <widgets:GroupWidget IsHitTestVisible="{Binding Converter={StaticResource WidgetClickableConverter}}"/>
     </DataTemplate>
 
     

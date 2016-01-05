@@ -61,7 +61,7 @@ namespace openhabUWP.Models
         /// <value>
         /// The homepage.
         /// </value>
-        public IPage Homepage { get; set; }
+        public Page Homepage { get; set; }
 
         /// <summary>
         /// Gets or sets the link.

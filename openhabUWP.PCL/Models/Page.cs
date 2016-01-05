@@ -1,9 +1,10 @@
-﻿using openhabUWP.Interfaces.Common;
+﻿using openhabUWP.Interfaces;
+using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Widgets;
 
 namespace openhabUWP.Models
 {
-    public class Page : IPage, ILinkedPage
+    public class Page : IPage
     {
         public Page()
         {
@@ -31,7 +32,7 @@ namespace openhabUWP.Models
         public bool Leaf { get; set; }
         public string Link { get; set; }
 
-        public IParentItem Parent { get; set; }
+        public Page Parent { get; set; }
         public IWidget[] Widgets { get; set; }
     }
 }

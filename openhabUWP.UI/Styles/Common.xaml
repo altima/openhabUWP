@@ -6,6 +6,7 @@
     <!-- converter -->
     <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
     <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+    <converters:WidgetClickableConverter x:Key="WidgetClickableConverter"/>
     
     
 </ResourceDictionary>

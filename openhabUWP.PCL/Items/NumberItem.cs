@@ -1,8 +1,11 @@
-﻿using openhabUWP.Enums;
-using openhabUWP.Interfaces.Items;
+﻿using openhabUWP.Interfaces.Items;
 
 namespace openhabUWP.Items
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="openhabUWP.Interfaces.Items.INumberItem" />
     public class NumberItem : INumberItem
     {
         /// <summary>
@@ -33,6 +36,14 @@ namespace openhabUWP.Items
         /// The name.
         /// </value>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        public string Type { get; set; }
 
         /// <summary>
         /// Gets or sets the link.

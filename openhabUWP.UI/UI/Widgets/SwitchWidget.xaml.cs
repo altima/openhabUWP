@@ -9,6 +9,7 @@ using Microsoft.Practices.Unity;
 using openhabUWP.Annotations;
 using openhabUWP.Events;
 using openhabUWP.Helper;
+using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Services;
 using openhabUWP.Interfaces.Widgets;
@@ -64,7 +65,7 @@ namespace openhabUWP.UI.Widgets
 
         public void WidgetUpdateReceived(Interfaces.Widgets.IWidget widget)
         {
-            if (Equals(widget.Id, _widget.Id))
+            if (Equals(widget.WidgetId, _widget.WidgetId))
             {
                 remoteUpdate = true;
                 this.DataContext = widget;

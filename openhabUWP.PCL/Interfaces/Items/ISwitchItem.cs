@@ -2,7 +2,7 @@ using openhabUWP.Interfaces.Common;
 
 namespace openhabUWP.Interfaces.Items
 {
-    public interface ISwitchItem : IStateItem<bool>
+    public interface ISwitchItem : IItem<bool>
     {
 
     }

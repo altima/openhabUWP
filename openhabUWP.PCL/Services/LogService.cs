@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Media.Core;
 using openhabUWP.Enums;
 using openhabUWP.Interfaces.Services;
 
 namespace openhabUWP.Services
 {
-
-
     public class LogService : ILogService
     {
         private const string LOG_PATTERN = "{0:s}\t{1}\t{2}";
