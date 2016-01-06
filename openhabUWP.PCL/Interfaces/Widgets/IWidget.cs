@@ -1,4 +1,5 @@
 ﻿using openhabUWP.Interfaces.Common;
+using openhabUWP.Models;
 
 namespace openhabUWP.Interfaces.Widgets
 {
@@ -42,7 +43,7 @@ namespace openhabUWP.Interfaces.Widgets
         /// <value>
         /// The linked page.
         /// </value>
-        IPage LinkedPage { get; set; }
+        Page LinkedPage { get; set; }
         
         /// <summary>
         /// Gets or sets the widgets.

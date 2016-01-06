@@ -17,7 +17,6 @@
             FontWeight="Bold"/>
         <ItemsControl 
             ItemsSource="{Binding Widgets}"
-            ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
-        </ItemsControl>
+            ItemTemplateSelector="{StaticResource WidgetTemplateSelector}"/>
     </StackPanel>
 </UserControl>

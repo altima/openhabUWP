@@ -25,8 +25,8 @@ namespace openhabUWP.UI.Widgets
         public void RegisterForUpdate()
         {
             _widget = this.DataContext as openhabUWP.Widgets.FrameWidget;
-            App.Current.Container.Resolve<IEventAggregator>().GetEvent<WidgetUpdateEvent>().Unsubscribe(WidgetUpdateReceived);
-            App.Current.Container.Resolve<IEventAggregator>().GetEvent<WidgetUpdateEvent>().Subscribe(WidgetUpdateReceived);
+            App.Current.Container.Resolve<IEventAggregator>().GetEvent<WidgetEvents.WidgetUpdateEvent>().Unsubscribe(WidgetUpdateReceived);
+            App.Current.Container.Resolve<IEventAggregator>().GetEvent<WidgetEvents.WidgetUpdateEvent>().Subscribe(WidgetUpdateReceived);
         }
 
         public void WidgetUpdateReceived(Interfaces.Widgets.IWidget widget)

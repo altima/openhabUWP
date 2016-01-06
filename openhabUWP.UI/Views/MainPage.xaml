@@ -15,18 +15,17 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Height="48" VerticalAlignment="Top">
-            <Rectangle x:Name="Spacer" Width="48"
-                       Visibility="{Binding IsSpacerVisible, Mode=TwoWay, Converter={StaticResource VisibilityConverter}}"/>
-            <TextBlock Text="{Binding OpenhabPage.Title}" Margin="5"/>
-        </StackPanel>
+
+        <TextBlock Text="{Binding CurrentPage.Title}" Margin="5"
+                   VerticalAlignment="Center"/>
+
 
         <ScrollViewer Grid.Row="1">
             <ItemsControl
-                ItemsSource="{Binding OpenhabPage.Widgets}"
+                ItemsSource="{Binding CurrentPage.Widgets}"
                 ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
             </ItemsControl>
         </ScrollViewer>

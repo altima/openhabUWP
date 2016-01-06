@@ -5,9 +5,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.Data.Json;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Practices.ObjectBuilder2;
@@ -22,71 +24,136 @@ using openhabUWP.Items;
 using openhabUWP.Models;
 using openhabUWP.Services;
 using openhabUWP.Widgets;
+using Prism.Commands;
 using Prism.Events;
+using Prism.Windows.AppModel;
 using Prism.Windows.Mvvm;
 using Prism.Windows.Navigation;
 using Page = openhabUWP.Models.Page;
 
 namespace openhabUWP.ViewModels
 {
-    public interface IMainPageViewModel : IViewModel
+    public interface IMainPageViewModel
     {
-        Page OpenhabPage { get; set; }
+        Page CurrentPage { get; set; }
+        Server CurrentServer { get; set; }
 
         Task LoadPage(Page page);
-        void GoBack();
-        bool CanGoBack();
+        void GoUp();
+        bool CanGoUp { get; set; }
     }
 
     public class MainPageViewModel : ViewModelBase, IMainPageViewModel
     {
         private readonly IRestService _restService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly INavigationService _navigationService;
+        private readonly IDeviceGestureService _gestureService;
+        private IPushClientService _pushClientService;
 
-        private bool _isSpacerVisible;
-        private Page _openhabPage;
+        private bool _canGetUp;
+        private Page _currentPage;
+        private Server _currentServer;
 
-        public bool IsSpacerVisible
+        public bool CanGoUp
         {
-            get { return _isSpacerVisible; }
-            set { SetProperty(ref _isSpacerVisible, value); }
+            get { return _canGetUp; }
+            set
+            {
+                SetProperty(ref _canGetUp, value);
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = value ?
+                    AppViewBackButtonVisibility.Visible :
+                    AppViewBackButtonVisibility.Collapsed;
+            }
+        }
+        public Page CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                SetProperty(ref _currentPage, value);
+                CanGoUp = CurrentPage?.Parent != null;
+            }
+        }
+        public Server CurrentServer
+        {
+            get { return _currentServer; }
+            set { SetProperty(ref _currentServer, value); }
         }
 
-        public Page OpenhabPage
-        {
-            get { return _openhabPage; }
-            set { SetProperty(ref _openhabPage, value); }
-        }
-
-        public MainPageViewModel(IEventAggregator eventAggregator, IRestService restService)
+        public MainPageViewModel(IEventAggregator eventAggregator, IRestService restService, IDeviceGestureService gestureService, INavigationService navigationService, IPushClientService pushClientService)
         {
             _eventAggregator = eventAggregator;
             _restService = restService;
+            _gestureService = gestureService;
+            _navigationService = navigationService;
+            _pushClientService = pushClientService;
 
-            //Basic example of how we can use NavigationDisplayModeChangedEvent
-            //to adjust things based on the navigation display mode.
-            //A page header control that can be included on every page can also
-            //be made, and the same technique can be used on that control.
-            _eventAggregator.GetEvent<PubSubNames.NavigationDisplayModeChangedEvent>()
-                .Subscribe(OnNavigationDisplayModeChangedEvent, true);
+            _gestureService.GoBackRequested += GestureServiceOnGoBackRequested;
         }
 
-        private void OnNavigationDisplayModeChangedEvent(SplitViewDisplayMode displayMode)
+        private void GestureServiceOnGoBackRequested(object sender, DeviceGestureEventArgs args)
         {
-            Debug.WriteLine(string.Format("MainPageViewModel.OnNavigationDisplayModeChangedEvent() - DisplayMode: {0}",
-                displayMode));
-
-            IsSpacerVisible = displayMode == SplitViewDisplayMode.Overlay;
+            if (CanGoUp)
+            {
+                args.Cancel = args.Handled = true;
+                GoUp();
+            }
         }
 
-        public override async void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
+        public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
         {
-            _eventAggregator.GetEvent<PubSubNames.NavigatedToPageEvent>().Publish(e);
+            _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Subscribe(WidgetTapped);
             CheckServer();
         }
 
-        private void OnDataReceived(string s)
+        private async void WidgetTapped(IWidget widget)
         {
+            switch (widget.Type)
+            {
+                case "Switch":
+                    var switchWidget = (SwitchWidget)widget;
+                    var switchItem = (SwitchItem)switchWidget.Item;
+                    var currentState = switchItem.State;
+                    await _restService.PostCommand(switchItem, currentState ? "OFF" : "ON");
+                    break;
+                case "Text":
+                    if (widget.LinkedPage != null &&
+                        !widget.LinkedPage.Link.IsNullOrEmpty())
+                    {
+                        await LoadPage(widget.LinkedPage);
+                    }
+                    break;
+            }
+
+        }
+
+        private async void OnDataReceived(string s)
+        {
+            if (_needPagePush)
+            {
+                //openhab1, response is page, resart pooling
+                if (!s.IsNullOrEmpty())
+                {
+                    var page = JsonObject.Parse(s).ToPage();
+                    if (page != null)
+                    {
+                        if (Equals(CurrentPage.Id, page.Id))
+                        {
+                            CurrentPage = page;
+                        }
+                        _pushClientService.PoolForEvent(page.Link, OnDataReceived);
+                    }
+                }
+                else
+                {
+                    _pushClientService.PoolForEvent(CurrentPage.Link, OnDataReceived);
+                }
+            }
+            else
+            {
+                //openhab2
+            }
             Debug.WriteLine(s);
         }
 
@@ -134,15 +201,15 @@ namespace openhabUWP.ViewModels
                 {
                     case "Switch":
                         widget = new SwitchWidget(widgetId, label, icon);
-                        _eventAggregator.GetEvent<WidgetUpdateEvent>().Publish(widget);
+                        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
                         break;
                     case "Text":
                         widget = new TextWidget(widgetId, label, icon);
-                        _eventAggregator.GetEvent<WidgetUpdateEvent>().Publish(widget);
+                        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
                         break;
                     case "Frame":
                         widget = new FrameWidget(widgetId, label, icon);
-                        _eventAggregator.GetEvent<WidgetUpdateEvent>().Publish(widget);
+                        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
                         break;
                 }
             }
@@ -150,21 +217,17 @@ namespace openhabUWP.ViewModels
 
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
-            if (e.NavigationMode == NavigationMode.Back && CanGoBack())
-            {
-                e.Cancel = true;
-                GoBack();
-            }
-            else
-            {
-                _eventAggregator.GetEvent<PubSubNames.NavigationDisplayModeChangedEvent>().Unsubscribe(OnNavigationDisplayModeChangedEvent);
-            }
+            _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Unsubscribe(WidgetTapped);
         }
 
         private async void CheckServer()
         {
-            var server = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
-            var sitemaps = await _restService.LoadSitemapsAsync(server);
+            //var server = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
+            CurrentServer = new Server(host: "192.168.178.3"); //alpha mode, set server ip here
+
+            CheckPush(CurrentServer);
+
+            var sitemaps = await _restService.LoadSitemapsAsync(CurrentServer);
             if (sitemaps.Any())
             {
                 var firstSitemap = sitemaps.FirstOrDefault();
@@ -174,32 +237,35 @@ namespace openhabUWP.ViewModels
                     await LoadPage(firstSitemap.Homepage);
                 }
             }
+
         }
 
         public async Task LoadPage(Page page)
         {
-            OpenhabPage = await _restService.LoadPageAsync(page);
-        }
-        public async void GoBack()
-        {
-            if (CanGoBack())
+            CurrentPage = await _restService.LoadPageAsync(page);
+            if (_needPagePush)
             {
-                await LoadPage(OpenhabPage.Parent);
+                _pushClientService.PoolForEvent(CurrentPage.Link, OnDataReceived);
             }
         }
-        public bool CanGoBack()
+
+        public async void GoUp()
         {
-            if (OpenhabPage != null &&
-                OpenhabPage.Parent != null &&
-                !OpenhabPage.Parent.Link.IsNullOrEmpty())
+            if (CanGoUp)
             {
-                return true;
+                await LoadPage(CurrentPage.Parent);
             }
-
-
-            return false;
         }
 
+        private bool _needPagePush = false;
+        private async void CheckPush(Server server)
+        {
+            _needPagePush = !(await _restService.IsOpenhab2(server));
+            if (!_needPagePush && !_pushClientService.PushChannelAttached)
+            {
+                _pushClientService.AttachToEvents(server.Link + "/events", onDataReceived: OnDataReceived);
+            }
+        }
     }
 
     namespace Design
@@ -208,7 +274,7 @@ namespace openhabUWP.ViewModels
         {
             public MainPageViewModel()
             {
-                OpenhabPage = new Page("", "Default", "http://link.to", false, "firstfloor")
+                CurrentPage = new Page("", "Default", "http://link.to", false, "firstfloor")
                 {
                     Widgets = new IWidget[]
                     {
@@ -219,24 +285,21 @@ namespace openhabUWP.ViewModels
                 };
             }
 
-            public bool IsSpacerVisible { get; set; }
+            public Server CurrentServer { get; set; }
 
             public Task LoadPage(Page page)
             {
                 throw new NotImplementedException();
             }
 
-            public void GoBack()
+            public void GoUp()
             {
                 throw new NotImplementedException();
             }
 
-            public bool CanGoBack()
-            {
-                throw new NotImplementedException();
-            }
+            public bool CanGoUp { get; set; }
 
-            public Page OpenhabPage { get; set; }
+            public Page CurrentPage { get; set; }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using openhabUWP.Enums;
@@ -34,6 +35,8 @@ namespace openhabUWP.Services
         /// </value>
         public string UserAgent { get { return "openhabUWP/0.1"; } }
 
+        private string X_Atmosphere_tracking_id = "";
+
         /// <summary>
         /// The supported mDNS protocols
         /// </summary>
@@ -44,7 +47,15 @@ namespace openhabUWP.Services
 
         private HttpClient Client()
         {
-            if (_client != null) return _client;
+            if (_client != null)
+            {
+                if (!X_Atmosphere_tracking_id.IsNullOrEmpty() && !
+                    _client.DefaultRequestHeaders.Contains("X-Atmosphere-tracking-id"))
+                {
+                    _client.DefaultRequestHeaders.Add("X-Atmosphere-tracking-id", X_Atmosphere_tracking_id);
+                }
+                return _client;
+            }
 
             var clientHandler = new HttpClientHandler();
             if (clientHandler.SupportsAutomaticDecompression)
@@ -65,8 +76,36 @@ namespace openhabUWP.Services
         /// <returns></returns>
         private async Task<string> Get(string url)
         {
-            var response = await Client().GetStringAsync(new Uri(url));
-            return response;
+            var response = await Client().GetAsync(new Uri(url));
+            CheckResponseHeaders(response.Headers);
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        private void CheckResponseHeaders(HttpResponseHeaders headers)
+        {
+            var xHeader = "";
+            if (headers.Contains("X-Atmosphere-tracking-id"))
+            {
+                xHeader = headers.GetValues("X-Atmosphere-tracking-id").FirstOrDefault();
+            }
+
+            if (!Equals(xHeader, X_Atmosphere_tracking_id))
+            {
+                X_Atmosphere_tracking_id = xHeader;
+            }
+        }
+
+        private async Task<bool> Post(string url, string body)
+        {
+            var response = await Client().PostAsync(new Uri(url), new StringContent(body, Encoding.UTF8));
+            CheckResponseHeaders(response.Headers);
+            try
+            {
+                return response.IsSuccessStatusCode;
+            }
+            catch { }
+
+            return false;
         }
 
         /// <summary>
@@ -162,14 +201,15 @@ namespace openhabUWP.Services
         /// <param name="command">The command.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public Task PostCommand(string url, string command)
+        public async Task PostCommand(string url, string command)
         {
-            throw new NotImplementedException();
+            //if (!url.EndsWith("/state")) url = string.Concat(url, "/state");
+            await Post(url, command);
         }
 
         public Task PostCommand(IItem item, string command)
         {
-            throw new NotImplementedException();
+            return PostCommand(item.Link, command);
         }
     }
 }

@@ -35,7 +35,7 @@
 			IsOn="{Binding Item.State}"
 			Margin="10,0,0,0"
 			HorizontalAlignment="Right"
-			x:Name="toggleSwitch">
+            x:Name="toggleSwitch">
             <Interactivity:Interaction.Behaviors>
                 <Core:EventTriggerBehavior 
                     EventName="Toggled">

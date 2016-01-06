@@ -111,8 +111,15 @@ namespace openhabUWP.Helper
             var pTitle = jo.GetNamedString("title", "");
             var pIcon = jo.GetNamedString("icon", "");
             var pLeaf = jo.ToBooleanSafe("key");
+            IPage pPage = null;
+
+            if (jo.ContainsKey("parent"))
+            {
+                pPage = jo.GetNamedObject("parent").ToPage();
+            }
 
             page = new Page(pId, pTitle, pLink, pLeaf, pIcon);
+            page.Parent = (Page)pPage;
 
             var jWidgets = jo.ToWidgetsSafe();
             if (jWidgets != null)
@@ -163,6 +170,7 @@ namespace openhabUWP.Helper
                         ((FrameWidget)widget).Item = item;
                         widget.Widgets = widgets;
                         widget.LinkedPage = linkedPage;
+
                         break;
                     case "Text":
                         widget = new TextWidget(widgetId, label, icon);
@@ -180,6 +188,9 @@ namespace openhabUWP.Helper
                         widget.LinkedPage = linkedPage;
                         break;
                 }
+
+                if (widget != null)
+                    widget.Type = type;
             }
             catch (Exception ex)
             {

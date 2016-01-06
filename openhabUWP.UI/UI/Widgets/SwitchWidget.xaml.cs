@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Microsoft.Practices.Unity;
 using openhabUWP.Annotations;
 using openhabUWP.Events;
@@ -21,82 +22,45 @@ namespace openhabUWP.UI.Widgets
     public sealed partial class SwitchWidget : UserControl, IWidget
     {
         private openhabUWP.Widgets.SwitchWidget _widget;
-        private IRestService _restService;
-
+        private IEventAggregator _eventAggregator;
 
         public SwitchWidget()
         {
             this.InitializeComponent();
             this.DataContextChanged += OnDataContextChanged;
-            _restService = App.Current.Container.Resolve<IRestService>();
+            this.Tapped += OnTapped;
+            this.toggleSwitch.Tapped += OnTapped;
+            _eventAggregator = App.Current.Container.Resolve<IEventAggregator>();
+        }
+
+        private void OnTapped(object sender, TappedRoutedEventArgs tappedRoutedEventArgs)
+        {
+            SwitchToggled();
         }
 
         private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-            if (args.NewValue == null)
-            {
-                _widget = null;
-                DeregisterForUpdate();
-            }
-            else
-            {
-                _widget = args.NewValue as openhabUWP.Widgets.SwitchWidget;
-                if (!IsRegisteredForUpdate())
-                {
-                    DeregisterForUpdate();
-                    RegisterForUpdate();
-                }
-            }
+            if (args.NewValue is openhabUWP.Widgets.SwitchWidget)
+                RegisterForUpdate();
         }
 
-        private bool IsRegisteredForUpdate()
+        public void SwitchToggled()
         {
-            return App.Current.Container.Resolve<IEventAggregator>().GetEvent<WidgetUpdateEvent>().Contains(WidgetUpdateReceived);
+            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
         }
 
         public void RegisterForUpdate()
         {
-            App.Current.Container.Resolve<IEventAggregator>().GetEvent<WidgetUpdateEvent>().Subscribe(WidgetUpdateReceived, ThreadOption.UIThread);
-        }
-        public void DeregisterForUpdate()
-        {
-            App.Current.Container.Resolve<IEventAggregator>().GetEvent<WidgetUpdateEvent>().Unsubscribe(WidgetUpdateReceived);
+            _widget = this.DataContext as openhabUWP.Widgets.SwitchWidget;
+            _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Unsubscribe(WidgetUpdateReceived);
+            _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Subscribe(WidgetUpdateReceived);
         }
 
         public void WidgetUpdateReceived(Interfaces.Widgets.IWidget widget)
         {
             if (Equals(widget.WidgetId, _widget.WidgetId))
             {
-                remoteUpdate = true;
                 this.DataContext = widget;
-                SwitchToggled();
-                remoteUpdate = false;
-            }
-        }
-
-        private bool remoteUpdate = false;
-        public async void SwitchToggled()
-        {
-            var link = (this.DataContext as ISwitchWidget)?.Item?.Link;
-            var state = ((this.DataContext as ISwitchWidget)?.Item as SwitchItem)?.State;
-            if (toggleSwitch.IsOn != state && remoteUpdate)
-            {
-                if (state != null)
-                {
-                    toggleSwitch.IsOn = (bool)state;
-                }
-            }
-
-            if (!link.IsNullOrEmpty())
-            {
-                if (toggleSwitch.IsOn)
-                {
-                    await _restService.PostCommand(link, "ON");
-                }
-                else
-                {
-                    await _restService.PostCommand(link, "OFF");
-                }
             }
         }
     }

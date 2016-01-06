@@ -4,30 +4,35 @@
     xmlns:widgets="using:openhabUWP.UI.Widgets"
     xmlns:helper="using:openhabUWP.Helper">
 
-    <!-- templates -->
-    <DataTemplate x:Key="FrameWidgetTemplate">
-        <widgets:FrameWidget IsHitTestVisible="{Binding Converter={StaticResource WidgetClickableConverter}}"/>
-    </DataTemplate>
-
-    <DataTemplate x:Key="SwitchWidgetTemplate">
-        <widgets:SwitchWidget IsHitTestVisible="{Binding Converter={StaticResource WidgetClickableConverter}}"/>
-    </DataTemplate>
-
-    <DataTemplate x:Key="TextWidgetTemplate">
-        <widgets:TextWidget IsHitTestVisible="{Binding Converter={StaticResource WidgetClickableConverter}}"/>
-    </DataTemplate>
-
-    <DataTemplate x:Key="GroupWidgetTemplate">
-        <widgets:GroupWidget IsHitTestVisible="{Binding Converter={StaticResource WidgetClickableConverter}}"/>
-    </DataTemplate>
-
-    
     <!-- selector -->
-    <helper:WidgetTemplateSelector
-        x:Key="WidgetTemplateSelector"
-        FrameWidgeTemplate="{StaticResource FrameWidgetTemplate}"
-        SwitchWidgeTemplate="{StaticResource SwitchWidgetTemplate}"
-        TextWidgeTemplate="{StaticResource TextWidgetTemplate}"
-        GroupWidgeTemplate="{StaticResource GroupWidgetTemplate}"/>
-    
+    <helper:WidgetTemplateSelector x:Key="WidgetTemplateSelector">
+        
+        <!-- FrameWidget -->
+        <helper:WidgetTemplateSelector.FrameWidgeTemplate>
+            <DataTemplate>
+                <widgets:FrameWidget/>
+            </DataTemplate>
+        </helper:WidgetTemplateSelector.FrameWidgeTemplate>
+        
+        <!--  GroupWidget-->
+        <helper:WidgetTemplateSelector.GroupWidgeTemplate>
+            <DataTemplate>
+                <widgets:GroupWidget/>
+            </DataTemplate>
+        </helper:WidgetTemplateSelector.GroupWidgeTemplate>
+        <!-- SwitchWidget -->
+        <helper:WidgetTemplateSelector.SwitchWidgeTemplate>
+            <DataTemplate>
+                <widgets:SwitchWidget/>
+            </DataTemplate>
+        </helper:WidgetTemplateSelector.SwitchWidgeTemplate>
+        <!-- TextWidget -->
+        <helper:WidgetTemplateSelector.TextWidgeTemplate>
+            <DataTemplate>
+                <widgets:TextWidget/>
+            </DataTemplate>
+        </helper:WidgetTemplateSelector.TextWidgeTemplate>
+        
+    </helper:WidgetTemplateSelector>
+
 </ResourceDictionary>

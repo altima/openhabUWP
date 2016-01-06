@@ -102,6 +102,6 @@ namespace openhabUWP.Widgets
         /// <value>
         /// The linked page.
         /// </value>
-        public IPage LinkedPage { get; set; }
+        public Page LinkedPage { get; set; }
     }
 }
