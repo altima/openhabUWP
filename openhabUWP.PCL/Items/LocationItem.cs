@@ -1,31 +1,36 @@
-using openhabUWP.Interfaces.Items;
+﻿using openhabUWP.Interfaces.Items;
 
 namespace openhabUWP.Items
 {
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="openhabUWP.Interfaces.Items.IGroupItem" />
-    public class GroupItem : IGroupItem
+    /// <seealso cref="openhabUWP.Interfaces.Items.ILocationItem" />
+    public class LocationItem : ILocationItem
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GroupItem"/> class.
+        /// Initializes a new instance of the <see cref="LocationItem"/> class.
         /// </summary>
-        public GroupItem()
-        {
-
-        }
+        public LocationItem() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GroupItem"/> class.
+        /// Initializes a new instance of the <see cref="LocationItem"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="link">The link.</param>
-        public GroupItem(string name, string link) : this()
+        public LocationItem(string name, string link) : this()
         {
             this.Name = name;
             this.Link = link;
         }
+
+        /// <summary>
+        /// Gets or sets the link.
+        /// </summary>
+        /// <value>
+        /// The link.
+        /// </value>
+        public string Link { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -50,14 +55,6 @@ namespace openhabUWP.Items
         /// The label.
         /// </value>
         public string Label { get; set; }
-
-        /// <summary>
-        /// Gets or sets the link.
-        /// </summary>
-        /// <value>
-        /// The link.
-        /// </value>
-        public string Link { get; set; }
 
         /// <summary>
         /// Gets or sets the state.

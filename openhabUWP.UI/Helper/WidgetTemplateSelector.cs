@@ -15,6 +15,7 @@ namespace openhabUWP.Helper
         public DataTemplate SwitchWidgeTemplate { get; set; }
         public DataTemplate TextWidgeTemplate { get; set; }
         public DataTemplate GroupWidgeTemplate { get; set; }
+        public DataTemplate MapViewWidgeTemplate { get; set; }
 
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
@@ -23,6 +24,7 @@ namespace openhabUWP.Helper
             if (item is SwitchWidget) return SwitchWidgeTemplate;
             if (item is TextWidget) return TextWidgeTemplate;
             if (item is GroupWidget) return GroupWidgeTemplate;
+            if (item is MapViewWidget) return MapViewWidgeTemplate;
 
             return null;
         }

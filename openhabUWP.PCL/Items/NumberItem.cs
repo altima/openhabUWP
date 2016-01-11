@@ -46,6 +46,14 @@ namespace openhabUWP.Items
         public string Type { get; set; }
 
         /// <summary>
+        /// Gets or sets the label.
+        /// </summary>
+        /// <value>
+        /// The label.
+        /// </value>
+        public string Label { get; set; }
+
+        /// <summary>
         /// Gets or sets the link.
         /// </summary>
         /// <value>

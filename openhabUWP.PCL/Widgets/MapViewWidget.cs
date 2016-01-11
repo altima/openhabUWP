@@ -1,52 +1,32 @@
-﻿using Windows.ApplicationModel;
-using openhabUWP.Interfaces;
-using openhabUWP.Interfaces.Common;
 using openhabUWP.Interfaces.Items;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Models;
 
 namespace openhabUWP.Widgets
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <seealso cref="openhabUWP.Interfaces.Widgets.IFrameWidget" />
-    public class FrameWidget : IFrameWidget
+    public class MapViewWidget : IMapViewWidget
     {
+        //http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/Brandenburger%20Gate%20Berlin?mapSize=800,800&key=Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d
+
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="FrameWidget"/> class.
+        /// Initializes a new instance of the <see cref="MapViewWidget"/> class.
         /// </summary>
-        public FrameWidget()
-        {
-            if (DesignMode.DesignModeEnabled)
-            {
-                WidgetId = "ID10";
-                Label = "FrameWidget";
-                Widgets = new IWidget[]
-                {
-                    new SwitchWidget("1","Switch 1",""),
-                    new SwitchWidget("2","Switch 2",""),
-                    new SwitchWidget("3","Switch 3",""),
-                    new TextWidget("4","Text 1",""),
-                    new TextWidget("5","Text 2 [31.2 Grad]",""),
-                    new SwitchWidget("6","Switch 4",""),
-                    new SwitchWidget("7","Switch 5",""),
-                };
-            }
-
-        }
+        public MapViewWidget() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FrameWidget"/> class.
+        /// Initializes a new instance of the <see cref="MapViewWidget"/> class.
         /// </summary>
         /// <param name="widgetId">The widget identifier.</param>
         /// <param name="label">The label.</param>
         /// <param name="icon">The icon.</param>
-        public FrameWidget(string widgetId, string label, string icon) : this()
+        /// <param name="height">The height. (maybe zoom)</param>
+        public MapViewWidget(string widgetId, string label, string icon, double height) : this()
         {
             this.WidgetId = widgetId;
             this.Label = label;
             this.Icon = icon;
+            this.Height = height;
         }
 
         /// <summary>
@@ -90,6 +70,14 @@ namespace openhabUWP.Widgets
         public Mapping[] Mappings { get; set; }
 
         /// <summary>
+        /// Gets or sets the linked page.
+        /// </summary>
+        /// <value>
+        /// The linked page.
+        /// </value>
+        public Page LinkedPage { get; set; }
+
+        /// <summary>
         /// Gets or sets the widgets.
         /// </summary>
         /// <value>
@@ -106,11 +94,11 @@ namespace openhabUWP.Widgets
         public IItem Item { get; set; }
 
         /// <summary>
-        /// Gets or sets the linked page.
+        /// Gets or sets the height.
         /// </summary>
         /// <value>
-        /// The linked page.
+        /// The height.
         /// </value>
-        public Page LinkedPage { get; set; }
+        public double Height { get; set; }
     }
 }

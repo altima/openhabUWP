@@ -1,4 +1,5 @@
-﻿using openhabUWP.Enums;
+﻿using System;
+using openhabUWP.Enums;
 using openhabUWP.Interfaces.Common;
 
 namespace openhabUWP.Models
@@ -46,5 +47,25 @@ namespace openhabUWP.Models
         /// The link.
         /// </value>
         public string Link { get; set; }
+
+        public string Base
+        {
+            get
+            {
+                var @base = "";
+
+                if (Uri.IsWellFormedUriString(Link, UriKind.Absolute))
+                {
+                    var uri = new Uri(Link, UriKind.Absolute);
+                    var host = uri.Host;
+                    var port = uri.Port;
+                    var scheme = uri.Scheme;
+
+                    return string.Concat(scheme, "://", host, ":", port, "/");
+                }
+
+                return string.Empty;
+            }
+        }
     }
 }

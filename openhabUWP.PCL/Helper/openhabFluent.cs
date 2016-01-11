@@ -5,6 +5,7 @@ using Windows.Data.Json;
 using Newtonsoft.Json;
 using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
+using openhabUWP.Interfaces.Items;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Items;
 using openhabUWP.Models;
@@ -187,6 +188,15 @@ namespace openhabUWP.Helper
                         widget.Widgets = widgets;
                         widget.LinkedPage = linkedPage;
                         break;
+                    case "Mapview":
+                        var height = jo.GetNamedNumber("height");
+                        widget = new MapViewWidget(widgetId, label, icon, height);
+                        ((MapViewWidget)widget).Item = item;
+                        widget.Widgets = widgets;
+                        widget.LinkedPage = linkedPage;
+                        break;
+                    default:
+                        break;
                 }
 
                 if (widget != null)
@@ -201,7 +211,6 @@ namespace openhabUWP.Helper
 
         public static IItem ToItem(this JsonObject jo)
         {
-
             //var category = jo.GetNamedString("category", "");
             //var icon = jo.GetNamedString("icon", "");
             //var label = jo.GetNamedString("label", "");
@@ -216,13 +225,17 @@ namespace openhabUWP.Helper
                 case "GroupItem":
                     return new GroupItem(name, link);
                 case "NumberItem":
-                    if (state == "NULL") state = "0";
-                    return new NumberItem(name, link, decimal.Parse(state));
+                    decimal stateDecimal = 0;
+                    decimal.TryParse(state, out stateDecimal);
+                    return new NumberItem(name, link, stateDecimal);
                 case "DateTimeItem":
-                    if (state == "NULL") state = DateTime.Parse("1970-01-01 01:00").ToString("s");
-                    return new DateTimeItem(name, link, DateTime.Parse(state));
+                    var stateDateTime = DateTime.Parse("1970-01-01 01:00");
+                    DateTime.TryParse(state, out stateDateTime);
+                    return new DateTimeItem(name, link, stateDateTime);
                 case "SwitchItem":
                     return new SwitchItem(name, link, state);
+                case "LocationItem":
+                    return new LocationItem(name, link);
             }
             return null;
         }

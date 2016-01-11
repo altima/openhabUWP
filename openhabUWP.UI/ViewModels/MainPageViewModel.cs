@@ -18,6 +18,7 @@ using openhabUWP.Events;
 using openhabUWP.Helper;
 using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
+using openhabUWP.Interfaces.Items;
 using openhabUWP.Interfaces.Services;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Items;
@@ -118,6 +119,7 @@ namespace openhabUWP.ViewModels
                     await _restService.PostCommand(switchItem, currentState ? "OFF" : "ON");
                     break;
                 case "Text":
+                case "Group":
                     if (widget.LinkedPage != null &&
                         !widget.LinkedPage.Link.IsNullOrEmpty())
                     {
@@ -223,7 +225,7 @@ namespace openhabUWP.ViewModels
         private async void CheckServer()
         {
             //var server = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
-            CurrentServer = new Server(host: "192.168.178.3"); //alpha mode, set server ip here
+            CurrentServer = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
 
             CheckPush(CurrentServer);
 

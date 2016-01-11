@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,7 +23,7 @@ namespace openhabUWP.UI.Widgets
 {
     public sealed partial class GroupWidget : UserControl
     {
-        private openhabUWP.Widgets.TextWidget _widget;
+        private openhabUWP.Widgets.GroupWidget _widget;
         private IEventAggregator _eventAggregator;
 
         public GroupWidget()
@@ -30,9 +31,32 @@ namespace openhabUWP.UI.Widgets
             this.InitializeComponent();
             _eventAggregator = App.Current.Container.Resolve<IEventAggregator>();
             this.Tapped += OnTapped;
+            this.DataContextChanged += OnDataContextChanged;
         }
 
-        
+        private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            if (args.NewValue is openhabUWP.Widgets.GroupWidget)
+                RegisterForUpdate();
+        }
+
+        private void RegisterForUpdate()
+        {
+            _widget = this.DataContext as openhabUWP.Widgets.GroupWidget;
+            _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Unsubscribe(WidgetUpdateReceived);
+            _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Subscribe(WidgetUpdateReceived);
+        }
+
+        public void WidgetUpdateReceived(Interfaces.Widgets.IWidget widget)
+        {
+            if (Equals(_widget.WidgetId, widget.WidgetId))
+            {
+                this.DataContext = widget;
+                Debug.WriteLine("GroupWidget Udpate {0}", widget.WidgetId);
+            }
+        }
+
+
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
             if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);

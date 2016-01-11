@@ -13,6 +13,7 @@ using openhabUWP.Enums;
 using openhabUWP.Helper;
 using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
+using openhabUWP.Interfaces.Items;
 using openhabUWP.Interfaces.Services;
 using openhabUWP.Models;
 using Zeroconf;

@@ -1,7 +1,3 @@
-﻿using Windows.ApplicationModel;
-using openhabUWP.Interfaces;
-using openhabUWP.Interfaces.Common;
-using openhabUWP.Interfaces.Items;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Models;
 
@@ -10,43 +6,29 @@ namespace openhabUWP.Widgets
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref="openhabUWP.Interfaces.Widgets.IFrameWidget" />
-    public class FrameWidget : IFrameWidget
+    /// <seealso cref="openhabUWP.Interfaces.Widgets.IChartWidget" />
+    public class ChartWidget : IChartWidget
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FrameWidget"/> class.
+        /// Initializes a new instance of the <see cref="ChartWidget"/> class.
         /// </summary>
-        public FrameWidget()
-        {
-            if (DesignMode.DesignModeEnabled)
-            {
-                WidgetId = "ID10";
-                Label = "FrameWidget";
-                Widgets = new IWidget[]
-                {
-                    new SwitchWidget("1","Switch 1",""),
-                    new SwitchWidget("2","Switch 2",""),
-                    new SwitchWidget("3","Switch 3",""),
-                    new TextWidget("4","Text 1",""),
-                    new TextWidget("5","Text 2 [31.2 Grad]",""),
-                    new SwitchWidget("6","Switch 4",""),
-                    new SwitchWidget("7","Switch 5",""),
-                };
-            }
-
-        }
+        public ChartWidget() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FrameWidget"/> class.
+        /// Initializes a new instance of the <see cref="ChartWidget"/> class.
         /// </summary>
         /// <param name="widgetId">The widget identifier.</param>
         /// <param name="label">The label.</param>
         /// <param name="icon">The icon.</param>
-        public FrameWidget(string widgetId, string label, string icon) : this()
+        /// <param name="refresh">The refresh.</param>
+        /// <param name="period">The period.</param>
+        public ChartWidget(string widgetId, string label, string icon, int refresh, string period) : this()
         {
             this.WidgetId = widgetId;
             this.Label = label;
             this.Icon = icon;
+            this.Refresh = refresh;
+            this.Period = period;
         }
 
         /// <summary>
@@ -90,6 +72,14 @@ namespace openhabUWP.Widgets
         public Mapping[] Mappings { get; set; }
 
         /// <summary>
+        /// Gets or sets the linked page.
+        /// </summary>
+        /// <value>
+        /// The linked page.
+        /// </value>
+        public Page LinkedPage { get; set; }
+
+        /// <summary>
         /// Gets or sets the widgets.
         /// </summary>
         /// <value>
@@ -98,19 +88,19 @@ namespace openhabUWP.Widgets
         public IWidget[] Widgets { get; set; }
 
         /// <summary>
-        /// Gets or sets the item.
+        /// Gets or sets the refresh.
         /// </summary>
         /// <value>
-        /// The item.
+        /// The refresh.
         /// </value>
-        public IItem Item { get; set; }
+        public int Refresh { get; set; }
 
         /// <summary>
-        /// Gets or sets the linked page.
+        /// Gets or sets the period.
         /// </summary>
         /// <value>
-        /// The linked page.
+        /// The period.
         /// </value>
-        public Page LinkedPage { get; set; }
+        public string Period { get; set; }
     }
 }

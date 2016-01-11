@@ -12,25 +12,10 @@ namespace openhabUWP.UI.Widgets
     public sealed partial class TextWidget : IWidget
     {
         private IEventAggregator _eventAggregator;
-
-        private static DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(TextWidget), new PropertyMetadata(""));
-        private static DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(TextWidget), new PropertyMetadata(""));
+        
 
         private const string LabelValuePattern = @"(?<label>.+)\s(\[(?<value>.+)\])$";
         private openhabUWP.Widgets.TextWidget _widget;
-
-        public string Value
-        {
-            get { return (string)this.GetValue(ValueProperty); }
-            set { this.SetValue(ValueProperty, value); }
-        }
-
-        public string Label
-        {
-            get { return (string)this.GetValue(LabelProperty); }
-            set { this.SetValue(LabelProperty, value); }
-        }
-
 
         public TextWidget()
         {
@@ -56,20 +41,6 @@ namespace openhabUWP.UI.Widgets
             _widget = this.DataContext as openhabUWP.Widgets.TextWidget;
             _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Unsubscribe(WidgetUpdateReceived);
             _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Subscribe(WidgetUpdateReceived);
-
-            if (_widget != null)
-            {
-                var labelValueMatch = Regex.Match(_widget.Label, LabelValuePattern);
-                if (labelValueMatch.Success)
-                {
-                    Label = labelValueMatch.Groups["label"].Value;
-                    Value = labelValueMatch.Groups["value"].Value;
-                }
-                else
-                {
-                    Label = _widget.Label;
-                }
-            }
         }
 
         public void WidgetUpdateReceived(Interfaces.Widgets.IWidget widget)

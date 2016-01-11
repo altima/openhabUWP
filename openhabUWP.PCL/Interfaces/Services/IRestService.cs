@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Networking.Sockets;
 using openhabUWP.Interfaces.Common;
+using openhabUWP.Interfaces.Items;
 using openhabUWP.Models;
 using openhabUWP.Widgets;
 

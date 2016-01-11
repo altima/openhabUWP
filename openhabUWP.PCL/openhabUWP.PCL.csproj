@@ -110,21 +110,20 @@
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Helper\openhabFluent.cs" />
     <Compile Include="Helper\StringFluent.cs" />
-    <Compile Include="Interfaces\Common\IItem.cs" />
+    <Compile Include="Interfaces\Items\IItem.cs" />
+    <Compile Include="Interfaces\IMapping.cs" />
+    <Compile Include="Items\LocationItem.cs" />
     <Compile Include="LabelConstants.cs" />
     <Compile Include="Enums\ItemType.cs" />
     <Compile Include="Enums\ProtocolType.cs" />
-    <Compile Include="Interfaces\Items\IDateTimeItem.cs" />
-    <Compile Include="Interfaces\Items\IGroupItem.cs" />
-    <Compile Include="Interfaces\Items\INumberItem.cs" />
     <Compile Include="Interfaces\Common\ISitemap.cs" />
-    <Compile Include="Interfaces\Items\ISwitchItem.cs" />
     <Compile Include="Interfaces\Widgets\IWidget.cs" />
     <Compile Include="Items\DateTimeItem.cs" />
     <Compile Include="Items\GroupItem.cs" />
     <Compile Include="Items\NumberItem.cs" />
     <Compile Include="Items\SwitchItem.cs" />
     <Compile Include="Interfaces\Common\IPage.cs" />
+    <Compile Include="Mapping.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Server.cs" />
     <Compile Include="Models\Sitemap.cs" />
@@ -137,10 +136,14 @@
     <Compile Include="Services\ParserService.cs" />
     <Compile Include="Services\PushClientService.cs" />
     <Compile Include="Services\RestService.cs" />
+    <Compile Include="Widgets\ChartWidget.cs" />
     <Compile Include="Widgets\FrameWidget.cs" />
     <Compile Include="Widgets\GroupWidget.cs" />
+    <Compile Include="Widgets\MapViewWidget.cs" />
     <Compile Include="Widgets\SwitchWidget.cs" />
     <Compile Include="Widgets\TextWidget.cs" />
+    <Compile Include="Widgets\VideoWidget.cs" />
+    <Compile Include="Widgets\WebViewWidget.cs" />
     <Content Include="Properties\openhabUWP.rd.xml" />
   </ItemGroup>
   <ItemGroup />

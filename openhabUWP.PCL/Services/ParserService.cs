@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
+using openhabUWP.Interfaces.Items;
 using openhabUWP.Interfaces.Services;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Items;

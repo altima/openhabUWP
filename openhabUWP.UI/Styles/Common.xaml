@@ -7,6 +7,22 @@
     <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
     <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
     <converters:WidgetClickableConverter x:Key="WidgetClickableConverter"/>
-    
-    
+    <converters:LabelSplitConverter x:Key="LabelSplitConverter"/>
+    <converters:LabelCleanConverter x:Key="LabelCleanConverter"/>
+    <converters:ObjectToImageUrlConverter x:Key="ObjectToImageUrlConverter"/>
+
+    <!-- Colors -->
+    <Color x:Key="Orange">#FC9600</Color>
+    <Color x:Key="White">#FEFEFE</Color>
+    <Color x:Key="Black">#010101</Color>
+    <Color x:Key="LightGray">#9F9F9F</Color>
+    <Color x:Key="DarkGray">#666666</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+    <SolidColorBrush x:Key="LightGrayBrush" Color="{StaticResource LightGray}"/>
+    <SolidColorBrush x:Key="DarkGrayBrush" Color="{StaticResource DarkGray}"/>
+
 </ResourceDictionary>

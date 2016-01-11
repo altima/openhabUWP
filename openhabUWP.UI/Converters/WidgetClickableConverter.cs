@@ -9,7 +9,7 @@ namespace openhabUWP.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var item = value as IWidget;
-            if (item !=null)
+            if (item != null)
             {
                 if (item.LinkedPage != null)
                 {

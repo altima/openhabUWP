@@ -11,12 +11,22 @@
     d:DesignWidth="400"
     d:DataContext="{d:DesignInstance widgets:FrameWidget, IsDesignTimeCreatable=True}">
 
-    <StackPanel Padding="10">
-        <TextBlock 
-            Text="{Binding Label}" 
-            FontWeight="Bold"/>
-        <ItemsControl 
-            ItemsSource="{Binding Widgets}"
-            ItemTemplateSelector="{StaticResource WidgetTemplateSelector}"/>
-    </StackPanel>
+    <Border Background="{StaticResource  WhiteBrush}" Margin="0,-1">
+        <StackPanel MinHeight="50">
+            <Border 
+                Visibility="{Binding Label, Converter={StaticResource StringToVisibilityConverter}}"
+                Background="{StaticResource OrangeBrush}">
+                <TextBlock 
+                    Margin="10,5,5,5"
+                    Foreground="{StaticResource WhiteBrush}"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Text="{Binding Label}" 
+                    FontWeight="Bold"/>
+            </Border>
+            <ItemsControl 
+                Margin="0,0,0,0"
+                ItemsSource="{Binding Widgets}"
+                ItemTemplateSelector="{StaticResource WidgetTemplateSelector}"/>
+        </StackPanel>
+    </Border>
 </UserControl>

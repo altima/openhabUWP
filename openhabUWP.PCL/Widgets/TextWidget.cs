@@ -1,6 +1,7 @@
 ﻿using Windows.ApplicationModel;
 using openhabUWP.Interfaces;
 using openhabUWP.Interfaces.Common;
+using openhabUWP.Interfaces.Items;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Models;
 
@@ -62,6 +63,14 @@ namespace openhabUWP.Widgets
         /// The type.
         /// </value>
         public string Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the mappings.
+        /// </summary>
+        /// <value>
+        /// The mappings.
+        /// </value>
+        public Mapping[] Mappings { get; set; }
 
         /// <summary>
         /// Gets or sets the icon.

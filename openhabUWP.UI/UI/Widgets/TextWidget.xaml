@@ -8,10 +8,11 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    d:DataContext="{d:DesignInstance local:TextWidget, IsDesignTimeCreatable=True}"
-    x:Name="control">
+    d:DataContext="{d:DesignInstance local:TextWidget, IsDesignTimeCreatable=True}">
 
-    <Grid>
+    <Grid MinHeight="50" Background="{StaticResource WhiteBrush}"
+          BorderBrush="{StaticResource LightGrayBrush}"
+          BorderThickness="0,0,0,1" Padding="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -19,27 +20,33 @@
         </Grid.ColumnDefinitions>
 
         <!-- image -->
+        <Image 
+            Source="{Binding Icon, Converter={StaticResource ObjectToImageUrlConverter}}" 
+            Visibility="{Binding Icon, Converter={StaticResource StringToVisibilityConverter}}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            MaxHeight="50" MaxWidth="50"
+            Margin="0,0,10,0"/>
 
-        
-        
         <!-- text -->
         <TextBlock
             Grid.Column="1"
-            Text="{Binding ElementName=control, Path=Label}"
+            Text="{Binding Label, Converter={StaticResource LabelSplitConverter}}"
             TextWrapping="Wrap"
             VerticalAlignment="Center"
             MaxLines="2"
+            Style="{StaticResource BaseTextBlockStyle}"
             TextTrimming="CharacterEllipsis"/>
 
         <!-- value -->
         <TextBlock
             Grid.Column="2"
-            Text="{Binding ElementName=control, Path=Value}"
+            Text="{Binding Label, Converter={StaticResource LabelSplitConverter}, ConverterParameter=1}"
             TextWrapping="NoWrap"
             VerticalAlignment="Center"
+            Style="{StaticResource BaseTextBlockStyle}"
             MaxLines="1"
-            Margin="0,0,10,0"
-            Visibility="{Binding ElementName=control, Path=Value, Converter={StaticResource StringToVisibilityConverter}}"/>
+            Margin="0,0,10,0"/>
 
     </Grid>
 </UserControl>

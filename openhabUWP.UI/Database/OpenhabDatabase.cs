@@ -1,4 +1,4 @@
-﻿
+﻿using Lex.Db;
 using System.IO;
 
 namespace openhabUWP.Database
@@ -11,19 +11,20 @@ namespace openhabUWP.Database
 
     public class OpenhabDatabase : IOpenhabDatabase
     {
+        private DbInstance _instance;
         public OpenhabDatabase()
         {
-            
+            _instance = new DbInstance("/openhab.database");
         }
 
         public Setup UpdateSetup(Setup setup)
         {
-            throw new System.NotImplementedException();
+            return setup;
         }
 
         public Setup GetSetup()
         {
-            throw new System.NotImplementedException();
+            return _instance.LoadByKey<Setup>("singelSetup") ?? new Setup();
         }
     }
 }

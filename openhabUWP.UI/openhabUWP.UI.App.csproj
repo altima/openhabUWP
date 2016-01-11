@@ -96,6 +96,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\LabelSplitConverter.cs" />
+    <Compile Include="Converters\MapViewWidgetToUrlConverter.cs" />
     <Compile Include="Converters\ObjectToImageUrlConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\WidgetClickableConverter.cs" />
@@ -112,7 +114,13 @@
     <Compile Include="UI\Widgets\GroupWidget.xaml.cs">
       <DependentUpon>GroupWidget.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Widgets\ImageWidget.xaml.cs">
+      <DependentUpon>ImageWidget.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Widgets\IWidget.cs" />
+    <Compile Include="UI\Widgets\MapViewWidget.xaml.cs">
+      <DependentUpon>MapViewWidget.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Widgets\TextWidget.xaml.cs">
       <DependentUpon>TextWidget.xaml</DependentUpon>
     </Compile>
@@ -166,6 +174,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Widgets\GroupWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Widgets\ImageWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Widgets\MapViewWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

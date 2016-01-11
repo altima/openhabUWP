@@ -4,13 +4,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
-    xmlns:converters="using:openhabUWP.Converters"
     xmlns:design="using:openhabUWP.ViewModels.Design"
-    xmlns:widgets="using:openhabUWP.UI.Widgets"
-    xmlns:helper="using:openhabUWP.Helper"
     x:Class="openhabUWP.Views.MainPage"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d"
+    RequestedTheme="Light"
     d:DataContext="{d:DesignInstance design:MainPageViewModel, IsDesignTimeCreatable=True}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -18,15 +16,18 @@
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <TextBlock Text="{Binding CurrentPage.Title}" Margin="5"
-                   VerticalAlignment="Center"/>
-
+        <Border Background="{StaticResource OrangeBrush}"/>
+        <TextBlock Text="{Binding CurrentPage.Title, Converter={StaticResource LabelCleanConverter}}" Margin="5"
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource WhiteBrush}"/>
 
         <ScrollViewer Grid.Row="1">
             <ItemsControl
                 ItemsSource="{Binding CurrentPage.Widgets}"
                 ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
+                
             </ItemsControl>
         </ScrollViewer>
     </Grid>

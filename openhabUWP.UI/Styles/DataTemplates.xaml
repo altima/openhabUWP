@@ -20,18 +20,27 @@
                 <widgets:GroupWidget/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.GroupWidgeTemplate>
+        
         <!-- SwitchWidget -->
         <helper:WidgetTemplateSelector.SwitchWidgeTemplate>
             <DataTemplate>
                 <widgets:SwitchWidget/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.SwitchWidgeTemplate>
+        
         <!-- TextWidget -->
         <helper:WidgetTemplateSelector.TextWidgeTemplate>
             <DataTemplate>
                 <widgets:TextWidget/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.TextWidgeTemplate>
+        
+        <!-- MapViewWidget -->
+        <helper:WidgetTemplateSelector.MapViewWidgeTemplate>
+            <DataTemplate>
+                <widgets:MapViewWidget/>
+            </DataTemplate>
+        </helper:WidgetTemplateSelector.MapViewWidgeTemplate>
         
     </helper:WidgetTemplateSelector>
 

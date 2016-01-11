@@ -11,7 +11,8 @@
     d:DesignWidth="400"
     d:DataContext="{d:DesignInstance local:SwitchWidget, IsDesignTimeCreatable=True}">
 
-    <Grid>
+    <Grid MinHeight="50" Background="{StaticResource WhiteBrush}"
+          Padding="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -19,7 +20,14 @@
         </Grid.ColumnDefinitions>
 
         <!-- image -->
-
+        <Image 
+            Source="{Binding Icon, Converter={StaticResource ObjectToImageUrlConverter}}" 
+            Visibility="{Binding Icon, Converter={StaticResource StringToVisibilityConverter}}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            MaxHeight="50" MaxWidth="50"
+            Margin="0,0,10,0"/>
+        
         <!-- text -->
         <TextBlock
 			Grid.Column="1"
@@ -27,6 +35,7 @@
 			TextWrapping="Wrap"
 			VerticalAlignment="Center"
 			MaxLines="2"
+            Style="{StaticResource BaseTextBlockStyle}"
 			TextTrimming="CharacterEllipsis"/>
 
         <!-- switch -->
