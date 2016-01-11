@@ -1,3 +1,4 @@
+using openhabUWP.Interfaces.Items;
 using openhabUWP.Interfaces.Widgets;
 using openhabUWP.Models;
 
@@ -22,7 +23,7 @@ namespace openhabUWP.Widgets
         /// <param name="icon">The icon.</param>
         /// <param name="refresh">The refresh.</param>
         /// <param name="period">The period.</param>
-        public ChartWidget(string widgetId, string label, string icon, int refresh, string period) : this()
+        public ChartWidget(string widgetId, string label, string icon, double refresh, string period) : this()
         {
             this.WidgetId = widgetId;
             this.Label = label;
@@ -93,7 +94,7 @@ namespace openhabUWP.Widgets
         /// <value>
         /// The refresh.
         /// </value>
-        public int Refresh { get; set; }
+        public double Refresh { get; set; }
 
         /// <summary>
         /// Gets or sets the period.
@@ -102,5 +103,7 @@ namespace openhabUWP.Widgets
         /// The period.
         /// </value>
         public string Period { get; set; }
+
+        public IItem Item { get; set; }
     }
 }

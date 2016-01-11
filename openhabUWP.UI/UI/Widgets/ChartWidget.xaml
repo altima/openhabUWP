@@ -1,0 +1,24 @@
+﻿<UserControl
+    x:Class="openhabUWP.UI.Widgets.ChartWidget"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:openhabUWP.UI.Widgets"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:openhabUWP.Converters"
+    xmlns:widgets="using:openhabUWP.Widgets"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    d:DataContext="{d:DesignInstance widgets:ChartWidget, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <converters:ChartWidgetToUrlConvrter x:Key="ChartWidgetToUrlConvrter"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Image 
+            Stretch="Uniform"
+            Source="{Binding Converter={StaticResource ChartWidgetToUrlConvrter}}"/>
+    </Grid>
+</UserControl>

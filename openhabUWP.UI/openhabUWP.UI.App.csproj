@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ChartWidgetToUrlConvrter.cs" />
     <Compile Include="Converters\LabelSplitConverter.cs" />
     <Compile Include="Converters\MapViewWidgetToUrlConverter.cs" />
     <Compile Include="Converters\ObjectToImageUrlConverter.cs" />
@@ -108,6 +109,9 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="UI\Widgets\ChartWidget.xaml.cs">
+      <DependentUpon>ChartWidget.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Widgets\FrameWidget.xaml.cs">
       <DependentUpon>FrameWidget.xaml</DependentUpon>
     </Compile>
@@ -168,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="UI\Widgets\ChartWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Widgets\FrameWidget.xaml">
       <SubType>Designer</SubType>

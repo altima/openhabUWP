@@ -42,6 +42,13 @@
             </DataTemplate>
         </helper:WidgetTemplateSelector.MapViewWidgeTemplate>
         
+        <!-- MapViewWidget -->
+        <helper:WidgetTemplateSelector.ChartWidgeTemplate>
+            <DataTemplate>
+                <widgets:ChartWidget/>
+            </DataTemplate>
+        </helper:WidgetTemplateSelector.ChartWidgeTemplate>
+        
     </helper:WidgetTemplateSelector>
 
 </ResourceDictionary>

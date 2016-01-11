@@ -154,10 +154,13 @@ namespace openhabUWP.Helper
                 var label = jo.GetNamedString("label", "");
                 var type = jo.GetNamedString("type", "");
 
+
                 var jWidgets = jo.ToWidgetsSafe();
 
                 if (jWidgets != null)
                     widgets = jWidgets.ToWidgets();
+
+                var mappings = jo.GetNamedArray("mappings").ToMappings();
 
                 if (jo.ContainsKey("item"))
                     item = jo.GetNamedObject("item").ToItem();
@@ -195,12 +198,24 @@ namespace openhabUWP.Helper
                         widget.Widgets = widgets;
                         widget.LinkedPage = linkedPage;
                         break;
+                    case "Chart":
+                        var refresh = jo.GetNamedNumber("refresh");
+                        var period = jo.GetNamedString("period");
+                        widget = new ChartWidget(widgetId, label, icon, refresh, period);
+                        ((ChartWidget)widget).Item = item;
+                        widget.Widgets = widgets;
+                        widget.LinkedPage = linkedPage;
+                        break;
                     default:
                         break;
                 }
 
                 if (widget != null)
+                {
                     widget.Type = type;
+                    widget.Mappings = mappings;
+                }
+
             }
             catch (Exception ex)
             {
@@ -229,6 +244,7 @@ namespace openhabUWP.Helper
                     decimal.TryParse(state, out stateDecimal);
                     return new NumberItem(name, link, stateDecimal);
                 case "DateTimeItem":
+                    // ReSharper disable once RedundantAssignment
                     var stateDateTime = DateTime.Parse("1970-01-01 01:00");
                     DateTime.TryParse(state, out stateDateTime);
                     return new DateTimeItem(name, link, stateDateTime);
@@ -240,6 +256,17 @@ namespace openhabUWP.Helper
             return null;
         }
 
+        public static Mapping[] ToMappings(this JsonArray ja)
+        {
+            if (ja != null && ja.Any())
+            {
+                return ja.Select(a => new Mapping(
+                    a.GetObject().GetNamedString("command"),
+                    a.GetObject().GetNamedString("label", ""))).ToArray();
+            }
+
+            return new Mapping[0];
+        }
 
         public static bool ToBoolean(this string input)
         {

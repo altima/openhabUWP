@@ -181,14 +181,13 @@ namespace openhabUWP.Interfaces.Widgets
     /// <seealso cref="openhabUWP.Interfaces.Widgets.IWidget" />
     public interface IChartWidget : IWidget
     {
-
         /// <summary>
         /// Gets or sets the refresh.
         /// </summary>
         /// <value>
         /// The refresh.
         /// </value>
-        int Refresh { get; set; }
+        double Refresh { get; set; }
 
         /// <summary>
         /// Gets or sets the period.
@@ -197,6 +196,14 @@ namespace openhabUWP.Interfaces.Widgets
         /// The period.
         /// </value>
         string Period { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the item.
+        /// </summary>
+        /// <value>
+        /// The item.
+        /// </value>
+        IItem Item { get; set; }
     }
 
     /// <summary>

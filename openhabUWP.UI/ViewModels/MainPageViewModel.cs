@@ -114,9 +114,17 @@ namespace openhabUWP.ViewModels
             {
                 case "Switch":
                     var switchWidget = (SwitchWidget)widget;
-                    var switchItem = (SwitchItem)switchWidget.Item;
-                    var currentState = switchItem.State;
-                    await _restService.PostCommand(switchItem, currentState ? "OFF" : "ON");
+                    if (switchWidget.Item is NumberItem)
+                    {
+                        var numberItem = switchWidget.Item as NumberItem;
+                        var mappings = switchWidget.Mappings;
+                    }
+                    else
+                    {
+                        var switchItem = (SwitchItem)switchWidget.Item;
+                        var currentState = switchItem.State;
+                        await _restService.PostCommand(switchItem, currentState ? "OFF" : "ON");
+                    }
                     break;
                 case "Text":
                 case "Group":
