@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
-using openhabUWP.Interfaces.Widgets;
+using openhabUWP.Models;
+using openhabUWP.Remote.Models;
 
 namespace openhabUWP.Converters
 {
@@ -8,7 +9,7 @@ namespace openhabUWP.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var item = value as IWidget;
+            var item = value as Widget;
             if (item != null)
             {
                 if (item.LinkedPage != null)
@@ -16,7 +17,7 @@ namespace openhabUWP.Converters
                     return true;
                 }
 
-                if (item is ISwitchWidget)
+                if (item.Type == "Switch")
                 {
                     return true;
                 }

@@ -10,28 +10,28 @@
         <!-- FrameWidget -->
         <helper:WidgetTemplateSelector.FrameWidgeTemplate>
             <DataTemplate>
-                <widgets:FrameWidget/>
+                <widgets:FrameWidgetControl/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.FrameWidgeTemplate>
         
         <!--  GroupWidget-->
         <helper:WidgetTemplateSelector.GroupWidgeTemplate>
             <DataTemplate>
-                <widgets:GroupWidget/>
+                <widgets:GroupWidgetControl/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.GroupWidgeTemplate>
         
         <!-- SwitchWidget -->
         <helper:WidgetTemplateSelector.SwitchWidgeTemplate>
             <DataTemplate>
-                <widgets:SwitchWidget/>
+                <widgets:SwitchWidgetControl/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.SwitchWidgeTemplate>
         
         <!-- TextWidget -->
         <helper:WidgetTemplateSelector.TextWidgeTemplate>
             <DataTemplate>
-                <widgets:TextWidget/>
+                <widgets:TextWidgetControl/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.TextWidgeTemplate>
         

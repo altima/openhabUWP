@@ -104,37 +104,51 @@
     <Compile Include="Converters\WidgetClickableConverter.cs" />
     <Compile Include="Database\OpenhabDatabase.cs" />
     <Compile Include="Database\Tables.cs" />
+    <Compile Include="Enums\LogType.cs" />
+    <Compile Include="Enums\ProtocolType.cs" />
     <Compile Include="Events\WidgetEvents.cs" />
+    <Compile Include="Remote\openhabFluent.cs" />
+    <Compile Include="Helper\StringFluent.cs" />
     <Compile Include="Helper\WidgetTemplateSelector.cs" />
+    <Compile Include="Remote\Models\Mapping.cs" />
+    <Compile Include="Remote\Models\Item.cs" />
+    <Compile Include="Remote\Models\Page.cs" />
+    <Compile Include="Models\Server.cs" />
+    <Compile Include="Remote\Models\Sitemap.cs" />
+    <Compile Include="Remote\Models\Widget.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Services\LogService.cs" />
+    <Compile Include="Services\ParserService.cs" />
+    <Compile Include="Remote\Services\PushClientService.cs" />
+    <Compile Include="Remote\Services\RestService.cs" />
     <Compile Include="UI\Widgets\ChartWidget.xaml.cs">
       <DependentUpon>ChartWidget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Widgets\FrameWidget.xaml.cs">
-      <DependentUpon>FrameWidget.xaml</DependentUpon>
+    <Compile Include="UI\Widgets\FrameWidgetControl.xaml.cs">
+      <DependentUpon>FrameWidgetControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Widgets\GroupWidget.xaml.cs">
-      <DependentUpon>GroupWidget.xaml</DependentUpon>
+    <Compile Include="UI\Widgets\GroupWidgetControl.xaml.cs">
+      <DependentUpon>GroupWidgetControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Widgets\ImageWidget.xaml.cs">
       <DependentUpon>ImageWidget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Widgets\IWidget.cs" />
+    <Compile Include="UI\Widgets\IWidgetControl.cs" />
     <Compile Include="UI\Widgets\MapViewWidget.xaml.cs">
       <DependentUpon>MapViewWidget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Widgets\TextWidget.xaml.cs">
-      <DependentUpon>TextWidget.xaml</DependentUpon>
+    <Compile Include="UI\Widgets\TextWidgetControl.xaml.cs">
+      <DependentUpon>TextWidgetControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Widgets\SwitchWidget.xaml.cs">
-      <DependentUpon>SwitchWidget.xaml</DependentUpon>
+    <Compile Include="UI\Widgets\SwitchWidgetControl.xaml.cs">
+      <DependentUpon>SwitchWidgetControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -177,11 +191,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Widgets\FrameWidget.xaml">
+    <Page Include="UI\Widgets\FrameWidgetControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Widgets\GroupWidget.xaml">
+    <Page Include="UI\Widgets\GroupWidgetControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,7 +207,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Widgets\TextWidget.xaml">
+    <Page Include="UI\Widgets\TextWidgetControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,16 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Widgets\SwitchWidget.xaml">
+    <Page Include="UI\Widgets\SwitchWidgetControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\openhabUWP.PCL\openhabUWP.PCL.csproj">
-      <Project>{d3efa406-dee1-4261-9f7c-00e5b4138e9e}</Project>
-      <Name>openhabUWP.PCL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">

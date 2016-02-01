@@ -1,4 +1,6 @@
-﻿using openhabUWP.Interfaces.Widgets;
+﻿using openhabUWP.Models;
+using openhabUWP.Remote.Models;
+using openhabUWP.UI.Widgets;
 using Prism.Events;
 
 namespace openhabUWP.Events
@@ -8,14 +10,14 @@ namespace openhabUWP.Events
         /// <summary>
         /// 
         /// </summary>
-        /// <seealso cref="Prism.Events.PubSubEvent{openhabUWP.Interfaces.Widgets.IWidget}" />
-        public class WidgetUpdateEvent : PubSubEvent<IWidget> { }
+        /// <seealso cref="Prism.Events.PubSubEvent{openhabUWP.Models.Widget}" />
+        public class WidgetUpdateEvent : PubSubEvent<Widget> { }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <seealso cref="Prism.Events.PubSubEvent{openhabUWP.Interfaces.Widgets.IWidget}" />
-        public class WidgetTappedEvent : PubSubEvent<IWidget> { }
+        /// <seealso cref="Prism.Events.PubSubEvent{openhabUWP.Models.Widget}" />
+        public class WidgetTappedEvent : PubSubEvent<Widget> { }
     }
     
 }

@@ -1,8 +1,10 @@
 ﻿using System;
+using Windows.ApplicationModel;
 using Windows.UI.Xaml.Data;
 using Microsoft.Practices.Unity;
 using openhabUWP.Database;
-using openhabUWP.Widgets;
+using openhabUWP.Models;
+using openhabUWP.Remote.Models;
 
 namespace openhabUWP.Converters
 {
@@ -19,6 +21,7 @@ namespace openhabUWP.Converters
         /// </summary>
         public ChartWidgetToUrlConvrter()
         {
+            if (DesignMode.DesignModeEnabled) return;
             _database = App.Current.Container.Resolve<IOpenhabDatabase>();
         }
 
@@ -37,10 +40,10 @@ namespace openhabUWP.Converters
 
             setup.Url = "http://192.168.178.107:8080/";
 
-            var chartWidget = value as ChartWidget;
+            var chartWidget = value as Widget;
             if (chartWidget != null)
             {
-                return string.Format("{0}/chart?groups={0}&period={1}&random={2}", chartWidget.Label, chartWidget.Period, 1);
+                //return string.Format("{0}/chart?groups={0}&period={1}&random={2}", chartWidget.Label, chartWidget.Period, 1);
             }
             return null;
         }

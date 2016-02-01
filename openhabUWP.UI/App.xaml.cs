@@ -2,15 +2,9 @@
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Microsoft.Practices.Unity;
 using openhabUWP.Database;
-using openhabUWP.Interfaces.Services;
+using openhabUWP.Remote.Services;
 using openhabUWP.Services;
-using openhabUWP.ViewModels;
-using openhabUWP.Views;
-using Prism.Unity.Windows;
 
 namespace openhabUWP
 {

@@ -1,10 +1,9 @@
 using System;
+using Windows.ApplicationModel;
 using Windows.UI.Xaml.Data;
 using Microsoft.Practices.Unity;
 using openhabUWP.Database;
 using openhabUWP.Helper;
-using openhabUWP.Interfaces.Common;
-using openhabUWP.Models;
 
 namespace openhabUWP.Converters
 {
@@ -14,6 +13,7 @@ namespace openhabUWP.Converters
 
         public ObjectToImageUrlConverter()
         {
+            if(DesignMode.DesignModeEnabled) return;
             _database = App.Current.Container.Resolve<IOpenhabDatabase>();
         }
 

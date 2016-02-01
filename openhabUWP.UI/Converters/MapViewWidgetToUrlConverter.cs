@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
-using openhabUWP.Widgets;
+using openhabUWP.Models;
+using openhabUWP.Remote.Models;
 
 namespace openhabUWP.Converters
 {
@@ -21,7 +22,7 @@ namespace openhabUWP.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             double size = (parameter is double) ? (double)parameter : 800;
-            var mapView = value as MapViewWidget;
+            var mapView = value as Widget;
             if (mapView != null)
             {
                 return string.Format("http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}?mapSize={1},{1}&key=Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d", mapView.Label, size);

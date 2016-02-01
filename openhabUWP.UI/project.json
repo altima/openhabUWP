@@ -1,9 +1,10 @@
 ﻿{
   "dependencies": {
     "Lex.Db": "1.2.6",
-    "Newtonsoft.Json": "8.0.1",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+    "Newtonsoft.Json": "8.0.2",
     "Prism.Unity": "6.1.1",
-	"Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
+    "Zeroconf": "2.5.0"
   },
   "frameworks": {
     "uap10.0": {}

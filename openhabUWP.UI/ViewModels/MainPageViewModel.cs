@@ -1,36 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.Data.Json;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Microsoft.Practices.ObjectBuilder2;
-using openhabUWP.Enums;
 using openhabUWP.Events;
 using openhabUWP.Helper;
-using openhabUWP.Interfaces;
-using openhabUWP.Interfaces.Common;
-using openhabUWP.Interfaces.Items;
-using openhabUWP.Interfaces.Services;
-using openhabUWP.Interfaces.Widgets;
-using openhabUWP.Items;
 using openhabUWP.Models;
+using openhabUWP.Remote;
+using openhabUWP.Remote.Models;
+using openhabUWP.Remote.Services;
 using openhabUWP.Services;
-using openhabUWP.Widgets;
-using Prism.Commands;
 using Prism.Events;
 using Prism.Windows.AppModel;
 using Prism.Windows.Mvvm;
 using Prism.Windows.Navigation;
-using Page = openhabUWP.Models.Page;
+using Page = openhabUWP.Remote.Models.Page;
 
 namespace openhabUWP.ViewModels
 {
@@ -108,22 +96,20 @@ namespace openhabUWP.ViewModels
             CheckServer();
         }
 
-        private async void WidgetTapped(IWidget widget)
+        private async void WidgetTapped(Widget widget)
         {
             switch (widget.Type)
             {
                 case "Switch":
-                    var switchWidget = (SwitchWidget)widget;
-                    if (switchWidget.Item is NumberItem)
+                    if (widget.Item != null && widget.Item.Type == "Number")
                     {
-                        var numberItem = switchWidget.Item as NumberItem;
-                        var mappings = switchWidget.Mappings;
+                        var numberItem = widget.Item;
+                        var mappings = widget.Mappings;
                     }
                     else
                     {
-                        var switchItem = (SwitchItem)switchWidget.Item;
-                        var currentState = switchItem.State;
-                        await _restService.PostCommand(switchItem, currentState ? "OFF" : "ON");
+                        var currentState = widget.Item.State == "ON";
+                        await _restService.PostCommand(widget.Item, currentState ? "OFF" : "ON");
                     }
                     break;
                 case "Text":
@@ -179,8 +165,8 @@ namespace openhabUWP.ViewModels
             var widgetObject = o.GetNamedObject("widget");
             if (widgetObject != null)
             {
-                IWidget widget = null;
-                IItem item = null;
+                Widget widget = null;
+                Item item = null;
                 var widgetId = widgetObject.GetNamedString("widgetId");
                 var type = widgetObject.GetNamedString("type");
                 var label = widgetObject.GetNamedString("label");
@@ -197,31 +183,31 @@ namespace openhabUWP.ViewModels
                     itemLink = itemObject.GetNamedString("link");
                 }
 
-                switch (itemType)
-                {
-                    case "SwitchItem":
-                        item = new SwitchItem(itemName, itemLink, itemState);
-                        break;
-                    default:
-                        Debug.WriteLine("todo: {0}", itemType);
-                        break;
-                }
+                //switch (itemType)
+                //{
+                //    case "SwitchItem":
+                //        item = new SwitchItem(itemName, itemLink, itemState);
+                //        break;
+                //    default:
+                //        Debug.WriteLine("todo: {0}", itemType);
+                //        break;
+                //}
 
-                switch (type)
-                {
-                    case "Switch":
-                        widget = new SwitchWidget(widgetId, label, icon);
-                        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
-                        break;
-                    case "Text":
-                        widget = new TextWidget(widgetId, label, icon);
-                        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
-                        break;
-                    case "Frame":
-                        widget = new FrameWidget(widgetId, label, icon);
-                        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
-                        break;
-                }
+                //switch (type)
+                //{
+                //    case "Switch":
+                //        widget = new SwitchWidgetControl(widgetId, label, icon);
+                //        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
+                //        break;
+                //    case "Text":
+                //        widget = new TextWidgetControl(widgetId, label, icon);
+                //        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
+                //        break;
+                //    case "Frame":
+                //        widget = new FrameWidgetControl(widgetId, label, icon);
+                //        _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
+                //        break;
+                //}
             }
         }
 
@@ -233,7 +219,8 @@ namespace openhabUWP.ViewModels
         private async void CheckServer()
         {
             //var server = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
-            CurrentServer = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
+            //CurrentServer = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
+            CurrentServer = new Server(host: "192.168.178.3"); //alpha mode, set server ip here
 
             CheckPush(CurrentServer);
 
@@ -286,11 +273,12 @@ namespace openhabUWP.ViewModels
             {
                 CurrentPage = new Page("", "Default", "http://link.to", false, "firstfloor")
                 {
-                    Widgets = new IWidget[]
+                    Widgets = new Widget[]
                     {
-                        new FrameWidget("","Frame 1", ""),
-                        new FrameWidget("","Frame 2", ""),
-                        new FrameWidget("","Frame 3", ""),
+                        new Widget("","Frame 1","Frame",""),
+                        new Widget("","Frame 2","Frame",""),
+                        new Widget("","Frame 3","Frame",""),
+                        new Widget("","Frame 4","Frame",""),
                     }
                 };
             }

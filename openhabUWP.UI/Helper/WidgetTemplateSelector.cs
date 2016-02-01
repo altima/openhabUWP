@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using openhabUWP.Widgets;
+using openhabUWP.Remote.Models;
 
 namespace openhabUWP.Helper
 {
@@ -21,13 +16,25 @@ namespace openhabUWP.Helper
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            if (item is FrameWidget) return FrameWidgeTemplate;
-            if (item is SwitchWidget) return SwitchWidgeTemplate;
-            if (item is TextWidget) return TextWidgeTemplate;
-            if (item is GroupWidget) return GroupWidgeTemplate;
-            if (item is MapViewWidget) return MapViewWidgeTemplate;
-            if (item is ChartWidget) return ChartWidgeTemplate;
-
+            var widget = item as Widget;
+            if (widget != null)
+            {
+                switch (widget.Type)
+                {
+                    case "Frame":
+                        return FrameWidgeTemplate;
+                    case "Text":
+                        return TextWidgeTemplate;
+                    case "Switch":
+                        return SwitchWidgeTemplate;
+                    case "Group":
+                        return GroupWidgeTemplate;
+                    case "MapView":
+                        return MapViewWidgeTemplate;
+                    case "Chart":
+                        return ChartWidgeTemplate;
+                }
+            }
             return null;
         }
     }
