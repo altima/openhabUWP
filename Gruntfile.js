@@ -11,14 +11,15 @@ module.exports = function(grunt) {
 				src: ['openhabUWP.sln'],
 				options: {
 					projectConfiguration: 'Release',
-					platform: 'x86',
 					targets: ['Clean', 'Rebuild'],
 					version: 14.0,
-					maxCpuCount: 4,
+					maxCpuCount: 2,
 					buildParameters: {
 						WarningLevel: 2
 					},
-					verbosity: 'normal'
+					verbosity: 'quiet',
+					AppxBundle: 'Always',
+					AppxBundlePlatforms: 'x86|x64|ARM'
 				}
 			}
 		}
