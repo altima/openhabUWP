@@ -4,3 +4,4 @@
 **/*.user
 /.vs/
 *.DotSettings
+/node_modules/

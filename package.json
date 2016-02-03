@@ -1,0 +1,29 @@
+{
+  "name": "openhabuwp",
+  "version": "1.0.0",
+  "description": "inspired by \r * https://github.com/openhab/openhab.winrt\r * https://github.com/kobush/OpenHab.Windows (thanks @kobush)",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/altima/openhabUWP.git"
+  },
+  "keywords": [
+    "openhab",
+    "windows10",
+    "uwp"
+  ],
+  "author": "enrico@soapbubbles.de",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/altima/openhabUWP/issues"
+  },
+  "homepage": "https://github.com/altima/openhabUWP#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-msbuild": "^0.3.4",
+    "grunt-nuget": "^0.1.5"
+  }
+}
