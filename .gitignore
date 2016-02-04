@@ -6,3 +6,6 @@
 *.DotSettings
 /node_modules/
 **/AppPackages/
+**/BundleArtifacts/
+openhab*[ARM|x86].zip
+openhab*[arm|x86].zip

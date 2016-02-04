@@ -23,6 +23,7 @@
   "homepage": "https://github.com/altima/openhabUWP#readme",
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-contrib-compress": "^0.14.0",
     "grunt-msbuild": "^0.3.4",
     "grunt-nuget": "^0.1.5"
   }

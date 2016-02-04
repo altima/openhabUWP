@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 					},
 					verbosity: 'quiet',
 					AppxBundle: 'Always',
-					AppxBundlePlatforms: 'x86|x64|ARM'
+					AppxBundlePlatforms: 'ARM'
 				}
 			},
 			x86: {
@@ -36,7 +36,8 @@ module.exports = function(grunt) {
 					},
 					verbosity: 'quiet',
 					AppxBundle: 'Always',
-					AppxBundlePlatforms: 'x86|x64|ARM'
+					AppxBundlePlatforms: 'x86',
+					OutputPath: 'deploy/'
 				}
 			},
 			arm: {
@@ -52,12 +53,33 @@ module.exports = function(grunt) {
 					},
 					verbosity: 'quiet',
 					AppxBundle: 'Always',
-					AppxBundlePlatforms: 'x86|x64|ARM'
+					AppxBundlePlatforms: 'ARM',
+					OutputPath: 'deploy/',
+					OutDir: 'deploy/',
 				}
+			}
+		},
+		compress: {
+			arm: {
+				options: {
+					archive: './openhabUWP-arm.zip',
+					mode: 'zip'
+				},
+				files: [{ src: 'openhabUWP.UI/AppPackages/*ARM*/**/*.*' }]
+			},
+			x86: {
+				options: {
+					archive: './openhabUWP-arm.zip',
+					mode: 'zip'
+				},
+				files: [{ src: 'openhabUWP.UI/AppPackages/*x86*/**/*.*' }]
 			}
 		}
 	});
+	
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-msbuild');
 	grunt.loadNpmTasks('grunt-nuget');
+	
 	grunt.registerTask('default', ['nugetrestore', 'msbuild:arm', 'msbuild:x86']);
 };
