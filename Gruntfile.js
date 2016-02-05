@@ -7,12 +7,12 @@ module.exports = function(grunt) {
 			}
 		},
 		msbuild: {
-			dev: {
+			x64: {
 				src: ['openhabUWP.sln'],
 				options: {
 					projectConfiguration: 'Release',
 					targets: ['Clean', 'Rebuild'],
-					platform: 'ARM',
+					platform: 'x64',
 					version: 14.0,
 					maxCpuCount: 2,
 					buildParameters: {
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 					},
 					verbosity: 'quiet',
 					AppxBundle: 'Always',
-					AppxBundlePlatforms: 'ARM'
+					AppxBundlePlatforms: 'x64'
 				}
 			},
 			x86: {
@@ -37,7 +37,6 @@ module.exports = function(grunt) {
 					verbosity: 'quiet',
 					AppxBundle: 'Always',
 					AppxBundlePlatforms: 'x86',
-					OutputPath: 'deploy/'
 				}
 			},
 			arm: {
@@ -54,26 +53,31 @@ module.exports = function(grunt) {
 					verbosity: 'quiet',
 					AppxBundle: 'Always',
 					AppxBundlePlatforms: 'ARM',
-					OutputPath: 'deploy/',
-					OutDir: 'deploy/',
 				}
 			}
 		},
 		compress: {
+			x64: {
+				options: {
+					archive: './openhabUWP-x64.zip',
+					mode: 'zip'
+				},
+				files: [{ src: 'openhabUWP.UI/AppPackages/*x64*/**/*.*' }]
+			},
+			x86: {
+				options: {
+					archive: './openhabUWP-x86.zip',
+					mode: 'zip'
+				},
+				files: [{ src: 'openhabUWP.UI/AppPackages/*x86*/**/*.*' }]
+			},			
 			arm: {
 				options: {
-					archive: './openhabUWP-arm.zip',
+					archive: './openhabUWP-ARM.zip',
 					mode: 'zip'
 				},
 				files: [{ src: 'openhabUWP.UI/AppPackages/*ARM*/**/*.*' }]
 			},
-			x86: {
-				options: {
-					archive: './openhabUWP-arm.zip',
-					mode: 'zip'
-				},
-				files: [{ src: 'openhabUWP.UI/AppPackages/*x86*/**/*.*' }]
-			}
 		}
 	});
 	
@@ -81,5 +85,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-msbuild');
 	grunt.loadNpmTasks('grunt-nuget');
 	
-	grunt.registerTask('default', ['nugetrestore', 'msbuild:arm', 'msbuild:x86']);
+	grunt.registerTask('_before', ['nugetrestore']);
+	
+	grunt.registerTask('_x64', ['msbuild:x64', 'compress:x64']);
+	grunt.registerTask('_x86', ['msbuild:x86', 'compress:x86']);
+	grunt.registerTask('_arm', ['msbuild:arm', 'compress:arm']);
+	
+	grunt.registerTask('default', ['_before', '_x64', '_x86', '_arm']);
 };

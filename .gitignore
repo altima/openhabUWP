@@ -7,5 +7,5 @@
 /node_modules/
 **/AppPackages/
 **/BundleArtifacts/
-openhab*[ARM|x86].zip
-openhab*[arm|x86].zip
+openhab*[ARM|x86|x64].zip
+openhab*[arm|x86|x64].zip

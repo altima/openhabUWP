@@ -1,6 +1,6 @@
 {
   "name": "openhabuwp",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "inspired by \r * https://github.com/openhab/openhab.winrt\r * https://github.com/kobush/OpenHab.Windows (thanks @kobush)",
   "main": "Gruntfile.js",
   "scripts": {
@@ -24,6 +24,7 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-compress": "^0.14.0",
+    "grunt-git-release": "^0.1.3",
     "grunt-msbuild": "^0.3.4",
     "grunt-nuget": "^0.1.5"
   }
