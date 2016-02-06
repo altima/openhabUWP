@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <!--General styles-->
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/SplitViewStyles.xaml" />
                 <ResourceDictionary Source="Styles/Common.xaml" />
                 <ResourceDictionary Source="Styles/Styles.xaml" />
                 <ResourceDictionary Source="Styles/DataTemplates.xaml" />
