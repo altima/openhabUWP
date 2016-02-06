@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="abort" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="MenuView_btnMain" xml:space="preserve">
+    <value>Steuerung</value>
+  </data>
+  <data name="AboutPage_title.Text" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="ConnectionSetupPage_title.Text" xml:space="preserve">
+    <value>Verbindungseinstellugnen</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="failure" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="hint" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
+  <data name="MainPage_title.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Message_ConnectionCouldNotEtablished" xml:space="preserve">
+    <value>Du bist nicht mit dem Netzwerk verbunden, wo der eingestellte openhab-Dienst erreichbar ist.</value>
+  </data>
+  <data name="Message_NoConnectionFound" xml:space="preserve">
+    <value>Gebe deine Verbindungseinstellungen zum openhab-Dienst ein.</value>
+  </data>
+  <data name="Message_NotAuthorized" xml:space="preserve">
+    <value>Zugriff nicht erlaubt! Möchtest du deine Zugangsdaten ändern?</value>
+  </data>
+  <data name="Message_NoZeroConfFound" xml:space="preserve">
+    <value>Es wurde keine openhab-Dienst in deinem Netzwerkgefunden, gebe die Adresse ein.</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="ResourceLanguage" xml:space="preserve">
+    <value>de</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+</root>

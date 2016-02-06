@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="de" original="OPENHABUWP.UI.APP/STRINGS/EN/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1573.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="OPENHABUWP.UI.APP/STRINGS/EN/RESOURCES.RESW" datatype="resx">
+        <trans-unit id="abort" translate="yes" xml:space="preserve">
+          <source>Abort</source>
+          <target state="translated">Abbrechen</target>
+        </trans-unit>
+        <trans-unit id="cancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="translated">Abbrechen</target>
+        </trans-unit>
+        <trans-unit id="MenuView_btnConnectionSetup" translate="yes" xml:space="preserve">
+          <source>Setup</source>
+          <target state="new">Setup</target>
+        </trans-unit>
+        <trans-unit id="MenuView_btnMain" translate="yes" xml:space="preserve">
+          <source>Control</source>
+          <target state="translated">Steuerung</target>
+        </trans-unit>
+        <trans-unit id="ok" translate="yes" xml:space="preserve">
+          <source>Ok</source>
+          <target state="new">Ok</target>
+        </trans-unit>
+        <trans-unit id="AboutPage_title.Text" translate="yes" xml:space="preserve">
+          <source>About</source>
+          <target state="translated">Über</target>
+        </trans-unit>
+        <trans-unit id="ConnectionSetupPage_title.Text" translate="yes" xml:space="preserve">
+          <source>Connection setup</source>
+          <target state="translated">Verbindungseinstellugnen</target>
+        </trans-unit>
+        <trans-unit id="Description" translate="yes" xml:space="preserve">
+          <source>The openhab client app for Windows 10</source>
+          <target state="new">The openhab client app for Windows 10</target>
+        </trans-unit>
+        <trans-unit id="DisplayName" translate="yes" xml:space="preserve">
+          <source>openhab 10</source>
+          <target state="new">openhab 10</target>
+        </trans-unit>
+        <trans-unit id="error" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="translated">Fehler</target>
+        </trans-unit>
+        <trans-unit id="failure" translate="yes" xml:space="preserve">
+          <source>Failure</source>
+          <target state="translated">Fehler</target>
+        </trans-unit>
+        <trans-unit id="hint" translate="yes" xml:space="preserve">
+          <source>Hint</source>
+          <target state="translated">Hinweis</target>
+        </trans-unit>
+        <trans-unit id="MainPage_title.Text" translate="yes" xml:space="preserve">
+          <source>Home</source>
+          <target state="translated">Start</target>
+        </trans-unit>
+        <trans-unit id="Message_ConnectionCouldNotEtablished" translate="yes" xml:space="preserve">
+          <source>You are not in the same network there the stored instance runs.</source>
+          <target state="translated">Du bist nicht mit dem Netzwerk verbunden, wo der eingestellte openhab-Dienst erreichbar ist.</target>
+        </trans-unit>
+        <trans-unit id="Message_NoConnectionFound" translate="yes" xml:space="preserve">
+          <source>Please setup a connection to an openhab instance.</source>
+          <target state="translated">Gebe deine Verbindungseinstellungen zum openhab-Dienst ein.</target>
+        </trans-unit>
+        <trans-unit id="Message_NotAuthorized" translate="yes" xml:space="preserve">
+          <source>Not authorized! Do you want to chenge your credentials?</source>
+          <target state="translated">Zugriff nicht erlaubt! Möchtest du deine Zugangsdaten ändern?</target>
+        </trans-unit>
+        <trans-unit id="Message_NoZeroConfFound" translate="yes" xml:space="preserve">
+          <source>No openhab instance found on your network. Please enter it manually.</source>
+          <target state="translated">Es wurde keine openhab-Dienst in deinem Netzwerkgefunden, gebe die Adresse ein.</target>
+        </trans-unit>
+        <trans-unit id="no" translate="yes" xml:space="preserve">
+          <source>No</source>
+          <target state="translated">Nein</target>
+        </trans-unit>
+        <trans-unit id="ResourceFlowDirection" translate="yes" xml:space="preserve">
+          <source>LeftToRight</source>
+          <target state="new">LeftToRight</target>
+        </trans-unit>
+        <trans-unit id="ResourceLanguage" translate="yes" xml:space="preserve">
+          <source>en</source>
+          <target state="translated">de</target>
+        </trans-unit>
+        <trans-unit id="yes" translate="yes" xml:space="preserve">
+          <source>Yes</source>
+          <target state="translated">Ja</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
