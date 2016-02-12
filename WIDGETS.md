@@ -1,5 +1,7 @@
 # Widget
 
+[[TOC]]
+
 ```javascript
 {
 	"widgetId": "",

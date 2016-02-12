@@ -1,5 +1,7 @@
 # Item
 
+[[TOC]]
+
 ```javascript
 {
 	"link": "",
@@ -98,4 +100,4 @@
 
 [Item]: #item
 
-[Mapping]: WIDGETS.md#mapping
+[Mapping]: #mapping
