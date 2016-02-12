@@ -1,7 +1,5 @@
 # Widget
 
-[[TOC]]
-
 ```javascript
 {
 	"widgetId": "",
@@ -139,8 +137,76 @@
 ```
 
 ## Chart::[Widget]
+```javascript
+
+```
+
+
 ## Selection::[Widget]
+```javascirpt
+{
+	"widgetId": "0203_0_0",
+	"type": "Selection",
+	"label": "Radio",
+	"icon": "network",
+	"mappings": [{
+		"command": "0",
+		"label": "off"
+	},
+	{
+		"command": "1",
+		"label": "HR3"
+	},
+	{
+		"command": "2",
+		"label": "SWR3"
+	},
+	{
+		"command": "3",
+		"label": "FFH"
+	}],
+	"item": {
+		"link": "http://demo.openhab.org:9080/rest/items/Radio_Station",
+		"state": "2",
+		"type": "NumberItem",
+		"name": "Radio_Station",
+		"label": "Radio",
+		"category": "network",
+		"tags": [],
+		"groupNames": []
+	},
+	"widgets": []
+}
+```
 ## Setpoint::[Widget]
+```javascript
+{
+	"widgetId": "0202_1_0_1_2",
+	"type": "Setpoint",
+	"label": "Temperature [20.5 Â°C]",
+	"icon": "temperature",
+	"mappings": [],
+	"minValue": 16,
+	"maxValue": 28,
+	"step": 0.5,
+	"item": {
+		"link": "http://demo.openhab.org:9080/rest/items/Temperature_Setpoint",
+		"state": "20.5",
+		"stateDescription": {
+			"pattern": "%.1f Â°C",
+			"readOnly": false,
+			"options": []
+		},
+		"type": "NumberItem",
+		"name": "Temperature_Setpoint",
+		"label": "Temperature",
+		"category": "temperature",
+		"tags": [],
+		"groupNames": []
+	},
+	"widgets": []
+}```
+
 ## Slider::[Widget]
 ```javascript
 {
@@ -194,14 +260,29 @@
 ## Mapview::[Widget]
 ```javascript
 {
-	"widgetId": "0203_1_0_1_2",
-	"type": "Webview",
-	"label": "",
-	"icon": "webview",
+	"widgetId": "0202_3",
+	"type": "Frame",
+	"label": "Map/Location",
+	"icon": "frame",
 	"mappings": [],
-	"height": 8,
-	"url": "http://heise-online.mobi/",
-	"widgets": []
+	"widgets": [{
+		"widgetId": "0202_3_0",
+		"type": "Mapview",
+		"label": "Brandenburg Gate Berlin",
+		"icon": "mapview",
+		"mappings": [],
+		"height": 10,
+		"item": {
+			"link": "http://demo.openhab.org:9080/rest/items/DemoLocation",
+			"state": "52.5200066,13.4049540",
+			"type": "LocationItem",
+			"name": "DemoLocation",
+			"label": "Brandenburg Gate Berlin",
+			"tags": [],
+			"groupNames": []
+		},
+		"widgets": []
+	}]
 }
 ```
 ## Image::[Widget]

@@ -1,7 +1,5 @@
 # Item
 
-[[TOC]]
-
 ```javascript
 {
 	"link": "",
@@ -58,6 +56,23 @@
 ```
 
 ## NumberItem::[Item]
+```javascript
+{
+	"link": "http://demo.openhab.org:9080/rest/items/Temperature_Setpoint",
+	"state": "20.5",
+	"stateDescription": {
+		"pattern": "%.1f Â°C",
+		"readOnly": false,
+		"options": []
+	},
+	"type": "NumberItem",
+	"name": "Temperature_Setpoint",
+	"label": "Temperature",
+	"category": "temperature",
+	"tags": [],
+	"groupNames": []
+}
+```
 ## ColorItem::[Item]
 
 ```javascript
@@ -80,6 +95,25 @@
 	"type": "RollershutterItem",
 	"name": "DemoShutter",
 	"label": "Roller Shutter",
+	"tags": [],
+	"groupNames": []
+}
+```
+
+## DateTimeItem::[Item]
+```javascript
+{
+	"link": "http://demo.openhab.org:9080/rest/items/CurrentDate",
+	"state": "2016-02-02T13:00:22",
+	"stateDescription": {
+		"pattern": "%1$tA, %1$td.%1$tm.%1$tY",
+		"readOnly": false,
+		"options": []
+	},
+	"type": "DateTimeItem",
+	"name": "CurrentDate",
+	"label": "Date",
+	"category": "calendar",
 	"tags": [],
 	"groupNames": []
 }
