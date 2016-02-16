@@ -229,13 +229,7 @@ namespace openhabUWP.ViewModels
 
             var url = setup.RemoteUrl.IsNullOrEmpty() ? setup.Url : setup.RemoteUrl;
 
-            //var server = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
-            //CurrentServer = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
-            //CurrentServer = new Server(host: "192.168.178.3"); //alpha mode, set server ip here
-            //CurrentServer = new Server(host: "demo.openhab.org"); //alpha mode, set server ip here
             CurrentServer = new Server(url);
-
-
 
             CheckPush(CurrentServer);
 
