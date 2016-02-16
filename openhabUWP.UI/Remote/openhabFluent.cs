@@ -179,6 +179,8 @@ namespace openhabUWP.Remote
                 case "Chart":
                     widget = widget.SetChartProperties(height, refresh, period);
                     break;
+                default:
+                    return null;
             }
 
             try

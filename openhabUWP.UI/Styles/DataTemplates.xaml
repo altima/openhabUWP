@@ -8,18 +8,18 @@
     <helper:WidgetTemplateSelector x:Key="WidgetTemplateSelector">
         
         <!--  GroupWidget-->
-        <!--<helper:WidgetTemplateSelector.GroupWidgeTemplate>
+        <helper:WidgetTemplateSelector.GroupWidgeTemplate>
             <DataTemplate>
                 <widgets:GroupWidgetControl/>
             </DataTemplate>
-        </helper:WidgetTemplateSelector.GroupWidgeTemplate>-->
+        </helper:WidgetTemplateSelector.GroupWidgeTemplate>
         
         <!-- SwitchWidget -->
-        <!--<helper:WidgetTemplateSelector.SwitchWidgeTemplate>
+        <helper:WidgetTemplateSelector.SwitchWidgeTemplate>
             <DataTemplate>
                 <widgets:SwitchWidgetControl/>
             </DataTemplate>
-        </helper:WidgetTemplateSelector.SwitchWidgeTemplate>-->
+        </helper:WidgetTemplateSelector.SwitchWidgeTemplate>
         
         <!-- TextWidget -->
         <helper:WidgetTemplateSelector.TextWidgeTemplate>

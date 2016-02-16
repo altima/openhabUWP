@@ -76,6 +76,16 @@ namespace openhabUWP.Remote.Models
             return widget.IsWidget("Chart");
         }
 
+        public static bool IsGroupWidget(this Widget widget)
+        {
+            return widget.IsWidget("Group");
+        }
+
+        public static bool IsTextWidget(this Widget widget)
+        {
+            return widget.IsWidget("Text");
+        }
+
         public static bool IsSwitchWidget(this Widget widget)
         {
             return widget.IsWidget("Switch");
