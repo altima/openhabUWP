@@ -94,6 +94,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="SampleData\page.json" />
+    <None Include="SampleData\page_multimedia.json" />
+    <None Include="SampleData\page_widgets.json" />
+    <None Include="SampleData\sitemap.json" />
+    <None Include="SampleData\sitemaps.json" />
     <None Include="project.json" />
     <PRIResource Include="Strings\de\Resources.resw" />
     <PRIResource Include="Strings\en\Resources.resw" />
@@ -117,6 +122,7 @@
     <Compile Include="Enums\ProtocolType.cs" />
     <Compile Include="Events\WidgetEvents.cs" />
     <Compile Include="PageTokens.cs" />
+    <Compile Include="Remote\Models\WidgetFluent.cs" />
     <Compile Include="Remote\openhabFluent.cs" />
     <Compile Include="Helper\StringFluent.cs" />
     <Compile Include="Helper\WidgetTemplateSelector.cs" />
@@ -195,6 +201,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <DesignData Include="SampleData\SwitchWidgetSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </DesignData>
+    <DesignData Include="SampleData\WidgetSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
+    <DesignData Include="SampleData\MapViewWidgetSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
     <Page Include="Styles\Common.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

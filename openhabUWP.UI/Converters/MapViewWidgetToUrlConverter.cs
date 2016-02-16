@@ -25,7 +25,7 @@ namespace openhabUWP.Converters
             var mapView = value as Widget;
             if (mapView != null)
             {
-                return string.Format("http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}?mapSize={1},{1}&key=Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d", mapView.Label, size);
+                return string.Format("http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}?mapSize={1},{1}&key=Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d", mapView.Item.State, size);
             }
             return null;
         }

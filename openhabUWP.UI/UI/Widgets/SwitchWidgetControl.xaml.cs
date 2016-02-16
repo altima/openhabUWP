@@ -60,5 +60,10 @@ namespace openhabUWP.UI.Widgets
                 this.DataContext = widget;
             }
         }
+
+        private void ToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
+        {
+            SwitchToggled();
+        }
     }
 }

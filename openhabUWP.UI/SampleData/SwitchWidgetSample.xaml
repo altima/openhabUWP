@@ -1,0 +1,15 @@
+﻿<models:Widget xmlns:models="using:openhabUWP.Remote.Models"
+               WidgetId="1234"
+               Type="Switch"
+               Label="Toggle Switch"
+               Icon="switch"
+               >
+    <models:Widget.Item>
+        <models:Item 
+            Link="http://demo.openhab.org:9080/rest/items/DemoSwitch"
+            State="ON"
+            Type="SwitchItem"
+            Name="DemoSwitch"
+            Label="Switch"/>
+    </models:Widget.Item>
+</models:Widget>

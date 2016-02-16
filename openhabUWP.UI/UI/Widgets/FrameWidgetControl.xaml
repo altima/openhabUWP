@@ -4,14 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:widgets="using:openhabUWP.Widgets"
     xmlns:helper="using:openhabUWP.Helper"
+    xmlns:models="using:openhabUWP.Remote.Models"
     mc:Ignorable="d"
     d:DesignHeight="400"
-    d:DesignWidth="400"
-    d:DataContext="{d:DesignInstance widgets:FrameWidget, IsDesignTimeCreatable=True}">
+    d:DesignWidth="400" d:DataContext="{d:DesignData /SampleData/WidgetSampleData.xaml}" >
 
-    <Border Background="{StaticResource  WhiteBrush}" Margin="0,-1">
+    <Border Margin="0,-1">
         <StackPanel MinHeight="50">
             <Border 
                 Visibility="{Binding Label, Converter={StaticResource StringToVisibilityConverter}}"

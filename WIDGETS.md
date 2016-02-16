@@ -332,19 +332,19 @@
 }
 ```
 
-[Widget]: #widget
-[Switch]: #switch::widget
-[Chart]: #chart::widget
-[Frame]: #frame::widget
-[Selection]: #selection::widget
-[Setpoint]: #setpoint::widget
-[Slider]: #slider::widget
-[Colorpicker]: #colorpicker::widget
-[Mapview]: #mapview::widget
-[Image]: #image::widget
-[Video]: #video::widget
-[Webview]: #webview::widget
+[Widget] : #widget
+[Switch] : #switch::widget
+[Chart] : #chart::widget
+[Frame] : #frame::widget
+[Selection] : #selection::widget
+[Setpoint] : #setpoint::widget
+[Slider] : #slider::widget
+[Colorpicker] : #colorpicker::widget
+[Mapview] : #mapview::widget
+[Image] : #image::widget
+[Video] : #video::widget
+[Webview] : #webview::widget
 
-[Item]: ITEMS.md#item
+[Item] : ITEMS.md#item
 
-[Mapping]: #mapping
+[Mapping] : #mapping

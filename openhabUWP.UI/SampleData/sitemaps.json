@@ -1,0 +1,22 @@
+[
+    {
+        "name": "demo",
+        "label": "Main Menu",
+        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo",
+        "homepage": {
+            "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/demo",
+            "leaf": false,
+            "widgets": [ ]
+        }
+    },
+    {
+        "name": "_default",
+        "label": "Home",
+        "link": "http://demo.openhab.org:9080/rest/sitemaps/_default",
+        "homepage": {
+            "link": "http://demo.openhab.org:9080/rest/sitemaps/_default/_default",
+            "leaf": false,
+            "widgets": [ ]
+        }
+    }
+]

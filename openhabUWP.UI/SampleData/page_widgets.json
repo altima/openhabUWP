@@ -1,0 +1,285 @@
+{
+    "id": "0202",
+    "title": "Widget Overview",
+    "icon": "chart",
+    "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0202",
+    "parent": {
+        "id": "demo",
+        "title": "Main Menu",
+        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/demo",
+        "leaf": true
+    },
+    "leaf": false,
+    "widgets": [
+        {
+            "widgetId": "0202_0",
+            "type": "Frame",
+            "label": "Binary Widgets",
+            "icon": "frame",
+            "mappings": [ ],
+            "widgets": [
+                {
+                    "widgetId": "0202_0_0",
+                    "type": "Switch",
+                    "label": "Toggle Switch",
+                    "icon": "switch",
+                    "mappings": [ ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/DemoSwitch",
+                        "state": "ON",
+                        "type": "SwitchItem",
+                        "name": "DemoSwitch",
+                        "label": "Switch",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "0202_0_0_1",
+                    "type": "Switch",
+                    "label": "Button Switch",
+                    "icon": "switch",
+                    "mappings": [
+                        {
+                            "command": "ON",
+                            "label": "On"
+                        }
+                    ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/DemoSwitch",
+                        "state": "ON",
+                        "type": "SwitchItem",
+                        "name": "DemoSwitch",
+                        "label": "Switch",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                }
+            ]
+        },
+        {
+            "widgetId": "0202_1",
+            "type": "Frame",
+            "label": "Discrete Widgets",
+            "icon": "frame",
+            "mappings": [ ],
+            "widgets": [
+                {
+                    "widgetId": "0202_1_0",
+                    "type": "Selection",
+                    "label": "Scene Selection",
+                    "icon": "sofa",
+                    "mappings": [
+                        {
+                            "command": "0",
+                            "label": "off"
+                        },
+                        {
+                            "command": "1",
+                            "label": "TV"
+                        },
+                        {
+                            "command": "2",
+                            "label": "Dinner"
+                        },
+                        {
+                            "command": "3",
+                            "label": "Reading"
+                        }
+                    ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/Scene_General",
+                        "state": "1",
+                        "type": "NumberItem",
+                        "name": "Scene_General",
+                        "label": "Scene",
+                        "category": "sofa",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "0202_1_0_1",
+                    "type": "Switch",
+                    "label": "Scene",
+                    "icon": "sofa",
+                    "mappings": [
+                        {
+                            "command": "1",
+                            "label": "TV"
+                        },
+                        {
+                            "command": "2",
+                            "label": "Dinner"
+                        },
+                        {
+                            "command": "3",
+                            "label": "Reading"
+                        }
+                    ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/Scene_General",
+                        "state": "1",
+                        "type": "NumberItem",
+                        "name": "Scene_General",
+                        "label": "Scene",
+                        "category": "sofa",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "0202_1_0_1_2",
+                    "type": "Setpoint",
+                    "label": "Temperature [20.5 °C]",
+                    "icon": "temperature",
+                    "mappings": [ ],
+                    "minValue": 16,
+                    "maxValue": 28,
+                    "step": 0.5,
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/Temperature_Setpoint",
+                        "state": "20.5",
+                        "stateDescription": {
+                            "pattern": "%.1f °C",
+                            "readOnly": false,
+                            "options": [ ]
+                        },
+                        "type": "NumberItem",
+                        "name": "Temperature_Setpoint",
+                        "label": "Temperature",
+                        "category": "temperature",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                }
+            ]
+        },
+        {
+            "widgetId": "0202_2",
+            "type": "Frame",
+            "label": "Percent-based Widgets",
+            "icon": "frame",
+            "mappings": [ ],
+            "widgets": [
+                {
+                    "widgetId": "0202_2_0",
+                    "type": "Slider",
+                    "label": "Dimmer [98 %]",
+                    "icon": "slider",
+                    "mappings": [ ],
+                    "switchSupport": true,
+                    "sendFrequency": 0,
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/DimmedLight",
+                        "state": "98",
+                        "stateDescription": {
+                            "pattern": "%d %%",
+                            "readOnly": false,
+                            "options": [ ]
+                        },
+                        "type": "DimmerItem",
+                        "name": "DimmedLight",
+                        "label": "Dimmer",
+                        "category": "slider",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "0202_2_0_1",
+                    "type": "Colorpicker",
+                    "label": "RGB Light",
+                    "icon": "slider",
+                    "mappings": [ ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/RGBLight",
+                        "state": "327.05884,100.0,100.0",
+                        "type": "ColorItem",
+                        "name": "RGBLight",
+                        "label": "RGB Light",
+                        "category": "slider",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "0202_2_0_1_2",
+                    "type": "Switch",
+                    "label": "Roller Shutter",
+                    "icon": "rollershutter",
+                    "mappings": [ ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/DemoShutter",
+                        "state": "100",
+                        "type": "RollershutterItem",
+                        "name": "DemoShutter",
+                        "label": "Roller Shutter",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "0202_2_0_1_2_3",
+                    "type": "Slider",
+                    "label": "Blinds [74 %]",
+                    "icon": "rollershutter",
+                    "mappings": [ ],
+                    "switchSupport": false,
+                    "sendFrequency": 0,
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/DemoBlinds",
+                        "state": "74",
+                        "stateDescription": {
+                            "pattern": "%d %%",
+                            "readOnly": false,
+                            "options": [ ]
+                        },
+                        "type": "DimmerItem",
+                        "name": "DemoBlinds",
+                        "label": "Blinds",
+                        "category": "rollershutter",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                }
+            ]
+        },
+        {
+            "widgetId": "0202_3",
+            "type": "Frame",
+            "label": "Map/Location",
+            "icon": "frame",
+            "mappings": [ ],
+            "widgets": [
+                {
+                    "widgetId": "0202_3_0",
+                    "type": "Mapview",
+                    "label": "Brandenburg Gate Berlin",
+                    "icon": "mapview",
+                    "mappings": [ ],
+                    "height": 10,
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/DemoLocation",
+                        "state": "52.5200066,13.4049540",
+                        "type": "LocationItem",
+                        "name": "DemoLocation",
+                        "label": "Brandenburg Gate Berlin",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                }
+            ]
+        }
+    ]
+}

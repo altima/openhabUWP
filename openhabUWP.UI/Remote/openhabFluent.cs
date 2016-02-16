@@ -159,7 +159,30 @@ namespace openhabUWP.Remote
             var label = jo.GetNamedString("label", "");
             var type = jo.GetNamedString("type", "");
 
-            var widget = new Widget(widgetId, label, type, icon);
+            Widget widget = new Widget(widgetId, label, type, icon);
+            switch (type)
+            {
+                case "Switch":
+                    break;
+                case "Frame":
+                    break;
+                case "Group":
+                    break;
+                //case "Image":
+                //break;
+                case "MapView":
+                    break;
+                case "Chart":
+                    var height = jo.GetNamedNumber("height", 0);
+                    var refresh = jo.GetNamedNumber("refresh", 0);
+                    var period = jo.GetNamedString("period", "");
+                    widget = widget.SetChartProperties(height, refresh, period);
+                    break;
+                default:
+                case "Text":
+                    widget = new Widget(widgetId, label, type, icon);
+                    break;
+            }
 
             try
             {
@@ -177,9 +200,6 @@ namespace openhabUWP.Remote
                     widget.SetLinkedPage(jo.GetNamedObject("linkedPage").ToPage());
                 }
 
-                var height = jo.GetNamedNumber("height", 0);
-                var refresh = jo.GetNamedNumber("refresh", 0);
-                var period = jo.GetNamedString("period", "");
                 if (jo.ContainsKey("mappings"))
                 {
                     widget.SetMappings(jo.GetNamedArray("mappings").ToMappings());

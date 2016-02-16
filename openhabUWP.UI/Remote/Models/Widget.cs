@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using Windows.ApplicationModel;
+using Windows.Data.Json;
+using openhabUWP.Helper;
+
 namespace openhabUWP.Remote.Models
 {
     /// <summary>
@@ -12,7 +18,6 @@ namespace openhabUWP.Remote.Models
         /// The widget identifier.
         /// </value>
         public string WidgetId { get; set; }
-
         /// <summary>
         /// Gets or sets the icon.
         /// </summary>
@@ -20,7 +25,6 @@ namespace openhabUWP.Remote.Models
         /// The icon.
         /// </value>
         public string Icon { get; set; }
-
         /// <summary>
         /// Gets or sets the label.
         /// </summary>
@@ -28,7 +32,6 @@ namespace openhabUWP.Remote.Models
         /// The label.
         /// </value>
         public string Label { get; set; }
-
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
@@ -36,15 +39,13 @@ namespace openhabUWP.Remote.Models
         /// The type.
         /// </value>
         public string Type { get; set; }
-
         /// <summary>
         /// Gets or sets the widgets.
         /// </summary>
         /// <value>
         /// The widgets.
         /// </value>
-        public Widget[] Widgets { get; set; }
-
+        public List<Widget> Widgets { get; set; }
         /// <summary>
         /// Gets or sets the item.
         /// </summary>
@@ -52,7 +53,6 @@ namespace openhabUWP.Remote.Models
         /// The item.
         /// </value>
         public Item Item { get; set; }
-
         /// <summary>
         /// Gets or sets the linked page.
         /// </summary>
@@ -60,7 +60,6 @@ namespace openhabUWP.Remote.Models
         /// The linked page.
         /// </value>
         public Page LinkedPage { get; set; }
-
         /// <summary>
         /// Gets or sets the mappings.
         /// </summary>
@@ -69,17 +68,65 @@ namespace openhabUWP.Remote.Models
         /// </value>
         public Mapping[] Mappings { get; set; }
 
+
+        /*chart widget*/
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
+        /// <value>
+        /// The height.
+        /// </value>
+        public double Height { get; set; }
+        /// <summary>
+        /// Gets or sets the refresh.
+        /// </summary>
+        /// <value>
+        /// The refresh.
+        /// </value>
+        public double Refresh { get; set; }
+        /// <summary>
+        /// Gets or sets the period.
+        /// </summary>
+        /// <value>
+        /// The period.
+        /// </value>
+        public string Period { get; set; }
+
+
+        /*setpoint*/
+        /// <summary>
+        /// Gets or sets the minimum value.
+        /// </summary>
+        /// <value>
+        /// The minimum value.
+        /// </value>
+        public double MinValue { get; set; }
+        /// <summary>
+        /// Gets or sets the maximum value.
+        /// </summary>
+        /// <value>
+        /// The maximum value.
+        /// </value>
+        public double MaxValue { get; set; }
+        /// <summary>
+        /// Gets or sets the step.
+        /// </summary>
+        /// <value>
+        /// The step.
+        /// </value>
+        public double Step { get; set; }
+
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Widget"/> class.
         /// </summary>
         public Widget()
         {
-            this.Widgets = new Widget[0];
+            if (!DesignMode.DesignModeEnabled) this.Widgets = new List<Widget>();
             this.Item = new Item();
             this.LinkedPage = new Page();
             this.Mappings = new Mapping[0];
         }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Widget"/> class.
         /// </summary>
@@ -95,92 +142,5 @@ namespace openhabUWP.Remote.Models
             this.Type = type;
         }
 
-        /// <summary>
-        /// Sets the widget identifier.
-        /// </summary>
-        /// <param name="widgetId">The widget identifier.</param>
-        /// <returns></returns>
-        public Widget SetWidgetId(string widgetId)
-        {
-            this.WidgetId = widgetId;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the icon.
-        /// </summary>
-        /// <param name="icon">The icon.</param>
-        /// <returns></returns>
-        public Widget SetIcon(string icon)
-        {
-            this.Icon = icon;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the label.
-        /// </summary>
-        /// <param name="label">The label.</param>
-        /// <returns></returns>
-        public Widget SetLabel(string label)
-        {
-            this.Label = label;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns></returns>
-        public Widget SetType(string type)
-        {
-            this.Type = type;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the widgets.
-        /// </summary>
-        /// <param name="widgets">The widgets.</param>
-        /// <returns></returns>
-        public Widget SetWidgets(Widget[] widgets)
-        {
-            this.Widgets = widgets;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the item.
-        /// </summary>
-        /// <param name="item">The item.</param>
-        /// <returns></returns>
-        public Widget SetItem(Item item)
-        {
-            this.Item = item;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the linked page.
-        /// </summary>
-        /// <param name="linkedPage">The linked page.</param>
-        /// <returns></returns>
-        public Widget SetLinkedPage(Page linkedPage)
-        {
-            this.LinkedPage = linkedPage;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the mappings.
-        /// </summary>
-        /// <param name="mappings">The mappings.</param>
-        /// <returns></returns>
-        public Widget SetMappings(Mapping[] mappings)
-        {
-            this.Mappings = mappings;
-            return this;
-        }
     }
 }

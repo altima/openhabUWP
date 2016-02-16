@@ -7,26 +7,19 @@
     <!-- selector -->
     <helper:WidgetTemplateSelector x:Key="WidgetTemplateSelector">
         
-        <!-- FrameWidget -->
-        <helper:WidgetTemplateSelector.FrameWidgeTemplate>
-            <DataTemplate>
-                <widgets:FrameWidgetControl/>
-            </DataTemplate>
-        </helper:WidgetTemplateSelector.FrameWidgeTemplate>
-        
         <!--  GroupWidget-->
-        <helper:WidgetTemplateSelector.GroupWidgeTemplate>
+        <!--<helper:WidgetTemplateSelector.GroupWidgeTemplate>
             <DataTemplate>
                 <widgets:GroupWidgetControl/>
             </DataTemplate>
-        </helper:WidgetTemplateSelector.GroupWidgeTemplate>
+        </helper:WidgetTemplateSelector.GroupWidgeTemplate>-->
         
         <!-- SwitchWidget -->
-        <helper:WidgetTemplateSelector.SwitchWidgeTemplate>
+        <!--<helper:WidgetTemplateSelector.SwitchWidgeTemplate>
             <DataTemplate>
                 <widgets:SwitchWidgetControl/>
             </DataTemplate>
-        </helper:WidgetTemplateSelector.SwitchWidgeTemplate>
+        </helper:WidgetTemplateSelector.SwitchWidgeTemplate>-->
         
         <!-- TextWidget -->
         <helper:WidgetTemplateSelector.TextWidgeTemplate>
@@ -48,7 +41,14 @@
                 <widgets:ChartWidget/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.ChartWidgeTemplate>
-        
+
+        <!-- FrameWidget -->
+        <helper:WidgetTemplateSelector.FrameWidgeTemplate>
+            <DataTemplate>
+                <widgets:FrameWidgetControl/>
+            </DataTemplate>
+        </helper:WidgetTemplateSelector.FrameWidgeTemplate>
+
     </helper:WidgetTemplateSelector>
 
 </ResourceDictionary>

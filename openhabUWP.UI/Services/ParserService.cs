@@ -49,7 +49,7 @@ namespace openhabUWP.Services
             page.Leaf = bool.Parse(GetValue(homepageNode, "leaf"));
 
             //widgets
-            page.Widgets = ParseWidgets(homepageNode.Elements("widget")).ToArray();
+            page.Widgets = new List<Widget>(ParseWidgets(homepageNode.Elements("widget")));
 
             return page;
         }

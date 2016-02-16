@@ -1,0 +1,261 @@
+{
+    "id": "demo",
+    "title": "Main Menu",
+    "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/demo",
+    "leaf": true,
+    "widgets": [
+        {
+            "widgetId": "demo_0",
+            "type": "Frame",
+            "label": "",
+            "icon": "frame",
+            "mappings": [ ],
+            "widgets": [
+                {
+                    "widgetId": "demo_0_0",
+                    "type": "Group",
+                    "label": "First Floor",
+                    "icon": "firstfloor",
+                    "mappings": [ ],
+                    "item": {
+                        "members": [ ],
+                        "link": "http://demo.openhab.org:9080/rest/items/gFF",
+                        "state": "UNDEF",
+                        "type": "GroupItem",
+                        "name": "gFF",
+                        "label": "First Floor",
+                        "category": "firstfloor",
+                        "tags": [ "home-group" ],
+                        "groupNames": [ ]
+                    },
+                    "linkedPage": {
+                        "id": "0000",
+                        "title": "First Floor",
+                        "icon": "firstfloor",
+                        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0000",
+                        "leaf": false
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "demo_0_0_1",
+                    "type": "Group",
+                    "label": "Ground Floor",
+                    "icon": "groundfloor",
+                    "mappings": [ ],
+                    "item": {
+                        "members": [ ],
+                        "link": "http://demo.openhab.org:9080/rest/items/gGF",
+                        "state": "UNDEF",
+                        "type": "GroupItem",
+                        "name": "gGF",
+                        "label": "Ground Floor",
+                        "category": "groundfloor",
+                        "tags": [ "home-group" ],
+                        "groupNames": [ ]
+                    },
+                    "linkedPage": {
+                        "id": "0001",
+                        "title": "Ground Floor",
+                        "icon": "groundfloor",
+                        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0001",
+                        "leaf": false
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "demo_0_0_1_2",
+                    "type": "Group",
+                    "label": "Cellar",
+                    "icon": "cellar",
+                    "mappings": [ ],
+                    "item": {
+                        "members": [ ],
+                        "link": "http://demo.openhab.org:9080/rest/items/gC",
+                        "state": "UNDEF",
+                        "type": "GroupItem",
+                        "name": "gC",
+                        "label": "Cellar",
+                        "category": "cellar",
+                        "tags": [ "home-group" ],
+                        "groupNames": [ ]
+                    },
+                    "linkedPage": {
+                        "id": "0002",
+                        "title": "Cellar",
+                        "icon": "cellar",
+                        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0002",
+                        "leaf": false
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "demo_0_0_1_2_3",
+                    "type": "Group",
+                    "label": "Garden",
+                    "icon": "garden",
+                    "mappings": [ ],
+                    "item": {
+                        "members": [ ],
+                        "link": "http://demo.openhab.org:9080/rest/items/Garden",
+                        "state": "UNDEF",
+                        "type": "GroupItem",
+                        "name": "Garden",
+                        "label": "Garden",
+                        "category": "garden",
+                        "tags": [ "home-group" ],
+                        "groupNames": [ ]
+                    },
+                    "linkedPage": {
+                        "id": "0003",
+                        "title": "Garden",
+                        "icon": "garden",
+                        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0003",
+                        "leaf": false
+                    },
+                    "widgets": [ ]
+                }
+            ]
+        },
+        {
+            "widgetId": "demo_1",
+            "type": "Frame",
+            "label": "Weather",
+            "icon": "frame",
+            "mappings": [ ],
+            "widgets": [
+                {
+                    "widgetId": "demo_1_0",
+                    "type": "Text",
+                    "label": "Sun Elevation [75.00 °]",
+                    "icon": "sun",
+                    "mappings": [ ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/Sun_Elevation",
+                        "state": "75",
+                        "stateDescription": {
+                            "pattern": "%.2f °",
+                            "readOnly": true,
+                            "options": [ ]
+                        },
+                        "type": "NumberItem",
+                        "name": "Sun_Elevation",
+                        "label": "Sun Elevation",
+                        "category": "sun",
+                        "tags": [ ],
+                        "groupNames": [ "Weather" ]
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "demo_1_0_1",
+                    "type": "Text",
+                    "label": "Outside Temperature [11.0 °C]",
+                    "icon": "temperature",
+                    "valuecolor": "lightgray",
+                    "mappings": [ ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/Weather_Temperature",
+                        "state": "11",
+                        "stateDescription": {
+                            "pattern": "%.1f °C",
+                            "readOnly": true,
+                            "options": [ ]
+                        },
+                        "type": "NumberItem",
+                        "name": "Weather_Temperature",
+                        "label": "Outside Temperature",
+                        "category": "temperature",
+                        "tags": [ ],
+                        "groupNames": [ "Weather", "Weather_Chart" ]
+                    },
+                    "linkedPage": {
+                        "id": "0101",
+                        "title": "Outside Temperature [11.0 °C]",
+                        "icon": "temperature",
+                        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0101",
+                        "leaf": false
+                    },
+                    "widgets": [ ]
+                }
+            ]
+        },
+        {
+            "widgetId": "demo_2",
+            "type": "Frame",
+            "label": "Demo",
+            "icon": "frame",
+            "mappings": [ ],
+            "widgets": [
+                {
+                    "widgetId": "demo_2_0",
+                    "type": "Text",
+                    "label": "Date [Tuesday, 02.02.2016]",
+                    "icon": "calendar",
+                    "mappings": [ ],
+                    "item": {
+                        "link": "http://demo.openhab.org:9080/rest/items/CurrentDate",
+                        "state": "2016-02-02T13:00:22",
+                        "stateDescription": {
+                            "pattern": "%1$tA, %1$td.%1$tm.%1$tY",
+                            "readOnly": false,
+                            "options": [ ]
+                        },
+                        "type": "DateTimeItem",
+                        "name": "CurrentDate",
+                        "label": "Date",
+                        "category": "calendar",
+                        "tags": [ ],
+                        "groupNames": [ ]
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "demo_2_0_1",
+                    "type": "Text",
+                    "label": "Group Demo",
+                    "icon": "firstfloor",
+                    "mappings": [ ],
+                    "linkedPage": {
+                        "id": "0201",
+                        "title": "Group Demo",
+                        "icon": "firstfloor",
+                        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0201",
+                        "leaf": false
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "demo_2_0_1_2",
+                    "type": "Text",
+                    "label": "Widget Overview",
+                    "icon": "chart",
+                    "mappings": [ ],
+                    "linkedPage": {
+                        "id": "0202",
+                        "title": "Widget Overview",
+                        "icon": "chart",
+                        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0202",
+                        "leaf": false
+                    },
+                    "widgets": [ ]
+                },
+                {
+                    "widgetId": "demo_2_0_1_2_3",
+                    "type": "Text",
+                    "label": "Multimedia",
+                    "icon": "video",
+                    "mappings": [ ],
+                    "linkedPage": {
+                        "id": "0203",
+                        "title": "Multimedia",
+                        "icon": "video",
+                        "link": "http://demo.openhab.org:9080/rest/sitemaps/demo/0203",
+                        "leaf": false
+                    },
+                    "widgets": [ ]
+                }
+            ]
+        }
+    ]
+}

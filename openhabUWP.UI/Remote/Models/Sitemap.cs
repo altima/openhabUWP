@@ -12,7 +12,6 @@ namespace openhabUWP.Remote.Models
         /// The homepage.
         /// </value>
         public Page Homepage { get; set; }
-
         /// <summary>
         /// Gets or sets the label.
         /// </summary>
@@ -20,7 +19,6 @@ namespace openhabUWP.Remote.Models
         /// The label.
         /// </value>
         public string Label { get; set; }
-
         /// <summary>
         /// Gets or sets the link.
         /// </summary>
@@ -28,7 +26,6 @@ namespace openhabUWP.Remote.Models
         /// The link.
         /// </value>
         public string Link { get; set; }
-
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -37,6 +34,7 @@ namespace openhabUWP.Remote.Models
         /// </value>
         public string Name { get; set; }
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Sitemap"/> class.
         /// </summary>
@@ -44,7 +42,6 @@ namespace openhabUWP.Remote.Models
         {
             this.Homepage = new Page();
         }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Sitemap"/> class.
         /// </summary>
@@ -57,7 +54,6 @@ namespace openhabUWP.Remote.Models
             this.Link = link;
             this.Name = name;
         }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Sitemap"/> class.
         /// </summary>
@@ -68,50 +64,6 @@ namespace openhabUWP.Remote.Models
         public Sitemap(string label, string link, string name, Page homepage) : this(label, link, name)
         {
             this.Homepage = homepage;
-        }
-
-        /// <summary>
-        /// Sets the homepage.
-        /// </summary>
-        /// <param name="homepage">The homepage.</param>
-        /// <returns></returns>
-        public Sitemap SetHomepage(Page homepage)
-        {
-            this.Homepage = homepage;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the label.
-        /// </summary>
-        /// <param name="label">The label.</param>
-        /// <returns></returns>
-        public Sitemap SetLabel(string label)
-        {
-            this.Label = label;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the link.
-        /// </summary>
-        /// <param name="link">The link.</param>
-        /// <returns></returns>
-        public Sitemap SetLink(string link)
-        {
-            this.Link = link;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the name.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns></returns>
-        public Sitemap SetName(string name)
-        {
-            this.Name = name;
-            return this;
         }
     }
 }

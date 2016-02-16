@@ -8,7 +8,6 @@
     x:Class="openhabUWP.Views.MainPage"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d"
-    RequestedTheme="Light"
     d:DataContext="{d:DesignInstance design:MainPageViewModel, IsDesignTimeCreatable=True}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -18,7 +17,7 @@
         </Grid.RowDefinitions>
         <Border Background="{StaticResource OrangeBrush}"/>
         <TextBlock Text="{Binding CurrentPage.Title, Converter={StaticResource LabelCleanConverter}}" Margin="5"
-                   Style="{ThemeResource HeaderTextBlockStyle}"
+                   Style="{ThemeResource TitleTextBlockStyle}"
                    FontWeight="Bold"
                    VerticalAlignment="Center"
                    Foreground="{StaticResource WhiteBrush}"/>

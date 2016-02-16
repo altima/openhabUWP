@@ -1,0 +1,15 @@
+﻿<models:Widget xmlns:models="using:openhabUWP.Remote.Models"
+               WidgetId="1234"
+               Type="Mapview"
+               Label="Brandenburg Gate Berlin"
+               Icon="mapview"
+               Height="800">
+    <models:Widget.Item>
+        <models:Item 
+            Link="http://demo.openhab.org:9080/rest/items/DemoLocation"
+            State="52.5200066,13.4049540"
+            Type="LocationItem"
+            Name="DemoLocation"
+            Label="Brandenburg Gate Berlin"/>
+    </models:Widget.Item>
+</models:Widget>

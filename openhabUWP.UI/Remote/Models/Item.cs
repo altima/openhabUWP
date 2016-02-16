@@ -38,6 +38,38 @@ namespace openhabUWP.Remote.Models
         public string Type { get; set; }
 
         /// <summary>
+        /// Gets or sets the label.
+        /// </summary>
+        /// <value>
+        /// The label.
+        /// </value>
+        public string Label { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
+        /// <value>
+        /// The category.
+        /// </value>
+        public string Category { get; set; }
+
+        /// <summary>
+        /// Gets or sets the tags.
+        /// </summary>
+        /// <value>
+        /// The tags.
+        /// </value>
+        public string[] Tags { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group names.
+        /// </summary>
+        /// <value>
+        /// The group names.
+        /// </value>
+        public string[] GroupNames { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Item"/> class.
         /// </summary>
         public Item() { }
@@ -55,50 +87,6 @@ namespace openhabUWP.Remote.Models
             this.Name = name;
             this.State = state;
             this.Type = type;
-        }
-
-        /// <summary>
-        /// Sets the link.
-        /// </summary>
-        /// <param name="link">The link.</param>
-        /// <returns></returns>
-        public Item SetLink(string link)
-        {
-            this.Link = link;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the name.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns></returns>
-        public Item SetName(string name)
-        {
-            this.Name = name;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the state.
-        /// </summary>
-        /// <param name="state">The state.</param>
-        /// <returns></returns>
-        public Item SetState(string state)
-        {
-            this.State = state;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns></returns>
-        public Item SetType(string type)
-        {
-            this.Type = type;
-            return this;
         }
     }
 }
