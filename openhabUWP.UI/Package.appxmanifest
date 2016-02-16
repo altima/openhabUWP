@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="56670847-7004-49a0-b874-53afec25bbb8" Publisher="CN=emeinel" Version="0.1.0.0" />
+  <Identity Name="56670847-7004-49a0-b874-53afec25bbb8" Publisher="CN=emeinel" Version="0.1.1.0" />
   <mp:PhoneIdentity PhoneProductId="56670847-7004-49a0-b874-53afec25bbb8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>openhabUWP App</DisplayName>
@@ -21,15 +21,15 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="openhab" />
-        </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name="openhab">
             <uap:SupportedFileTypes>
               <uap:FileType>.openhab</uap:FileType>
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="openhab" />
         </uap:Extension>
       </Extensions>
     </Application>

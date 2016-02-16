@@ -1,6 +1,6 @@
 {
   "name": "openhabuwp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "inspired by \r * https://github.com/openhab/openhab.winrt\r * https://github.com/kobush/OpenHab.Windows (thanks @kobush)",
   "main": "Gruntfile.js",
   "scripts": {
