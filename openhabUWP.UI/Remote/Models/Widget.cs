@@ -68,8 +68,8 @@ namespace openhabUWP.Remote.Models
         /// </value>
         public Mapping[] Mappings { get; set; }
 
-
-        /*chart widget*/
+        
+        /*chart,webview,mapview widget*/
         /// <summary>
         /// Gets or sets the height.
         /// </summary>
@@ -77,6 +77,9 @@ namespace openhabUWP.Remote.Models
         /// The height.
         /// </value>
         public double Height { get; set; }
+
+
+        /*chart widget*/
         /// <summary>
         /// Gets or sets the refresh.
         /// </summary>
@@ -116,7 +119,7 @@ namespace openhabUWP.Remote.Models
         /// </value>
         public double Step { get; set; }
 
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Widget"/> class.
         /// </summary>

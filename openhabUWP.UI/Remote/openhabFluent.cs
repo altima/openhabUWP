@@ -159,28 +159,25 @@ namespace openhabUWP.Remote
             var label = jo.GetNamedString("label", "");
             var type = jo.GetNamedString("type", "");
 
+            var height = jo.GetNamedNumber("height", 0);
+            var refresh = jo.GetNamedNumber("refresh", 0);
+            var period = jo.GetNamedString("period", "");
+
             Widget widget = new Widget(widgetId, label, type, icon);
             switch (type)
             {
                 case "Switch":
-                    break;
                 case "Frame":
-                    break;
                 case "Group":
+                case "Image":
+                case "Text":
                     break;
-                //case "Image":
-                //break;
-                case "MapView":
+                case "Mapview":
+                case "WebView":
+                    widget = widget.SetHeight(height);
                     break;
                 case "Chart":
-                    var height = jo.GetNamedNumber("height", 0);
-                    var refresh = jo.GetNamedNumber("refresh", 0);
-                    var period = jo.GetNamedString("period", "");
                     widget = widget.SetChartProperties(height, refresh, period);
-                    break;
-                default:
-                case "Text":
-                    widget = new Widget(widgetId, label, type, icon);
                     break;
             }
 
@@ -215,16 +212,30 @@ namespace openhabUWP.Remote
 
         public static Item ToItem(this JsonObject jo)
         {
-            //var category = jo.GetNamedString("category", "");
-            //var icon = jo.GetNamedString("icon", "");
-            //var label = jo.GetNamedString("label", "");
+            var category = jo.GetNamedString("category", "");
+            var icon = jo.GetNamedString("icon", "");
+            var label = jo.GetNamedString("label", "");
 
             var type = jo.GetNamedString("type", "");
             var name = jo.GetNamedString("name", "");
             var link = jo.GetNamedString("link", "");
             var state = jo.GetNamedString("state", "");
+            var stateDescription = jo.GetNamedObject("stateDescription", null).ToStateDescription();
 
-            return new Item(link, name, state, type);
+
+            return new Item(link, name, state, type)
+                .SetStateDescription(stateDescription)
+                .SetCategory(category)
+                .SetIcon(icon)
+                .SetLabel(label);
+        }
+
+        public static StateDescription ToStateDescription(this JsonObject jo)
+        {
+            if (jo == null) return null;
+            var pattern = jo.GetNamedString("pattern", "");
+            var readOnly = jo.GetNamedBoolean("readOnly", false);
+            return new StateDescription(pattern, readOnly);
         }
 
         public static Mapping[] ToMappings(this JsonArray ja)

@@ -60,6 +60,12 @@ namespace openhabUWP.Remote.Models
             return chart;
         }
 
+        public static Widget SetHeight(this Widget widget, double height)
+        {
+            widget.Height = height;
+            return widget;
+        }
+
         private static bool IsWidget(this Widget widget, string ofType)
         {
             return Equals(widget?.Type, ofType);
