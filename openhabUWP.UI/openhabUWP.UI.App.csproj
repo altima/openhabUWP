@@ -122,6 +122,12 @@
     <Compile Include="Enums\ProtocolType.cs" />
     <Compile Include="Events\WidgetEvents.cs" />
     <Compile Include="PageTokens.cs" />
+    <Compile Include="Remote\Models\ItemFluent.cs" />
+    <Compile Include="Remote\Models\MappingFluent.cs" />
+    <Compile Include="Remote\Models\PageFluent.cs" />
+    <Compile Include="Remote\Models\SitemapFluent.cs" />
+    <Compile Include="Remote\Models\StateDescription.cs" />
+    <Compile Include="Remote\Models\StateDescriptionFluent.cs" />
     <Compile Include="Remote\Models\WidgetFluent.cs" />
     <Compile Include="Remote\openhabFluent.cs" />
     <Compile Include="Helper\StringFluent.cs" />
@@ -158,12 +164,12 @@
     <Compile Include="UI\Widgets\TextWidgetControl.xaml.cs">
       <DependentUpon>TextWidgetControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ConnectionSetupPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="Views\ConnectionSetupPage.xaml.cs">
-      <DependentUpon>ConnectionSetupPage.xaml</DependentUpon>
+    <Compile Include="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -257,7 +263,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ConnectionSetupPage.xaml">
+    <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

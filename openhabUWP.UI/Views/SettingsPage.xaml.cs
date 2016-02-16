@@ -5,12 +5,12 @@ using Prism.Windows.Mvvm;
 
 namespace openhabUWP.Views
 {
-    public sealed partial class ConnectionSetupPage : SessionStateAwarePage, INotifyPropertyChanged
+    public sealed partial class SettingsPage : SessionStateAwarePage, INotifyPropertyChanged
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectionSetupPage"/> class.
+        /// Initializes a new instance of the <see cref="SettingsPage"/> class.
         /// </summary>
-        public ConnectionSetupPage()
+        public SettingsPage()
         {
             this.InitializeComponent();
             DataContextChanged += MainPage_DataContextChanged;
@@ -27,11 +27,11 @@ namespace openhabUWP.Views
         /// <value>
         /// The concrete data context.
         /// </value>
-        public ConnectionSetupPageViewModel ConcreteDataContext
+        public SettingsPageViewModel ConcreteDataContext
         {
             get
             {
-                return DataContext as ConnectionSetupPageViewModel;
+                return DataContext as SettingsPageViewModel;
             }
         }
 

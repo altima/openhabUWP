@@ -9,6 +9,7 @@ using Windows.Networking.Sockets;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using openhabUWP.Database;
 using openhabUWP.Events;
 using openhabUWP.Helper;
 using openhabUWP.Models;
@@ -40,7 +41,8 @@ namespace openhabUWP.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly INavigationService _navigationService;
         private readonly IDeviceGestureService _gestureService;
-        private IPushClientService _pushClientService;
+        private readonly IPushClientService _pushClientService;
+        private IOpenhabDatabase _databaseService;
 
         private bool _canGetUp;
         private Page _currentPage;
@@ -72,13 +74,15 @@ namespace openhabUWP.ViewModels
             set { SetProperty(ref _currentServer, value); }
         }
 
-        public MainPageViewModel(IEventAggregator eventAggregator, IRestService restService, IDeviceGestureService gestureService, INavigationService navigationService, IPushClientService pushClientService)
+        public MainPageViewModel(IEventAggregator eventAggregator, IRestService restService, IDeviceGestureService gestureService, INavigationService navigationService,
+            IPushClientService pushClientService, IOpenhabDatabase databaseService)
         {
             _eventAggregator = eventAggregator;
             _restService = restService;
             _gestureService = gestureService;
             _navigationService = navigationService;
             _pushClientService = pushClientService;
+            _databaseService = databaseService;
 
             _gestureService.GoBackRequested += GestureServiceOnGoBackRequested;
         }
@@ -220,10 +224,18 @@ namespace openhabUWP.ViewModels
 
         private async void CheckServer()
         {
+            var setup = _databaseService.GetSetup();
+            if (setup.Url.IsNullOrEmpty() && setup.RemoteUrl.IsNullOrEmpty()) return;
+
+            var url = setup.RemoteUrl.IsNullOrEmpty() ? setup.Url : setup.RemoteUrl;
+
             //var server = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
             //CurrentServer = new Server(host: "192.168.178.107"); //alpha mode, set server ip here
             //CurrentServer = new Server(host: "192.168.178.3"); //alpha mode, set server ip here
-            CurrentServer = new Server(host: "demo.openhab.org"); //alpha mode, set server ip here
+            //CurrentServer = new Server(host: "demo.openhab.org"); //alpha mode, set server ip here
+            CurrentServer = new Server(url);
+
+
 
             CheckPush(CurrentServer);
 

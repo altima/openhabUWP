@@ -19,7 +19,7 @@ namespace openhabUWP.ViewModels
             Commands = new ObservableCollection<MenuItemViewModel>
             {
                 new MenuItemViewModel { DisplayName = resourceLoader.GetString("MenuView_btnMain"), FontIcon = "\ue10f", Command = new DelegateCommand(NavigateToMainPage, CanNavigateToMainPage) },
-                new MenuItemViewModel { DisplayName = resourceLoader.GetString("MenuView_btnConnectionSetup"), FontIcon = "\ue115", Command = new DelegateCommand(NavigateToConnectionSetup, CanNavigateToConnectionSetup) },
+                new MenuItemViewModel { DisplayName = resourceLoader.GetString("MenuView_btnConnectionSetup"), FontIcon = "\ue115", Command = new DelegateCommand(NavigateToSettings, CanNavigateToSettings) },
             };
         }
 
@@ -44,12 +44,12 @@ namespace openhabUWP.ViewModels
             return _canNavigateToMain;
         }
 
-        /*ConnectionSetup*/
-        private void NavigateToConnectionSetup()
+        /*SettingsPage*/
+        private void NavigateToSettings()
         {
-            if (CanNavigateToConnectionSetup())
+            if (CanNavigateToSettings())
             {
-                if (_navigationService.Navigate(PageTokens.ConnectionSetup, null))
+                if (_navigationService.Navigate(PageTokens.SettingsPage, null))
                 {
                     _canNavigateToMain = true;
                     _canNavigateToConenctionSetup = false;
@@ -58,7 +58,7 @@ namespace openhabUWP.ViewModels
             }
         }
 
-        private bool CanNavigateToConnectionSetup()
+        private bool CanNavigateToSettings()
         {
             return _canNavigateToConenctionSetup;
         }
