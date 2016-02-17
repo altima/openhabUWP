@@ -3,8 +3,14 @@ pull_requests:
   do_not_increment_build_number: true
 skip_tags: true
 os: Visual Studio 2015
-build_script:
-- cmd: >-
-    npm i
-
-    grunt
+configuration: Release
+platform:
+- x86
+- x64
+- ARM
+before_build:
+- cmd: nuget restore openhabUWP.sln
+build:
+  project: openhabUWP.sln
+  parallel: true
+  verbosity: minimal
