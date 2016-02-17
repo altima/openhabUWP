@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/n38mp4b6yjj2t8qt?svg=true)](https://ci.appveyor.com/project/altima/openhabuwp)
+
 # openhabUWP
 
 ## About
