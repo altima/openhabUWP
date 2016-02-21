@@ -16,7 +16,6 @@ namespace openhabUWP.Remote.Services
 
         void AttachToEvents(string baseUrl, string[] topics = null, Action<string> onDataReceived = null, Action<string> onEventReceived = null);
         void PoolForEvent(string url, Action<string> onDataReceived = null);
-        void PoolForEvent(Server currentServer, Action<string> onDataReceived);
     }
 
     /// <summary>
@@ -125,11 +124,6 @@ namespace openhabUWP.Remote.Services
             {
                 _pushChannelAttached = false;
             }
-        }
-
-        public void PoolForEvent(Server server, Action<string> onDataReceived)
-        {
-            PoolForEvent(server.Link, onDataReceived);
         }
     }
 }

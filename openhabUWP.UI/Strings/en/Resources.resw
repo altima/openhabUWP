@@ -180,4 +180,22 @@
   <data name="yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="HomePage_AppBar_btnInfo.Label" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="HomePage_AppBar_btnSetup.Label" xml:space="preserve">
+    <value>Setup</value>
+  </data>
+  <data name="HomePage_AppBar_btnSitemaps.Label" xml:space="preserve">
+    <value>Sitemaps</value>
+  </data>
+  <data name="HomePage_title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BingMapsKey" xml:space="preserve">
+    <value>Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d</value>
+  </data>
+  <data name="MapViewWidget_staticUrl" xml:space="preserve">
+    <value>http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}/16?mapSize={1},{1}&amp;pp={0};68;{3}&amp;key={2}</value>
+  </data>
 </root>

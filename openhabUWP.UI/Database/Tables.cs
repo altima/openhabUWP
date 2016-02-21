@@ -72,5 +72,13 @@
         ///   <c>true</c> if [ignore SSL hostnames]; otherwise, <c>false</c>.
         /// </value>
         public bool IgnoreSslHostnames { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sitemap.
+        /// </summary>
+        /// <value>
+        /// The sitemap.
+        /// </value>
+        public string Sitemap { get; set; }
     }
 }

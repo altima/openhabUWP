@@ -10,6 +10,7 @@
     <converters:LabelSplitConverter x:Key="LabelSplitConverter"/>
     <converters:LabelCleanConverter x:Key="LabelCleanConverter"/>
     <converters:ObjectToImageUrlConverter x:Key="ObjectToImageUrlConverter"/>
+    <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
 
     <!-- Colors -->
     <Color x:Key="Orange">#FC9600</Color>
@@ -25,4 +26,7 @@
     <SolidColorBrush x:Key="LightGrayBrush" Color="{StaticResource LightGray}"/>
     <SolidColorBrush x:Key="DarkGrayBrush" Color="{StaticResource DarkGray}"/>
 
+    <!-- Fonts -->
+    <FontFamily x:Key="FontAwesome">/Assets/Fonts/Font-Awesome/fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
+    
 </ResourceDictionary>

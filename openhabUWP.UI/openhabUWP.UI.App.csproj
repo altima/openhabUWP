@@ -94,6 +94,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Fonts\Font-Awesome\fonts\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="SampleData\page.json" />
     <None Include="SampleData\page_multimedia.json" />
     <None Include="SampleData\page_widgets.json" />
@@ -107,8 +110,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppShell.xaml.cs">
-      <DependentUpon>AppShell.xaml</DependentUpon>
+    <Compile Include="Controls\SitemapListItem.xaml.cs">
+      <DependentUpon>SitemapListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ChartWidgetToUrlConvrter.cs" />
     <Compile Include="Converters\LabelSplitConverter.cs" />
@@ -120,6 +123,8 @@
     <Compile Include="Database\Tables.cs" />
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Enums\ProtocolType.cs" />
+    <Compile Include="Events\SetupEvents.cs" />
+    <Compile Include="Events\SitemapEvents.cs" />
     <Compile Include="Events\WidgetEvents.cs" />
     <Compile Include="PageTokens.cs" />
     <Compile Include="Remote\Models\ItemFluent.cs" />
@@ -135,7 +140,6 @@
     <Compile Include="Remote\Models\Mapping.cs" />
     <Compile Include="Remote\Models\Item.cs" />
     <Compile Include="Remote\Models\Page.cs" />
-    <Compile Include="Models\Server.cs" />
     <Compile Include="Remote\Models\Sitemap.cs" />
     <Compile Include="Remote\Models\Widget.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -164,22 +168,29 @@
     <Compile Include="UI\Widgets\TextWidgetControl.xaml.cs">
       <DependentUpon>TextWidgetControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
-    <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="ViewModels\MenuItemViewModel.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="Views\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    <Compile Include="ViewModels\InfoPageViewModel.cs" />
+    <Compile Include="ViewModels\SetupPageViewModel.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\SitemapsPageViewModel.cs" />
+    <Compile Include="ViewModels\SplashPageViewModel.cs" />
+    <Compile Include="Views\InfoPage.xaml.cs">
+      <DependentUpon>InfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Views\SetupPage.xaml.cs">
+      <DependentUpon>SetupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Widgets\SwitchWidgetControl.xaml.cs">
       <DependentUpon>SwitchWidgetControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
+    <Compile Include="Views\SitemapsPage.xaml.cs">
+      <DependentUpon>SitemapsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplashPage.xaml.cs">
+      <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -203,10 +214,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AppShell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <DesignData Include="SampleData\SwitchWidgetSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="Controls\SitemapListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Common.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -263,11 +274,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsPage.xaml">
+    <Page Include="Views\InfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainPage.xaml">
+    <Page Include="Views\SetupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -275,7 +290,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MenuView.xaml">
+    <Page Include="Views\SitemapsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplashPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

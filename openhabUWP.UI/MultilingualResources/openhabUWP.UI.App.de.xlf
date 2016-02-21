@@ -90,6 +90,30 @@
           <source>Yes</source>
           <target state="translated">Ja</target>
         </trans-unit>
+        <trans-unit id="HomePage_AppBar_btnInfo.Label" translate="yes" xml:space="preserve">
+          <source>About</source>
+          <target state="new">About</target>
+        </trans-unit>
+        <trans-unit id="HomePage_AppBar_btnSetup.Label" translate="yes" xml:space="preserve">
+          <source>Setup</source>
+          <target state="new">Setup</target>
+        </trans-unit>
+        <trans-unit id="HomePage_AppBar_btnSitemaps.Label" translate="yes" xml:space="preserve">
+          <source>Sitemaps</source>
+          <target state="new">Sitemaps</target>
+        </trans-unit>
+        <trans-unit id="HomePage_title" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="new"></target>
+        </trans-unit>
+        <trans-unit id="BingMapsKey" translate="yes" xml:space="preserve">
+          <source>Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d</source>
+          <target state="new">Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d</target>
+        </trans-unit>
+        <trans-unit id="MapViewWidget_staticUrl" translate="yes" xml:space="preserve">
+          <source>http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}/16?mapSize={1},{1}&amp;pp={0};68;{3}&amp;key={2}</source>
+          <target state="new">http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}/16?mapSize={1},{1}&amp;pp={0};68;{3}&amp;key={2}</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -1,0 +1,34 @@
+﻿<mvvm:SessionStateAwarePage
+    x:Class="openhabUWP.Views.SitemapsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:openhabUWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:design="using:openhabUWP.ViewModels.Design"
+    xmlns:controls="using:openhabUWP.Controls"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance design:SitemapsPageViewModel, IsDesignTimeCreatable=True}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ListView 
+            Grid.Row="1"
+            Style="{StaticResource ListViewStyle}"
+            ItemsSource="{Binding Sitemaps}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <controls:SitemapListItem/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</mvvm:SessionStateAwarePage>

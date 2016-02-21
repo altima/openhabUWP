@@ -46,10 +46,10 @@ namespace openhabUWP.Remote
             return new Sitemap[0];
         }
 
-        public static Sitemap ToSitemap(this string jsonString, Sitemap sitemap)
+        public static Sitemap ToSitemap(this string jsonString)
         {
-            if (string.IsNullOrEmpty(jsonString)) return sitemap;
-            return JsonObject.Parse(jsonString).ToSitemapDetail(sitemap);
+            if (string.IsNullOrEmpty(jsonString)) return null;
+            return JsonObject.Parse(jsonString).ToSitemapDetail();
         }
 
         public static Sitemap ToSitemap(this JsonObject jo)
@@ -141,9 +141,9 @@ namespace openhabUWP.Remote
             return page;
         }
 
-        public static Page ToPage(this string jsonString, Page page)
+        public static Page ToPage(this string jsonString)
         {
-            if (string.IsNullOrEmpty(jsonString)) return page;
+            if (string.IsNullOrEmpty(jsonString)) return null;
             return JsonObject.Parse(jsonString).ToPage();
         }
 

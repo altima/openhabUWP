@@ -1,0 +1,70 @@
+﻿<mvvm:SessionStateAwarePage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:design="using:openhabUWP.ViewModels.Design"
+    x:Class="openhabUWP.Views.HomePage"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance design:MainPageViewModel, IsDesignTimeCreatable=True}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="{StaticResource OrangeBrush}"/>
+        <TextBlock Text="{Binding CurrentPage.Title, Converter={StaticResource LabelCleanConverter}}" Margin="5"
+                   Style="{ThemeResource TitleTextBlockStyle}"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource WhiteBrush}"/>
+
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl
+                ItemsSource="{Binding CurrentPage.Widgets}"
+                ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
+                
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton
+                    x:Uid="HomePage_AppBar_btnSitemaps"
+                    Command="{Binding ShowSitemapsCommand}"
+                    Label="Sitemaps">
+                    <AppBarButton.Icon>
+                        <FontIcon 
+                            FontFamily="{StaticResource FontAwesome}" 
+                            Glyph="&#xf0e8;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton
+                    x:Uid="HomePage_AppBar_btnSetup"
+                    Command="{Binding ShowSetupCommand}"
+                    Label="Setup">
+                    <AppBarButton.Icon>
+                        <FontIcon 
+                            FontFamily="{StaticResource FontAwesome}" 
+                            Glyph="&#xf085;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton
+                    x:Uid="HomePage_AppBar_btnInfo"
+                    Command="{Binding ShowInfoCommand}"
+                    Label="Info">
+                    <AppBarButton.Icon>
+                        <FontIcon 
+                            FontFamily="{StaticResource FontAwesome}" 
+                            Glyph="&#xf129;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</mvvm:SessionStateAwarePage>

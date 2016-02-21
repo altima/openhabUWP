@@ -25,39 +25,51 @@ namespace openhabUWP.Remote.Services
         /// </value>
         string UserAgent { get; }
 
+        string Authentication { get; }
+
         /// <summary>
         /// Finds the local servers asynchronous.
         /// </summary>
-        /// <returns cref="Server"></returns>
-        Task<Server[]> FindLocalServersAsync();
+        /// <returns></returns>
+        Task<string[]> FindLocalServersAsync();
+
+        /// <summary>
+        /// Pings the specified server URL.
+        /// </summary>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <returns></returns>
+        Task<bool> Ping(string serverUrl);
 
         /// <summary>
         /// Loads the sitemaps asynchronous.
         /// </summary>
-        /// <param name="server">The server.</param>
+        /// <param name="serverUrl">The server URL.</param>
         /// <returns></returns>
-        Task<Sitemap[]> LoadSitemapsAsync(Server server);
+        Task<Sitemap[]> LoadSitemapsAsync(string serverUrl);
 
         /// <summary>
-        /// Loads the sitemap details asynchronous.
+        /// Loads the sitemap asynchronous.
         /// </summary>
-        /// <param name="sitemap">The sitemap.</param>
-        /// <returns cref="Sitemap"></returns>
-        Task<Sitemap> LoadSitemapAsync(Sitemap sitemap);
+        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="sitemapName">Name of the sitemap.</param>
+        /// <returns></returns>
+        Task<Sitemap> LoadSitemapAsync(string serverUrl, string sitemapName);
 
         /// <summary>
-        /// Loads the page.
+        /// Loads the page asynchronous.
         /// </summary>
-        /// <param name="page">The page.</param>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="sitemapName">Name of the sitemap.</param>
+        /// <param name="pageId">The page identifier.</param>
         /// <returns></returns>
-        Task<Page> LoadPageAsync(Page page);
+        Task<Page> LoadPageAsync(string serverUrl, string sitemapName, string pageId);
 
         /// <summary>
-        /// Determines whether the specified server is openhab2.
+        /// Determines whether the specified server URL is openhab2.
         /// </summary>
-        /// <param name="server">The server.</param>
+        /// <param name="serverUrl">The server URL.</param>
         /// <returns></returns>
-        Task<bool> IsOpenhab2(Server server);
+        Task<bool> IsOpenhab2(string serverUrl);
 
         /// <summary>
         /// Posts the command.
@@ -67,14 +79,7 @@ namespace openhabUWP.Remote.Services
         /// <returns></returns>
         Task PostCommand(string url, string command);
 
-        /// <summary>
-        /// Posts the command.
-        /// </summary>
-        /// <param name="item">The item.</param>
-        /// <param name="command">The command.</param>
-        /// <returns></returns>
-        Task PostCommand(Item item, string command);
-
+        void SetAuthentication(string username, string password);
     }
 
     /// <summary>
@@ -83,6 +88,18 @@ namespace openhabUWP.Remote.Services
     /// <seealso cref="openhabUWP.Services.IRestService20" />
     public class RestService : IRestService
     {
+        private Dictionary<string, string> Api = new Dictionary<string, string>()
+        {
+            {"rest", "{0}/rest"},
+            {"sitemaps", "{0}/rest/sitemaps"},
+            {"sitemap", "{0}/rest/sitemaps/{1}"},
+            {"page", "{0}/rest/sitemaps/{1}/{2}"},
+
+            {"items", "{0}/rest/items"},
+
+            {"events", "{0}/rest/events"},
+        };
+
         private HttpClient _client;
 
         /// <summary>
@@ -91,7 +108,9 @@ namespace openhabUWP.Remote.Services
         /// <value>
         /// The user agent.
         /// </value>
-        public string UserAgent { get { return "openhabUWP/0.1"; } }
+        public string UserAgent { get { return "openhabUWP/10.0"; } }
+
+        public string Authentication { get; private set; }
 
         private string X_Atmosphere_tracking_id = "";
 
@@ -102,6 +121,11 @@ namespace openhabUWP.Remote.Services
             "_openhab-server._tcp.local.",
             "_openhab-server-ssl._tcp.local."
         };
+
+        public RestService()
+        {
+            SetAuthentication("", "");
+        }
 
         private HttpClient Client()
         {
@@ -123,6 +147,7 @@ namespace openhabUWP.Remote.Services
             _client = new HttpClient(clientHandler);
             //set default headers
             _client.DefaultRequestHeaders.Add("UserAgent", UserAgent);
+            _client.DefaultRequestHeaders.Add("Authentication", Authentication);
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
             return _client;
         }
@@ -170,9 +195,9 @@ namespace openhabUWP.Remote.Services
         /// Finds the local servers asynchronous.
         /// </summary>
         /// <returns></returns>
-        public async Task<Server[]> FindLocalServersAsync()
+        public async Task<string[]> FindLocalServersAsync()
         {
-            var serverList = new List<Server>();
+            var serverList = new List<string>();
 
             //todo integrate zeroconf for find openhab servers on network
 
@@ -187,61 +212,82 @@ namespace openhabUWP.Remote.Services
                 retryDelayMilliseconds: retryDelay,
                 callback: (x) => Debug.WriteLine(x.DisplayName));
 
+            //todo
 
-            if (httpResult.Any(s => Equals(s.IPAddress, "192.168.178.107")))
+            foreach (IZeroconfHost host in httpResult)
             {
-                //serverList.Insert(0, new Server(ProtocolType.Http, "192.168.178.3"));
+                var ip = host.IPAddress;
+                foreach (var service in host.Services.Where(service => _mDnsProtocols.Contains(service.Key)))
+                {
+                    var protocol = service.Key.Contains("ssl") ? "https://" : "http://";
+                    var port = service.Value.Port;
+                    serverList.Add(string.Concat(protocol, ip, ":", port));
+                }
             }
-
-            serverList.AddRange(httpResult.Select(s => new Server(ProtocolType.Http, s.IPAddress)));
-
-            if (!serverList.Any())
-            {
-                serverList.Add(new Server(ProtocolType.Http, "192.168.178.107"));
-            }
-
             return serverList.ToArray();
+        }
+
+        /// <summary>
+        /// Pings the specified server URL.
+        /// </summary>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <returns></returns>
+        public async Task<bool> Ping(string serverUrl)
+        {
+            try
+            {
+                var client = Client();
+                var result = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, serverUrl));
+                return result.IsSuccessStatusCode;
+            }
+            catch { }
+            return false;
         }
 
         /// <summary>
         /// Loads the sitemaps asynchronous.
         /// </summary>
-        /// <param name="server">The server.</param>
+        /// <param name="serverUrl">The server URL.</param>
         /// <returns></returns>
-        public async Task<Sitemap[]> LoadSitemapsAsync(Server server)
+        public async Task<Sitemap[]> LoadSitemapsAsync(string serverUrl)
         {
-            var sitemaps = string.Concat(server.Link, "/sitemaps");
-            return (await Get(sitemaps)).ToSitemaps();
+            var url = string.Format(Api["sitemaps"], serverUrl);
+            return (await Get(url)).ToSitemaps();
         }
 
         /// <summary>
-        /// Loads the sitemap detail asynchronous.
+        /// Loads the sitemap asynchronous.
         /// </summary>
-        /// <param name="sitemap">The sitemap.</param>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="sitemapName">Name of the sitemap.</param>
         /// <returns></returns>
-        public async Task<Sitemap> LoadSitemapAsync(Sitemap sitemap)
+        public async Task<Sitemap> LoadSitemapAsync(string serverUrl, string sitemapName)
         {
-            return (await Get(sitemap.Link)).ToSitemap(sitemap);
+            var url = string.Format(Api["sitemap"], serverUrl, sitemapName);
+            return (await Get(url)).ToSitemap();
         }
 
         /// <summary>
         /// Loads the page asynchronous.
         /// </summary>
-        /// <param name="page">The page.</param>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="sitemapName">Name of the sitemap.</param>
+        /// <param name="pageName">Name of the page.</param>
         /// <returns></returns>
-        public async Task<Page> LoadPageAsync(Page page)
+        public async Task<Page> LoadPageAsync(string serverUrl, string sitemapName, string pageName)
         {
-            return (await Get(page.Link)).ToPage(page);
+            var url = string.Format(Api["page"], serverUrl, sitemapName, pageName);
+            return (await Get(url)).ToPage();
         }
 
         /// <summary>
-        /// Determines whether the specified server is openhab2.
+        /// Determines whether the specified server URL is openhab2.
         /// </summary>
-        /// <param name="server">The server.</param>
+        /// <param name="serverUrl">The server URL.</param>
         /// <returns></returns>
-        public async Task<bool> IsOpenhab2(Server server)
+        public async Task<bool> IsOpenhab2(string serverUrl)
         {
-            var url = string.Concat(server.Link, "/events");
+            var url = string.Format(Api["events"], serverUrl);
 
             using (var client = new HttpClient())
             {
@@ -265,9 +311,11 @@ namespace openhabUWP.Remote.Services
             await Post(url, command);
         }
 
-        public Task PostCommand(Item item, string command)
+        public void SetAuthentication(string username, string password)
         {
-            return PostCommand(item.Link, command);
+            var plain = string.Concat(username, ":", password);
+            var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(plain));
+            Authentication = string.Concat("Basic ", base64);
         }
     }
 }

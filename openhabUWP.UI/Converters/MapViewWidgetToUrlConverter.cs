@@ -1,7 +1,10 @@
 ﻿using System;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Data;
-using openhabUWP.Models;
+using Microsoft.Practices.Unity;
 using openhabUWP.Remote.Models;
+using Prism.Windows.AppModel;
 
 namespace openhabUWP.Converters
 {
@@ -11,6 +14,19 @@ namespace openhabUWP.Converters
     /// <seealso cref="Windows.UI.Xaml.Data.IValueConverter" />
     public class MapViewWidgetToUrlConverter : IValueConverter
     {
+        private IResourceLoader _resourceLoader;
+
+        public MapViewWidgetToUrlConverter()
+        {
+            if (DesignMode.DesignModeEnabled)
+            {
+                _resourceLoader = new ResourceLoaderAdapter(ResourceLoader.GetForCurrentView());
+                return;
+            }
+            _resourceLoader = App.Current.Container.Resolve<IResourceLoader>();
+        }
+
+
         /// <summary>
         /// Converts the specified value.
         /// </summary>
@@ -25,7 +41,17 @@ namespace openhabUWP.Converters
             var mapView = value as Widget;
             if (mapView != null)
             {
-                return string.Format("http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}?mapSize={1},{1}&key=Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d", mapView.Item.State, size);
+                var mapUrl = _resourceLoader.GetString("MapViewWidget_staticUrl");
+                var key = _resourceLoader.GetString("BingMapsKey");
+                var location = mapView.Item.State;
+                var label = mapView.Item.Label;
+                if (label.Length > 3)
+                {
+                    label = "";
+                }
+
+                var url = string.Format(mapUrl, location, size, key, label);
+                return url;
             }
             return null;
         }

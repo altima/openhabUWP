@@ -19,5 +19,4 @@ namespace openhabUWP.Events
         /// <seealso cref="Prism.Events.PubSubEvent{openhabUWP.Models.Widget}" />
         public class WidgetTappedEvent : PubSubEvent<Widget> { }
     }
-    
 }

@@ -1,5 +1,5 @@
 ﻿<mvvm:SessionStateAwarePage
-    x:Class="openhabUWP.Views.SettingsPage"
+    x:Class="openhabUWP.Views.SetupPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:openhabUWP.Views"
@@ -9,37 +9,60 @@
     xmlns:mvvm="using:Prism.Windows.Mvvm"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
-    RequestedTheme="Light"
-    d:DataContext="{d:DesignInstance design:SettingsPageViewModel, IsDesignTimeCreatable=True}">
+    d:DataContext="{d:DesignInstance design:SetupPageViewModel, IsDesignTimeCreatable=True}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <ScrollViewer Margin="10">
             <StackPanel>
-                <TextBox
-                    x:Uid="SettingsPage_txtUrl"
+                
+                <CheckBox
+                    Margin="0,5"
+                    x:Uid="SetupPage_cbDemo"
+                    Content="Demo mode"
+                    IsChecked="{Binding IsDemoModeOn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <TextBox 
+                    x:Uid="SetupPage_txtUrl"
                     Header="Url"
                     PlaceholderText="Url"
-                    Text="{Binding Path=CurrentSetup.Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding Path=CurrentSetup.Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                </TextBox>
                 
                 <TextBox
-                    x:Uid="SettingsPage_txtRemoteUrl"
+                    x:Uid="SetupPage_txtRemoteUrl"
                     Header="Remote-Url"
                     PlaceholderText="Remote-Url"
                     Text="{Binding Path=CurrentSetup.RemoteUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                
+
                 <TextBox
-                    x:Uid="SettingsPage_txtUsername"
+                    x:Uid="SetupPage_txtUsername"
                     Header="Username"
                     PlaceholderText="Username"
                     Text="{Binding Path=CurrentSetup.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                
                 <TextBox
-                    x:Uid="SettingsPage_txtPassword"
+                    x:Uid="SetupPage_txtPassword"
                     Header="Password"
                     PlaceholderText="Password"
                     Text="{Binding Path=CurrentSetup.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <StackPanel 
+                    Orientation="Horizontal"
+                    Margin="0,10">
+                    <Button 
+                        Margin="0,0,10,0"
+                        Content="Check"
+                        Command="{Binding CheckCommand}"/>
+
+                    <Button 
+                        Margin="0,0,0,0"
+                        Content="Next"
+                        IsEnabled="{Binding IsOk}"
+                        Command="{Binding NextCommand}"/>
+                </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
-
     </Grid>
 </mvvm:SessionStateAwarePage>

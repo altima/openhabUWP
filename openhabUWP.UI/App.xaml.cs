@@ -22,21 +22,7 @@ namespace openhabUWP
         {
             this.InitializeComponent();
         }
-
-        /// <summary>
-        /// Creates the shell of the app.
-        /// </summary>
-        /// <param name="rootFrame"></param>
-        /// <returns>
-        /// The shell of the app.
-        /// </returns>
-        protected override UIElement CreateShell(Frame rootFrame)
-        {
-            var shell = Container.Resolve<AppShell>();
-            shell.SetContentFrame(rootFrame);
-            return shell;
-        }
-
+        
         /// <summary>
         /// Override this method with the initialization logic of your application. Here you can initialize services, repositories, and so on.
         /// </summary>
@@ -56,7 +42,7 @@ namespace openhabUWP
         {
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 320));
 
-            NavigationService.Navigate(PageTokens.MainPage, null);
+            NavigationService.Navigate(PageTokens.SplashPage, null);
 
             return Task.FromResult<object>(null);
         }
