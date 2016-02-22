@@ -1,24 +1,33 @@
 ﻿using System.Diagnostics;
+using Windows.ApplicationModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Microsoft.Practices.Unity;
 using openhabUWP.Events;
+using openhabUWP.Models;
 using openhabUWP.Remote.Models;
 using Prism.Events;
 
 namespace openhabUWP.UI.Widgets
 {
-    public sealed partial class GroupWidgetControl : IWidgetControl
+    public sealed partial class TextWidget : IWidgetControl
     {
-        private Widget _widget;
         private IEventAggregator _eventAggregator;
+        
+        private Widget _widget;
 
-        public GroupWidgetControl()
+        public TextWidget()
         {
             this.InitializeComponent();
+            if(DesignMode.DesignModeEnabled) return;
             _eventAggregator = App.Current.Container.Resolve<IEventAggregator>();
-            this.Tapped += OnTapped;
             this.DataContextChanged += OnDataContextChanged;
+            this.Tapped += OnTapped;
+        }
+
+        private void OnTapped(object sender, TappedRoutedEventArgs tappedRoutedEventArgs)
+        {
+            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
         }
 
         private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
@@ -39,14 +48,8 @@ namespace openhabUWP.UI.Widgets
             if (Equals(_widget.WidgetId, widget.WidgetId))
             {
                 this.DataContext = widget;
-                Debug.WriteLine("GroupWidgetControl Udpate {0}", widget.WidgetId);
+                Debug.WriteLine("TextWidget Udpate {0}", widget.WidgetId);
             }
-        }
-
-
-        private void OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
         }
     }
 }

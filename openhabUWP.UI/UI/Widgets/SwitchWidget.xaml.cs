@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using Windows.ApplicationModel;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Microsoft.Practices.Unity;
 using openhabUWP.Events;
@@ -10,30 +8,42 @@ using Prism.Events;
 
 namespace openhabUWP.UI.Widgets
 {
-    public sealed partial class TextWidgetControl : IWidgetControl
+    public sealed partial class SwitchWidget : IWidgetControl
     {
-        private IEventAggregator _eventAggregator;
-        
         private Widget _widget;
+        private IEventAggregator _eventAggregator;
 
-        public TextWidgetControl()
+        public SwitchWidget()
         {
             this.InitializeComponent();
-            if(DesignMode.DesignModeEnabled) return;
-            _eventAggregator = App.Current.Container.Resolve<IEventAggregator>();
             this.DataContextChanged += OnDataContextChanged;
             this.Tapped += OnTapped;
+            this.toggleSwitch.Tapped += OnTapped;
+            _eventAggregator = App.Current.Container.Resolve<IEventAggregator>();
         }
 
         private void OnTapped(object sender, TappedRoutedEventArgs tappedRoutedEventArgs)
         {
-            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
+            SwitchToggled();
         }
 
         private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-            if (args.NewValue is Widget)
+            var widget = args.NewValue as Widget;
+            if (widget != null)
+            {
                 RegisterForUpdate();
+                if (widget.Item != null)
+                {
+                    this.toggleSwitch.IsOn = widget.Item.State == "ON";
+                }
+            }
+
+        }
+
+        public void SwitchToggled()
+        {
+            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
         }
 
         public void RegisterForUpdate()
@@ -45,11 +55,15 @@ namespace openhabUWP.UI.Widgets
 
         public void WidgetUpdateReceived(Widget widget)
         {
-            if (Equals(_widget.WidgetId, widget.WidgetId))
+            if (Equals(widget.WidgetId, _widget.WidgetId))
             {
                 this.DataContext = widget;
-                Debug.WriteLine("TextWidgetControl Udpate {0}", widget.WidgetId);
             }
+        }
+
+        private void ToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
+        {
+            SwitchToggled();
         }
     }
 }

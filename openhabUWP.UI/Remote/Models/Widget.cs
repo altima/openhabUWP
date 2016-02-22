@@ -67,7 +67,20 @@ namespace openhabUWP.Remote.Models
         /// The mappings.
         /// </value>
         public Mapping[] Mappings { get; set; }
-
+        /// <summary>
+        /// Gets or sets the tags.
+        /// </summary>
+        /// <value>
+        /// The tags.
+        /// </value>
+        public string[] Tags { get; set; }
+        /// <summary>
+        /// Gets or sets the group names.
+        /// </summary>
+        /// <value>
+        /// The group names.
+        /// </value>
+        public string[] GroupNames { get; set; }
         
         /*chart,webview,mapview widget*/
         /// <summary>
@@ -118,6 +131,16 @@ namespace openhabUWP.Remote.Models
         /// The step.
         /// </value>
         public double Step { get; set; }
+
+
+        /*url*/
+        /// <summary>
+        /// Gets or sets the URL.
+        /// </summary>
+        /// <value>
+        /// The URL.
+        /// </value>
+        public string Url { get; set; }
 
 
         /// <summary>

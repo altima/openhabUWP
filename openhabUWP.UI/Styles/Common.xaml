@@ -9,7 +9,6 @@
     <converters:WidgetClickableConverter x:Key="WidgetClickableConverter"/>
     <converters:LabelSplitConverter x:Key="LabelSplitConverter"/>
     <converters:LabelCleanConverter x:Key="LabelCleanConverter"/>
-    <converters:ObjectToImageUrlConverter x:Key="ObjectToImageUrlConverter"/>
     <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
 
     <!-- Colors -->

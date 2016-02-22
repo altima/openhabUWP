@@ -10,21 +10,21 @@
         <!--  GroupWidget-->
         <helper:WidgetTemplateSelector.GroupWidgeTemplate>
             <DataTemplate>
-                <widgets:GroupWidgetControl/>
+                <widgets:GroupWidget/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.GroupWidgeTemplate>
         
         <!-- SwitchWidget -->
         <helper:WidgetTemplateSelector.SwitchWidgeTemplate>
             <DataTemplate>
-                <widgets:SwitchWidgetControl/>
+                <widgets:SwitchWidget/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.SwitchWidgeTemplate>
         
         <!-- TextWidget -->
         <helper:WidgetTemplateSelector.TextWidgeTemplate>
             <DataTemplate>
-                <widgets:TextWidgetControl/>
+                <widgets:TextWidget/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.TextWidgeTemplate>
         
@@ -45,9 +45,16 @@
         <!-- FrameWidget -->
         <helper:WidgetTemplateSelector.FrameWidgeTemplate>
             <DataTemplate>
-                <widgets:FrameWidgetControl/>
+                <widgets:FrameWidget/>
             </DataTemplate>
         </helper:WidgetTemplateSelector.FrameWidgeTemplate>
+
+        <!-- ImageWidget -->
+        <helper:WidgetTemplateSelector.ImageWidgetTemplate>
+            <DataTemplate>
+                <widgets:ImageWidget/>
+            </DataTemplate>
+        </helper:WidgetTemplateSelector.ImageWidgetTemplate>
 
     </helper:WidgetTemplateSelector>
 

@@ -196,6 +196,6 @@
     <value>Apo40xJZv08NT-pX9i_LE7PNGfuBnUMungCpaDYLuwh-nZiiH9dapequtuIhY-5d</value>
   </data>
   <data name="MapViewWidget_staticUrl" xml:space="preserve">
-    <value>http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}/16?mapSize={1},{1}&amp;pp={0};68;{3}&amp;key={2}</value>
+    <value>http://dev.virtualearth.net/REST/V1/Imagery/Map/Road/{0}/{1}?mapSize={2},{2}&amp;pp={0};68;{4}&amp;key={3}</value>
   </data>
 </root>

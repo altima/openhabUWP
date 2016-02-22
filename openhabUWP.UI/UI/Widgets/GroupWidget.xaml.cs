@@ -1,49 +1,30 @@
-﻿using Windows.UI.Xaml;
+﻿using System.Diagnostics;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Microsoft.Practices.Unity;
 using openhabUWP.Events;
-using openhabUWP.Models;
 using openhabUWP.Remote.Models;
 using Prism.Events;
 
 namespace openhabUWP.UI.Widgets
 {
-    public sealed partial class SwitchWidgetControl : IWidgetControl
+    public sealed partial class GroupWidget : IWidgetControl
     {
         private Widget _widget;
         private IEventAggregator _eventAggregator;
 
-        public SwitchWidgetControl()
+        public GroupWidget()
         {
             this.InitializeComponent();
-            this.DataContextChanged += OnDataContextChanged;
-            this.Tapped += OnTapped;
-            this.toggleSwitch.Tapped += OnTapped;
             _eventAggregator = App.Current.Container.Resolve<IEventAggregator>();
-        }
-
-        private void OnTapped(object sender, TappedRoutedEventArgs tappedRoutedEventArgs)
-        {
-            SwitchToggled();
+            this.Tapped += OnTapped;
+            this.DataContextChanged += OnDataContextChanged;
         }
 
         private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-            var widget = args.NewValue as Widget;
-            if (widget != null)
-            {
+            if (args.NewValue is Widget)
                 RegisterForUpdate();
-                if (widget.Item != null)
-                {
-                    this.toggleSwitch.IsOn = widget.Item.State == "ON";
-                }
-            }
-
-        }
-
-        public void SwitchToggled()
-        {
-            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
         }
 
         public void RegisterForUpdate()
@@ -55,15 +36,17 @@ namespace openhabUWP.UI.Widgets
 
         public void WidgetUpdateReceived(Widget widget)
         {
-            if (Equals(widget.WidgetId, _widget.WidgetId))
+            if (Equals(_widget.WidgetId, widget.WidgetId))
             {
                 this.DataContext = widget;
+                Debug.WriteLine("GroupWidget Udpate {0}", widget.WidgetId);
             }
         }
 
-        private void ToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
+
+        private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            SwitchToggled();
+            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
         }
     }
 }

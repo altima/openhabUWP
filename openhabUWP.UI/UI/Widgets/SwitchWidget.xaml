@@ -5,8 +5,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:models="using:openhabUWP.Remote.Models"
+    xmlns:controls="using:openhabUWP.Controls"
     x:Name="userControl"
-    x:Class="openhabUWP.UI.Widgets.SwitchWidgetControl"
+    x:Class="openhabUWP.UI.Widgets.SwitchWidget"
     mc:Ignorable="d"
     d:DesignHeight="100"
     d:DesignWidth="400"
@@ -20,14 +21,15 @@
         </Grid.ColumnDefinitions>
 
         <!-- image -->
-        <Image 
-            Source="{Binding Icon, Converter={StaticResource ObjectToImageUrlConverter}}" 
+
+        <controls:IconControl
+            Icon="{Binding Icon}"
             Visibility="{Binding Icon, Converter={StaticResource StringToVisibilityConverter}}"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             MaxHeight="50" MaxWidth="50"
             Margin="0,0,10,0"/>
-        
+
         <!-- text -->
         <TextBlock
 			Grid.Column="1"

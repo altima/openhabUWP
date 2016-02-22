@@ -7,11 +7,11 @@ using Prism.Events;
 
 namespace openhabUWP.UI.Widgets
 {
-    public sealed partial class FrameWidgetControl : IWidgetControl
+    public sealed partial class FrameWidget : IWidgetControl
     {
         private Widget _widget;
 
-        public FrameWidgetControl()
+        public FrameWidget()
         {
             this.InitializeComponent();
             this.DataContextChanged += OnDataContextChanged;
@@ -34,7 +34,7 @@ namespace openhabUWP.UI.Widgets
         {
             if (Equals(widget.WidgetId, _widget.WidgetId))
             {
-                Debug.WriteLine("FrameWidgetControl Udpate {0}", widget.WidgetId);
+                Debug.WriteLine("FrameWidget Udpate {0}", widget.WidgetId);
             }
         }
     }

@@ -1,16 +1,20 @@
 ﻿<UserControl
-    x:Class="openhabUWP.UI.Widgets.MapViewWidget"
+    x:Class="openhabUWP.Controls.IconControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:openhabUWP.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters="using:openhabUWP.Converters"
-    xmlns:models="using:openhabUWP.Remote.Models"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    d:DataContext="{d:DesignInstance models:Widget, IsDesignTimeCreatable=True}">
+    x:Name="imageControl">
+
     <Image 
         x:Name="theImage"
+        HorizontalAlignment="{Binding ElementName=imageControl, Path=HorizontalAlignment}"
+        VerticalAlignment="{Binding ElementName=imageControl, Path=VerticalAlignment}"
+        Width="{Binding ElementName=imageControl, Path=Width}"
+        Height="{Binding ElementName=imageControl, Path=Height}"
         Stretch="Uniform"/>
 </UserControl>

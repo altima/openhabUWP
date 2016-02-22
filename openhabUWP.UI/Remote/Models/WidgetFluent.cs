@@ -66,6 +66,24 @@ namespace openhabUWP.Remote.Models
             return widget;
         }
 
+        public static Widget SetUrl(this Widget widget, string url)
+        {
+            widget.Url = url;
+            return widget;
+        }
+
+        public static Widget SetTags(this Widget widget, string[] tags)
+        {
+            widget.Tags = tags;
+            return widget;
+        }
+
+        public static Widget SetGroupNames(this Widget widget, string[] groupNames)
+        {
+            widget.GroupNames = groupNames;
+            return widget;
+        }
+
         private static bool IsWidget(this Widget widget, string ofType)
         {
             return Equals(widget?.Type, ofType);

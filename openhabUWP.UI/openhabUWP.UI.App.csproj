@@ -110,13 +110,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IconControl.xaml.cs">
+      <DependentUpon>IconControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SitemapListItem.xaml.cs">
       <DependentUpon>SitemapListItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ChartWidgetToUrlConvrter.cs" />
     <Compile Include="Converters\LabelSplitConverter.cs" />
-    <Compile Include="Converters\MapViewWidgetToUrlConverter.cs" />
-    <Compile Include="Converters\ObjectToImageUrlConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\WidgetClickableConverter.cs" />
     <Compile Include="Database\OpenhabDatabase.cs" />
@@ -142,7 +142,6 @@
     <Compile Include="Remote\Models\Page.cs" />
     <Compile Include="Remote\Models\Sitemap.cs" />
     <Compile Include="Remote\Models\Widget.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Services\LogService.cs" />
@@ -152,11 +151,11 @@
     <Compile Include="UI\Widgets\ChartWidget.xaml.cs">
       <DependentUpon>ChartWidget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Widgets\FrameWidgetControl.xaml.cs">
-      <DependentUpon>FrameWidgetControl.xaml</DependentUpon>
+    <Compile Include="UI\Widgets\FrameWidget.xaml.cs">
+      <DependentUpon>FrameWidget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Widgets\GroupWidgetControl.xaml.cs">
-      <DependentUpon>GroupWidgetControl.xaml</DependentUpon>
+    <Compile Include="UI\Widgets\GroupWidget.xaml.cs">
+      <DependentUpon>GroupWidget.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Widgets\ImageWidget.xaml.cs">
       <DependentUpon>ImageWidget.xaml</DependentUpon>
@@ -165,8 +164,11 @@
     <Compile Include="UI\Widgets\MapViewWidget.xaml.cs">
       <DependentUpon>MapViewWidget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Widgets\TextWidgetControl.xaml.cs">
-      <DependentUpon>TextWidgetControl.xaml</DependentUpon>
+    <Compile Include="UI\Widgets\TextWidget.xaml.cs">
+      <DependentUpon>TextWidget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Widgets\WebViewWidget.xaml.cs">
+      <DependentUpon>WebViewWidget.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\InfoPageViewModel.cs" />
     <Compile Include="ViewModels\SetupPageViewModel.cs" />
@@ -183,8 +185,8 @@
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Widgets\SwitchWidgetControl.xaml.cs">
-      <DependentUpon>SwitchWidgetControl.xaml</DependentUpon>
+    <Compile Include="UI\Widgets\SwitchWidget.xaml.cs">
+      <DependentUpon>SwitchWidget.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SitemapsPage.xaml.cs">
       <DependentUpon>SitemapsPage.xaml</DependentUpon>
@@ -226,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="Controls\IconControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SitemapListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -254,11 +260,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Widgets\FrameWidgetControl.xaml">
+    <Page Include="UI\Widgets\FrameWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Widgets\GroupWidgetControl.xaml">
+    <Page Include="UI\Widgets\GroupWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,7 +276,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Widgets\TextWidgetControl.xaml">
+    <Page Include="UI\Widgets\TextWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Widgets\WebViewWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,7 +296,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Widgets\SwitchWidgetControl.xaml">
+    <Page Include="UI\Widgets\SwitchWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

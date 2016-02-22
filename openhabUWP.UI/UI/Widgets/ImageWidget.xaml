@@ -5,11 +5,14 @@
     xmlns:local="using:openhabUWP.UI.Widgets"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:openhabUWP.Remote.Models"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    d:DataContext="{d:DesignInstance models:Widget, IsDesignTimeCreatable=True}">
 
-    <Grid Background="{StaticResource WhiteBrush}">
-
-    </Grid>
+    <Image
+        Stretch="Uniform"
+        Source="{Binding Url}"
+        MaxHeight="{Binding Height}"/>
 </UserControl>

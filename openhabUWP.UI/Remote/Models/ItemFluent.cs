@@ -100,5 +100,29 @@ namespace openhabUWP.Remote.Models
             item.Category = category;
             return item;
         }
+
+        /// <summary>
+        /// Sets the tags.
+        /// </summary>
+        /// <param name="item">The widget.</param>
+        /// <param name="tags">The tags.</param>
+        /// <returns></returns>
+        public static Item SetTags(this Item item, string[] tags)
+        {
+            item.Tags = tags;
+            return item;
+        }
+
+        /// <summary>
+        /// Sets the group names.
+        /// </summary>
+        /// <param name="item">The widget.</param>
+        /// <param name="groupNames">The group names.</param>
+        /// <returns></returns>
+        public static Item SetGroupNames(this Item item, string[] groupNames)
+        {
+            item.GroupNames = groupNames;
+            return item;
+        }
     }
 }

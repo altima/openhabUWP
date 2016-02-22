@@ -162,26 +162,38 @@ namespace openhabUWP.Remote
             var height = jo.GetNamedNumber("height", 0);
             var refresh = jo.GetNamedNumber("refresh", 0);
             var period = jo.GetNamedString("period", "");
+            var url = jo.GetNamedString("url", "");
 
             Widget widget = new Widget(widgetId, label, type, icon);
+
             switch (type)
             {
                 case "Switch":
                 case "Frame":
                 case "Group":
-                case "Image":
+                case "Selection":
                 case "Text":
                     break;
                 case "Mapview":
                 case "WebView":
-                    widget = widget.SetHeight(height);
+                    //widget = widget.SetHeight(height);
                     break;
                 case "Chart":
-                    widget = widget.SetChartProperties(height, refresh, period);
+                    //widget = widget.SetChartProperties(height, refresh, period);
+                    break;
+                case "Image":
+                case "Video":
+                    //widget = widget.SetUrl(url);
                     break;
                 default:
                     return null;
             }
+
+
+
+            widget = widget.SetHeight(height);
+            widget = widget.SetChartProperties(height, refresh, period);
+            widget = widget.SetUrl(url);
 
             try
             {
@@ -204,6 +216,19 @@ namespace openhabUWP.Remote
                     widget.SetMappings(jo.GetNamedArray("mappings").ToMappings());
                 }
 
+                if (jo.ContainsKey("tags"))
+                {
+                    var tags = jo.GetNamedArray("tags");
+                    widget.SetTags(tags.Select(j => j.GetString()).ToArray());
+                }
+
+                if (jo.ContainsKey("groupNames"))
+                {
+                    var groupNames = jo.GetNamedArray("groupNames");
+                    widget.SetGroupNames(groupNames.Select(j => j.GetString()).ToArray());
+                }
+                
+                
             }
             catch (Exception)
             {
@@ -223,13 +248,27 @@ namespace openhabUWP.Remote
             var link = jo.GetNamedString("link", "");
             var state = jo.GetNamedString("state", "");
             var stateDescription = jo.GetNamedObject("stateDescription", null).ToStateDescription();
+            
+            var tags = new string[0];
+            var groupNames = new string[0];
 
+            if (jo.ContainsKey("tags"))
+            {
+                tags = jo.GetNamedArray("tags").Select(j => j.GetString()).ToArray();
+            }
+
+            if (jo.ContainsKey("groupNames"))
+            {
+                groupNames = jo.GetNamedArray("groupNames").Select(j => j.GetString()).ToArray();
+            }
 
             return new Item(link, name, state, type)
                 .SetStateDescription(stateDescription)
                 .SetCategory(category)
                 .SetIcon(icon)
-                .SetLabel(label);
+                .SetLabel(label)
+                .SetGroupNames(groupNames)
+                .SetTags(tags);
         }
 
         public static StateDescription ToStateDescription(this JsonObject jo)
