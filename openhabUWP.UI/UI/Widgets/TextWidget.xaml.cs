@@ -27,7 +27,7 @@ namespace openhabUWP.UI.Widgets
 
         private void OnTapped(object sender, TappedRoutedEventArgs tappedRoutedEventArgs)
         {
-            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
+            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(new SwitchWidgetButtonTappedArgs(_widget));
         }
 
         private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)

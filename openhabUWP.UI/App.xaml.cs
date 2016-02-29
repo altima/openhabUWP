@@ -22,7 +22,7 @@ namespace openhabUWP
         {
             this.InitializeComponent();
         }
-        
+
         /// <summary>
         /// Override this method with the initialization logic of your application. Here you can initialize services, repositories, and so on.
         /// </summary>
@@ -53,10 +53,11 @@ namespace openhabUWP
         protected override void ConfigureContainer()
         {
             Container.RegisterInstance<IResourceLoader>(new ResourceLoaderAdapter(new ResourceLoader()));
+            Container.RegisterType<IHttpService, HttpService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILogService, LogService>();
             Container.RegisterType<IParserService, ParserService>();
             Container.RegisterType<IRestService, RestService>();
-            Container.RegisterType<IPushClientService, PushClientService>();
+            Container.RegisterType<IPushClientService, PushClientService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IOpenhabDatabase, OpenhabDatabase>();
 
             base.ConfigureContainer();

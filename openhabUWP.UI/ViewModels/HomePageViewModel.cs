@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Data.Json;
@@ -105,45 +106,59 @@ namespace openhabUWP.ViewModels
             Load(pageName);
         }
 
-        private async void WidgetTapped(Widget widget)
+        private async void WidgetTapped(SwitchWidgetButtonTappedArgs args)
         {
-            switch (widget.Type)
-            {
-                case "Switch":
-                    if (widget.Item != null && widget.Item.Type == "Number")
-                    {
-                        var numberItem = widget.Item;
-                        var mappings = widget.Mappings;
-                    }
-                    else
-                    {
-                        var currentState = widget.Item.State == "ON";
-                        await _restService.PostCommand(widget.Item.Link, currentState ? "OFF" : "ON");
-                    }
-                    break;
-                case "Text":
-                case "Group":
-                    if (widget.LinkedPage != null &&
-                        !widget.LinkedPage.Link.IsNullOrEmpty())
-                    {
-                        _navigationService.Navigate(PageTokens.HomePage, widget.LinkedPage.Id);
-                    }
-                    break;
-            }
+            var widget = args.Widget;
+            var command = args.Command;
 
+            if (widget == null) return;
+
+            if (widget.IsSwitchWidget())
+            {
+                if (widget.Item == null) return;
+                widget.Item.State = await _restService.PostCommand(widget.Item.Link, command);
+                _eventAggregator.GetEvent<WidgetEvents.WidgetUpdateEvent>().Publish(widget);
+            }
+            else if (widget.IsTextWidget() || widget.IsGroupWidget())
+            {
+                if (widget.LinkedPage != null &&
+                           !widget.LinkedPage.Link.IsNullOrEmpty())
+                {
+                    _navigationService.Navigate(PageTokens.HomePage, widget.LinkedPage.Id);
+                }
+
+            }
         }
 
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
             if (suspending) return;
             _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Unsubscribe(WidgetTapped);
+            _pushClientService.StopPolling();
         }
 
         private async void Load(string pageName)
         {
-            //var url = Setup.RemoteUrl.IsNullOrEmpty() ? Setup.Url : Setup.RemoteUrl;
-            var url = Setup.Url;
             var sitemapName = Setup.Sitemap;
+
+            var url = Setup.Url;
+            if (!await _restService.Ping(url))
+            {
+                if (!Setup.RemoteUrl.IsNullOrEmpty())
+                {
+                    url = Setup.RemoteUrl;
+                    if (!await _restService.Ping(url))
+                    {
+                        //offline?
+                        return;
+                    }
+                }
+                else
+                {
+                    //offline?
+                    return;
+                }
+            }
 
             if (pageName.IsNullOrEmpty())
             {
@@ -152,6 +167,35 @@ namespace openhabUWP.ViewModels
                 pageName = sitemap.Homepage.Id;
             }
             CurrentPage = await _restService.LoadPageAsync(url, sitemapName, pageName);
+            RegeisterForPushEvents(url, CurrentPage.Link);
+        }
+
+        private void RegeisterForPushEvents(string url, string fallbackUrl)
+        {
+            _pushClientService.StartPolling(url, fallbackUrl, OnDataReceived);
+        }
+
+        private void OnEventReceived(string obj)
+        {
+            Debug.WriteLine(obj);
+        }
+
+        private void OnDataReceived(string obj)
+        {
+            //{"topic":"smarthome/items/Weather_LastUpdate/state","payload":"{\"type\":\"DateTimeType\",\"value\":\"2016-02-27T00:42:49\"}","type":"ItemStateEvent"}
+            //{"topic":"smarthome/items/Weather_LastUpdate/statechanged","payload":"{\"type\":\"DateTimeType\",\"value\":\"2016-02-27T00:42:49\",\"oldType\":\"DateTimeType\",\"oldValue\":\"2016-02-27T00:41:49\"}","type":"ItemStateChangedEvent"}
+
+            try
+            {
+                var eventData = obj.ToEventData();
+                _eventAggregator.GetEvent<PushEvents.PushEvent>().Publish(eventData);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            Debug.WriteLine(obj);
         }
     }
 

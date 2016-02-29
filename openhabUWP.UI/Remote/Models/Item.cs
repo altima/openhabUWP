@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace openhabUWP.Remote.Models
 {
     /// <summary>

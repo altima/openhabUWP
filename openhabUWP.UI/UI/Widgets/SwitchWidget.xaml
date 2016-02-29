@@ -6,12 +6,19 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:models="using:openhabUWP.Remote.Models"
     xmlns:controls="using:openhabUWP.Controls"
+    xmlns:converters="using:openhabUWP.Converters"
     x:Name="userControl"
     x:Class="openhabUWP.UI.Widgets.SwitchWidget"
     mc:Ignorable="d"
     d:DesignHeight="100"
     d:DesignWidth="400"
-    d:DataContext="{d:DesignData /SampleData/SwitchWidgetSample.xaml}">
+    d:DataContext="{d:DesignInstance models:Widget, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <converters:WidgetToOnOffConverter x:Key="WidgetToOnOffConverter"/>
+        <converters:SwitchWidgetToggleVisibilityConverter x:Key="SwitchWidgetToggleVisibilityConverter"/>
+        <converters:SwitchWidgetButtonVisibilityConverter x:Key="SwitchWidgetButtonVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid MinHeight="50" Padding="5">
         <Grid.ColumnDefinitions>
@@ -21,7 +28,6 @@
         </Grid.ColumnDefinitions>
 
         <!-- image -->
-
         <controls:IconControl
             Icon="{Binding Icon}"
             Visibility="{Binding Icon, Converter={StaticResource StringToVisibilityConverter}}"
@@ -42,12 +48,31 @@
 
         <!-- switch -->
         <ToggleSwitch 
+            Visibility="{Binding Converter={StaticResource SwitchWidgetToggleVisibilityConverter}}"
 			Grid.Column="2"
-			IsOn="{Binding Item.State}"
 			Margin="10,0,0,0"
 			HorizontalAlignment="Right"
-            Toggled="ToggleSwitch_OnToggled"
-            x:Name="toggleSwitch">
-        </ToggleSwitch>
+            x:Name="toggleSwitch"/>
+
+        <!-- Buttons -->
+        <ItemsControl
+            Visibility="{Binding Converter={StaticResource SwitchWidgetButtonVisibilityConverter}}"
+            ItemsSource="{Binding Mappings}"
+            Grid.Column="2">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button 
+                        Content="{Binding Label}" 
+                        Tag="{Binding Command}"
+                        Tapped="OnTapped"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
     </Grid>
 </UserControl>

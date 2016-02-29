@@ -21,10 +21,12 @@ namespace openhabUWP.ViewModels
         ObservableCollection<string> FoundServers { get; set; }
         Setup CurrentSetup { get; set; }
         bool IsOk { get; set; }
+        bool IsFoundServerFlyoutVisible { get; set; }
 
         ICommand SearchCommand { get; set; }
         ICommand CheckCommand { get; set; }
         ICommand NextCommand { get; set; }
+        ICommand FoundItemTappedCommand { get; set; }
     }
 
     public class SetupPageViewModel : ViewModelBase, ISetupPageViewModel
@@ -38,6 +40,7 @@ namespace openhabUWP.ViewModels
         private ObservableCollection<string> _foundServers;
         private Setup _currentSetup;
         private bool _isOk;
+        private bool _isFoundServerFlyoutVisible;
 
         public bool IsDemoModeOn
         {
@@ -55,7 +58,7 @@ namespace openhabUWP.ViewModels
             {
                 CurrentSetup.Url = "http://demo.openhab.org:9080";
                 CurrentSetup.RemoteUrl = "http://demo.openhab.org:9080";
-                OnPropertyChanged(()=>CurrentSetup);
+                OnPropertyChanged(() => CurrentSetup);
             }
             else
             {
@@ -82,10 +85,16 @@ namespace openhabUWP.ViewModels
             get { return _isOk; }
             set { SetProperty(ref _isOk, value); }
         }
+        public bool IsFoundServerFlyoutVisible
+        {
+            get { return _isFoundServerFlyoutVisible; }
+            set { SetProperty(ref _isFoundServerFlyoutVisible, value); }
+        }
 
         public ICommand SearchCommand { get; set; }
         public ICommand CheckCommand { get; set; }
         public ICommand NextCommand { get; set; }
+        public ICommand FoundItemTappedCommand { get; set; }
 
         public SetupPageViewModel(IOpenhabDatabase database, INavigationService navigationService, IRestService restService, IEventAggregator eventAggregator)
         {
@@ -97,6 +106,7 @@ namespace openhabUWP.ViewModels
             SearchCommand = new DelegateCommand(Search);
             CheckCommand = new DelegateCommand(Check);
             NextCommand = new DelegateCommand(Next);
+            FoundItemTappedCommand = new DelegateCommand<string>(ServerSelected);
         }
 
         private async void Search()
@@ -104,8 +114,7 @@ namespace openhabUWP.ViewModels
             var servers = await _restService.FindLocalServersAsync();
             FoundServers = new ObservableCollection<string>(servers);
 
-            if (FoundServers.Any()) _eventAggregator.GetEvent<SetupEvents.ShowServerListEvent>();
-            else { /**/ }
+            if (FoundServers.Any()) IsFoundServerFlyoutVisible = true;
         }
 
         private async void Check()
@@ -162,7 +171,9 @@ namespace openhabUWP.ViewModels
 
             if (this.CurrentSetup == null) this.CurrentSetup = new Setup();
             this.CurrentSetup.Url = obj;
-            _eventAggregator.GetEvent<SetupEvents.HideServerListEvent>().Publish(true);
+            OnPropertyChanged(() => CurrentSetup);
+
+            IsFoundServerFlyoutVisible = false;
         }
 
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
@@ -199,10 +210,12 @@ namespace openhabUWP.ViewModels
             public ObservableCollection<string> FoundServers { get; set; }
             public Setup CurrentSetup { get; set; }
             public bool IsOk { get; set; }
+            public bool IsFoundServerFlyoutVisible { get; set; }
 
             public ICommand SearchCommand { get; set; }
             public ICommand CheckCommand { get; set; }
             public ICommand NextCommand { get; set; }
+            public ICommand FoundItemTappedCommand { get; set; }
 
             public SetupPageViewModel()
             {

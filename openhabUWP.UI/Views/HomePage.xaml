@@ -22,15 +22,25 @@
                    VerticalAlignment="Center"
                    Foreground="{StaticResource WhiteBrush}"/>
 
-        <ScrollViewer Grid.Row="1">
+
+        <ScrollViewer
+            Grid.Row="1"
+            VerticalScrollMode="Auto"
+            IsVerticalRailEnabled="False"
+            Padding="0,0,20,0">
             <ItemsControl
                 ItemsSource="{Binding CurrentPage.Widgets}"
                 ItemTemplateSelector="{StaticResource WidgetTemplateSelector}">
-                
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
+
     </Grid>
-    
+
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>

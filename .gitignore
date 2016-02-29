@@ -9,3 +9,4 @@
 **/BundleArtifacts/
 openhab*[ARM|x86|x64].zip
 openhab*[arm|x86|x64].zip
+/.project

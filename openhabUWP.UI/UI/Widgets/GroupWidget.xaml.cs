@@ -46,7 +46,7 @@ namespace openhabUWP.UI.Widgets
 
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(_widget);
+            if (_widget != null) _eventAggregator.GetEvent<WidgetEvents.WidgetTappedEvent>().Publish(new SwitchWidgetButtonTappedArgs(_widget));
         }
     }
 }

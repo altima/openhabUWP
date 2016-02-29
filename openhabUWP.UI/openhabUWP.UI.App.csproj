@@ -97,6 +97,7 @@
     <Content Include="Assets\Fonts\Font-Awesome\fonts\fontawesome-webfont.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="openhabUWP.App.pfx" />
     <None Include="SampleData\page.json" />
     <None Include="SampleData\page_multimedia.json" />
     <None Include="SampleData\page_widgets.json" />
@@ -118,15 +119,20 @@
     </Compile>
     <Compile Include="Converters\LabelSplitConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Converters\SwitchWidgetToggleVisibilityConverter.cs" />
     <Compile Include="Converters\WidgetClickableConverter.cs" />
+    <Compile Include="Converters\WidgetToOnOffConverter.cs" />
     <Compile Include="Database\OpenhabDatabase.cs" />
     <Compile Include="Database\Tables.cs" />
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Enums\ProtocolType.cs" />
+    <Compile Include="Events\PushEvents.cs" />
     <Compile Include="Events\SetupEvents.cs" />
     <Compile Include="Events\SitemapEvents.cs" />
     <Compile Include="Events\WidgetEvents.cs" />
+    <Compile Include="Helper\FlyoutHelper.cs" />
     <Compile Include="PageTokens.cs" />
+    <Compile Include="Remote\Models\EventData.cs" />
     <Compile Include="Remote\Models\ItemFluent.cs" />
     <Compile Include="Remote\Models\MappingFluent.cs" />
     <Compile Include="Remote\Models\PageFluent.cs" />
@@ -144,6 +150,8 @@
     <Compile Include="Remote\Models\Widget.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Remote\Services\HttpService.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\ParserService.cs" />
     <Compile Include="Remote\Services\PushClientService.cs" />
@@ -199,7 +207,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="App3_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
@@ -345,6 +352,12 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>openhabUWP.App.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets')" />

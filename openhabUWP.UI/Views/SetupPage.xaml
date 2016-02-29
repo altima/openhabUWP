@@ -7,6 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:design="using:openhabUWP.ViewModels.Design"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:helper="using:openhabUWP.Helper"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance design:SetupPageViewModel, IsDesignTimeCreatable=True}">
@@ -15,20 +18,49 @@
 
         <ScrollViewer Margin="10">
             <StackPanel>
-                
+
                 <CheckBox
                     Margin="0,5"
                     x:Uid="SetupPage_cbDemo"
                     Content="Demo mode"
                     IsChecked="{Binding IsDemoModeOn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                
-                <TextBox 
-                    x:Uid="SetupPage_txtUrl"
-                    Header="Url"
-                    PlaceholderText="Url"
-                    Text="{Binding Path=CurrentSetup.Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                </TextBox>
-                
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox 
+                        x:Uid="SetupPage_txtUrl"
+                        Header="Url"
+                        PlaceholderText="Url"
+                        x:Name="txtUrl"
+                        Text="{Binding Path=CurrentSetup.Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+
+                    <Button
+                        Content="Search"
+                        VerticalAlignment="Bottom"
+                        Grid.Column="1"
+                        Command="{Binding SearchCommand}"/>
+
+                    <FlyoutBase.AttachedFlyout>
+                        <ListPickerFlyout 
+                            helper:FlyoutHelper.IsOpen="{Binding IsFoundServerFlyoutVisible, Mode=TwoWay}"
+                            helper:FlyoutHelper.Parent="{Binding ElementName=txtUrl}"
+                            x:Name="serverFlyout"
+                            SelectionMode="Single"
+                            Placement="Bottom"
+                            ItemsSource="{Binding FoundServers}">
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemsPicked">
+                                    <core:InvokeCommandAction Command="{Binding FoundItemTappedCommand}" CommandParameter="{Binding ElementName=serverFlyout, Path=SelectedItem}" />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                        </ListPickerFlyout>
+                    </FlyoutBase.AttachedFlyout>
+                </Grid>
+
                 <TextBox
                     x:Uid="SetupPage_txtRemoteUrl"
                     Header="Remote-Url"
@@ -40,7 +72,7 @@
                     Header="Username"
                     PlaceholderText="Username"
                     Text="{Binding Path=CurrentSetup.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                
+
                 <TextBox
                     x:Uid="SetupPage_txtPassword"
                     Header="Password"

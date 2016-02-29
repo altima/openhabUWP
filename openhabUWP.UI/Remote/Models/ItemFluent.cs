@@ -124,5 +124,107 @@ namespace openhabUWP.Remote.Models
             item.GroupNames = groupNames;
             return item;
         }
+
+
+        /// <summary>
+        /// Determines whether the specified type is item.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
+        private static bool IsItem(this Item item, string type)
+        {
+            return Equals(item.Type, type);
+        }
+
+        /// <summary>
+        /// Determines whether [is switch item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsSwitchItem(this Item item)
+        {
+            return item.IsItem("SwitchItem");
+        }
+
+        /// <summary>
+        /// Determines whether [is rollershutter item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsRollershutterItem(this Item item)
+        {
+            return item.IsItem("RollershutterItem");
+        }
+
+        /// <summary>
+        /// Determines whether [is number item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsNumberItem(this Item item)
+        {
+            return item.IsItem("NumberItem");
+        }
+
+        /// <summary>
+        /// Determines whether [is contact item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsContactItem(this Item item)
+        {
+            return item.IsItem("ContactItem");
+        }
+
+        /// <summary>
+        /// Determines whether [is group item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsGroupItem(this Item item)
+        {
+            return item.IsItem("GroupItem");
+        }
+
+        /// <summary>
+        /// Determines whether [is date time item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsDateTimeItem(this Item item)
+        {
+            return item.IsItem("DateTimeItem");
+        }
+
+        /// <summary>
+        /// Determines whether [is dimmer item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsDimmerItem(this Item item)
+        {
+            return item.IsItem("DimmerItem");
+        }
+
+        /// <summary>
+        /// Determines whether [is color item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsColorItem(this Item item)
+        {
+            return item.IsItem("ColorItem");
+        }
+
+        /// <summary>
+        /// Determines whether [is location item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        public static bool IsLocationItem(this Item item)
+        {
+            return item.IsItem("LocationItem");
+        }
     }
 }

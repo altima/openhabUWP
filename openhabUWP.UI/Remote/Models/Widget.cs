@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Windows.ApplicationModel;
 using Windows.Data.Json;
+using Newtonsoft.Json;
 using openhabUWP.Helper;
 
 namespace openhabUWP.Remote.Models
@@ -9,7 +12,7 @@ namespace openhabUWP.Remote.Models
     /// <summary>
     /// 
     /// </summary>
-    public class Widget
+    public class Widget : INotifyPropertyChanged
     {
         /// <summary>
         /// Gets or sets the widget identifier.
@@ -81,7 +84,7 @@ namespace openhabUWP.Remote.Models
         /// The group names.
         /// </value>
         public string[] GroupNames { get; set; }
-        
+
         /*chart,webview,mapview widget*/
         /// <summary>
         /// Gets or sets the height.
@@ -168,5 +171,26 @@ namespace openhabUWP.Remote.Models
             this.Type = type;
         }
 
+        public bool Equals(Widget widget)
+        {
+            return this.WidgetId == widget.WidgetId;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void Updated()
+        {
+            OnPropertyChanged("Self");
+        }
+
+        [JsonIgnore]
+        public Widget Self
+        {
+            get { return this; }
+        }
     }
 }

@@ -1,4 +1,3 @@
-using openhabUWP.Models;
 using openhabUWP.Remote.Models;
 
 namespace openhabUWP.UI.Widgets

@@ -6,7 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Windows.Media.Protection.PlayReady;
 using openhabUWP.Enums;
 using openhabUWP.Helper;
 using openhabUWP.Models;
@@ -36,9 +38,9 @@ namespace openhabUWP.Remote.Services
         /// <summary>
         /// Pings the specified server URL.
         /// </summary>
-        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="url">The server URL.</param>
         /// <returns></returns>
-        Task<bool> Ping(string serverUrl);
+        Task<bool> Ping(string url);
 
         /// <summary>
         /// Loads the sitemaps asynchronous.
@@ -77,7 +79,7 @@ namespace openhabUWP.Remote.Services
         /// <param name="url">The URL.</param>
         /// <param name="command">The command.</param>
         /// <returns></returns>
-        Task PostCommand(string url, string command);
+        Task<string> PostCommand(string url, string command);
 
         void SetAuthentication(string username, string password);
     }
@@ -88,6 +90,8 @@ namespace openhabUWP.Remote.Services
     /// <seealso cref="openhabUWP.Services.IRestService20" />
     public class RestService : IRestService
     {
+        private IHttpService _httpService;
+
         private Dictionary<string, string> Api = new Dictionary<string, string>()
         {
             {"rest", "{0}/rest"},
@@ -99,8 +103,6 @@ namespace openhabUWP.Remote.Services
 
             {"events", "{0}/rest/events"},
         };
-
-        private HttpClient _client;
 
         /// <summary>
         /// Gets the user agent.
@@ -122,46 +124,49 @@ namespace openhabUWP.Remote.Services
             "_openhab-server-ssl._tcp.local."
         };
 
-        public RestService()
+        public RestService(IHttpService httpService)
         {
+            _httpService = httpService;
             SetAuthentication("", "");
         }
 
-        private HttpClient Client()
-        {
-            if (_client != null)
-            {
-                if (!X_Atmosphere_tracking_id.IsNullOrEmpty() && !
-                    _client.DefaultRequestHeaders.Contains("X-Atmosphere-tracking-id"))
-                {
-                    _client.DefaultRequestHeaders.Add("X-Atmosphere-tracking-id", X_Atmosphere_tracking_id);
-                }
-                return _client;
-            }
-
-            var clientHandler = new HttpClientHandler();
-            if (clientHandler.SupportsAutomaticDecompression)
-            {
-                clientHandler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            }
-            _client = new HttpClient(clientHandler);
-            //set default headers
-            _client.DefaultRequestHeaders.Add("UserAgent", UserAgent);
-            _client.DefaultRequestHeaders.Add("Authentication", Authentication);
-            _client.DefaultRequestHeaders.Add("Accept", "application/json");
-            return _client;
-        }
 
         /// <summary>
         /// Gets the specified URL.
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <returns></returns>
-        private async Task<string> Get(string url)
+        private async Task<string> Get(string url, string accept = "application/json")
         {
-            var response = await Client().GetAsync(new Uri(url));
+            var client = _httpService.GetClient();
+
+            var request = Create(HttpMethod.Get, url, accept);
+
+            var response = await client.SendAsync(request);
+
+            //var response = await client.GetAsync(new Uri(url));
+
             CheckResponseHeaders(response.Headers);
-            return await response.Content.ReadAsStringAsync();
+            var body = await response.Content.ReadAsStringAsync();
+            return body;
+        }
+
+        private HttpRequestMessage Create(HttpMethod method, string url, string accept = "application/json")
+        {
+            var request = new HttpRequestMessage(method, new Uri(url));
+            //set default headers
+            request.Headers.Add("UserAgent", UserAgent);
+            request.Headers.Add("Authentication", Authentication);
+            request.Headers.Add("Accept", accept);
+            request.Headers.Add("Cache-Control", new[] { "no-cache" });
+            if (!X_Atmosphere_tracking_id.IsNullOrEmpty())
+            {
+                if (request.Headers.Contains("X-Atmosphere-tracking-id"))
+                    request.Headers.Remove("X-Atmosphere-tracking-id");
+                request.Headers.Add("X-Atmosphere-tracking-id", X_Atmosphere_tracking_id);
+            }
+
+            return request;
         }
 
         private void CheckResponseHeaders(HttpResponseHeaders headers)
@@ -178,17 +183,30 @@ namespace openhabUWP.Remote.Services
             }
         }
 
-        private async Task<bool> Post(string url, string body)
+        private async Task<string> Post(string url, string body)
         {
-            var response = await Client().PostAsync(new Uri(url), new StringContent(body, Encoding.UTF8));
+            var client = _httpService.GetClient();
+            var request = Create(HttpMethod.Post, url, "*/*");
+            request.Content = new StringContent(body, Encoding.UTF8);
+
+            var response = await client.SendAsync(request);
+
             CheckResponseHeaders(response.Headers);
             try
             {
-                return response.IsSuccessStatusCode;
+                if (response.Headers.Contains("Location")) // do redirect hidden
+                {
+                    var redirectUrl = response.Headers.GetValues("Location").FirstOrDefault();
+                    if (!redirectUrl.IsNullOrEmpty())
+                    {
+                        await Task.Delay(100); // we have to wait for the change in the openhab system
+                        var newState = await Get(string.Concat(redirectUrl, "?_noCache=", Guid.NewGuid().ToString("N")), "text/plain");
+                        return newState;
+                    }
+                }
             }
             catch { }
-
-            return false;
+            return string.Empty;
         }
 
         /// <summary>
@@ -230,14 +248,16 @@ namespace openhabUWP.Remote.Services
         /// <summary>
         /// Pings the specified server URL.
         /// </summary>
-        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="url">The server URL.</param>
         /// <returns></returns>
-        public async Task<bool> Ping(string serverUrl)
+        public async Task<bool> Ping(string url)
         {
             try
             {
-                var client = Client();
-                var result = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, serverUrl));
+                var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
+                var client = _httpService.GetClient();
+                var reqeust = Create(HttpMethod.Head, url, "*/*");
+                var result = await client.SendAsync(reqeust, cts.Token);
                 return result.IsSuccessStatusCode;
             }
             catch { }
@@ -305,10 +325,10 @@ namespace openhabUWP.Remote.Services
         /// <param name="command">The command.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public async Task PostCommand(string url, string command)
+        public Task<string> PostCommand(string url, string command)
         {
             //if (!url.EndsWith("/state")) url = string.Concat(url, "/state");
-            await Post(url, command);
+            return Post(url, command);
         }
 
         public void SetAuthentication(string username, string password)
